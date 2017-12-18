@@ -11,7 +11,7 @@ source:
   sha256: ab83bb4d3c5986d22da0ce28d352e5f911830b63f18fee85537cebfa3df28e82
 
 build:
-  skip: true  # [win and py3k]
+  skip: true  # [win]
   number: 0
 
 requirements:
