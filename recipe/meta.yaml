@@ -8,7 +8,7 @@ package:
 source:
   fn: {{ name }}-{{ version }}.tar.gz
   url: https://github.com/rdkit/rdkit/archive/{{ version }}.tar.gz
-  sha256: cfe28da430f643af5b67a2c7053ccee2556cc4e5209d43f9309839d17e64d1d4
+  sha256: 6a4d9e9eb0ca06cbcdc20505f0c6ea0b1167b4dcdf7d1185871ba16ce701a5f4
 
 build:
   skip: true  # [win]
