@@ -23,6 +23,7 @@ cmake \
     -D PYTHON_NUMPY_INCLUDE_PATH="$SP_DIR/numpy/core/include" \
     -D BOOST_ROOT="$PREFIX" -D Boost_NO_SYSTEM_PATHS=ON \
     -D CMAKE_BUILD_TYPE=Release \
+    -D RDK_BUILD_CPP_TESTS=OFF \
     .
 
 
