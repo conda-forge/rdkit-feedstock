@@ -12,14 +12,14 @@ source:
 
 build:
   skip: true  # [win]
-  number: 1
+  number: 2
 
 requirements:
   build:
     - toolchain
     - cmake
     - requests
-    - boost 1.65.1
+    - boost 1.66.0
     - python
     - numpy 1.11.*
     - pillow
@@ -31,7 +31,7 @@ requirements:
     - pkg-config  # [not win]
   run:
     - cairo 1.14.*
-    - boost 1.65.1
+    - boost 1.66.0
     - python
     - six
     - numpy >=1.11
