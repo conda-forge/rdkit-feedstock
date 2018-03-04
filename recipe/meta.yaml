@@ -1,5 +1,5 @@
 {% set name = "rdkit" %}
-{% set version = "Release_2017_09" %}
+{% set version = "Release_2017_09_3" %}
 
 package:
   name: {{ name|lower }}
@@ -8,19 +8,18 @@ package:
 source:
   fn: {{ name }}-{{ version }}.tar.gz
   url: https://github.com/rdkit/rdkit/archive/{{ version }}.tar.gz
-  sha256: ab83bb4d3c5986d22da0ce28d352e5f911830b63f18fee85537cebfa3df28e82
+  sha256: 6a4d9e9eb0ca06cbcdc20505f0c6ea0b1167b4dcdf7d1185871ba16ce701a5f4
 
 build:
-  skip: true  # [win and py3k]
-  skip: true  # [osx and (py27 or py35)]
-  number: 1
+  skip: true  # [win]
+  number: 2
 
 requirements:
   build:
     - toolchain
     - cmake
     - requests
-    - boost 1.65.1
+    - boost 1.66.0
     - python
     - numpy 1.11.*
     - pillow
@@ -32,7 +31,7 @@ requirements:
     - pkg-config  # [not win]
   run:
     - cairo 1.14.*
-    - boost 1.65.1
+    - boost 1.66.0
     - python
     - six
     - numpy >=1.11
