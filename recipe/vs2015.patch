@@ -1,0 +1,501 @@
+diff --git a/Code/DataStructs/Wrap/wrap_ExplicitBV.cpp b/Code/DataStructs/Wrap/wrap_ExplicitBV.cpp
+index 41b07aff..972c26a3 100644
+--- a/Code/DataStructs/Wrap/wrap_ExplicitBV.cpp
++++ b/Code/DataStructs/Wrap/wrap_ExplicitBV.cpp
+@@ -15,6 +15,13 @@
+ 
+ namespace python = boost::python;
+ 
++// Workaround for bug in Visual Studio 2015 Update 3
++#if defined(_MSC_VER) && (_MSC_VER == 1900) && (_MSC_FULL_VER >= 190024210)
++namespace boost {
++  template<> const volatile ExplicitBitVect* get_pointer(const volatile ExplicitBitVect* p) { return p; }
++}
++#endif
++
+ // allows BitVects to be pickled
+ struct ebv_pickle_suite : python::pickle_suite {
+   static python::tuple getinitargs(const ExplicitBitVect &self) {
+diff --git a/Code/DataStructs/Wrap/wrap_SparseBV.cpp b/Code/DataStructs/Wrap/wrap_SparseBV.cpp
+index 39ede1e4..ca156874 100644
+--- a/Code/DataStructs/Wrap/wrap_SparseBV.cpp
++++ b/Code/DataStructs/Wrap/wrap_SparseBV.cpp
+@@ -16,6 +16,13 @@
+ 
+ namespace python = boost::python;
+ 
++// Workaround for bug in Visual Studio 2015 Update 3
++#if defined(_MSC_VER) && (_MSC_VER == 1900) && (_MSC_FULL_VER >= 190024210)
++namespace boost {
++  template<> const volatile SparseBitVect* get_pointer(const volatile SparseBitVect* p) { return p; }
++}
++#endif
++
+ // allows BitVects to be pickled
+ struct sbv_pickle_suite : python::pickle_suite {
+   static python::tuple getinitargs(const SparseBitVect &self) {
+diff --git a/Code/Geometry/Wrap/UniformGrid3D.cpp b/Code/Geometry/Wrap/UniformGrid3D.cpp
+index 2b8edf3f..7442d71b 100644
+--- a/Code/Geometry/Wrap/UniformGrid3D.cpp
++++ b/Code/Geometry/Wrap/UniformGrid3D.cpp
+@@ -20,6 +20,13 @@
+ #include <Geometry/GridUtils.h>
+ namespace python = boost::python;
+ 
++// Workaround for bug in Visual Studio 2015 Update 3
++#if defined(_MSC_VER) && (_MSC_VER == 1900) && (_MSC_FULL_VER >= 190024210)
++namespace boost {
++  template<> const volatile RDGeom::UniformGrid3D* get_pointer(const volatile RDGeom::UniformGrid3D* p) { return p; }
++}
++#endif
++
+ using namespace RDKit;
+ 
+ namespace RDGeom {
+diff --git a/Code/GraphMol/ChemReactions/Wrap/Enumerate.cpp b/Code/GraphMol/ChemReactions/Wrap/Enumerate.cpp
+index f8c2335c..988f685a 100644
+--- a/Code/GraphMol/ChemReactions/Wrap/Enumerate.cpp
++++ b/Code/GraphMol/ChemReactions/Wrap/Enumerate.cpp
+@@ -39,6 +39,17 @@
+ 
+ namespace python = boost::python;
+ 
++// Workaround for bug in Visual Studio 2015 Update 3
++#if defined(_MSC_VER) && (_MSC_VER == 1900) && (_MSC_FULL_VER >= 190024210)
++namespace boost {
++  template<> const volatile RDKit::EnumerateLibraryBase* get_pointer(const volatile RDKit::EnumerateLibraryBase* p) { return p; }
++  template<> const volatile RDKit::EnumerationStrategyBase* get_pointer(const volatile RDKit::EnumerationStrategyBase* p) { return p; }
++  template<> const volatile RDKit::CartesianProductStrategy* get_pointer(const volatile RDKit::CartesianProductStrategy* p) { return p; }
++  template<> const volatile RDKit::RandomSampleStrategy* get_pointer(const volatile RDKit::RandomSampleStrategy* p) { return p; }
++  template<> const volatile RDKit::RandomSampleAllBBsStrategy* get_pointer(const volatile RDKit::RandomSampleAllBBsStrategy* p) { return p; }
++  template<> const volatile RDKit::EvenSamplePairsStrategy* get_pointer(const volatile RDKit::EvenSamplePairsStrategy* p) { return p; }
++}
++#endif
+ 
+ namespace RDKit {
+ 
+@@ -433,6 +444,13 @@ for result in itertools.islice(libary2, 1000):\n\
+ 
+ }// end of namespace
+ 
++// Workaround for bug in Visual Studio 2015 Update 3
++#if defined(_MSC_VER) && (_MSC_VER == 1900) && (_MSC_FULL_VER >= 190024210)
++namespace boost {
++  template<> const volatile RDKit::EnumerateLibraryWrap* get_pointer(const volatile RDKit::EnumerateLibraryWrap* p) { return p; }
++}
++#endif
++
+ void wrap_enumeration() {
+   RDKit::enumeration_wrapper::wrap();
+ }
+diff --git a/Code/GraphMol/ChemReactions/Wrap/rdChemReactions.cpp b/Code/GraphMol/ChemReactions/Wrap/rdChemReactions.cpp
+index 32fd99d2..d6806b9a 100644
+--- a/Code/GraphMol/ChemReactions/Wrap/rdChemReactions.cpp
++++ b/Code/GraphMol/ChemReactions/Wrap/rdChemReactions.cpp
+@@ -50,6 +50,14 @@
+ 
+ namespace python = boost::python;
+ 
++// Workaround for bug in Visual Studio 2015 Update 3
++#if defined(_MSC_VER) && (_MSC_VER == 1900) && (_MSC_FULL_VER >= 190024210)
++namespace boost {
++  template<> const volatile RDKit::ROMol* get_pointer(const volatile RDKit::ROMol* p) { return p; }
++  template<> const volatile ExplicitBitVect* get_pointer(const volatile ExplicitBitVect* p) { return p; }
++}
++#endif
++
+ void rdChemicalReactionParserExceptionTranslator(
+     RDKit::ChemicalReactionParserException const &x) {
+   std::ostringstream ss;
+diff --git a/Code/GraphMol/Descriptors/Wrap/rdMolDescriptors.cpp b/Code/GraphMol/Descriptors/Wrap/rdMolDescriptors.cpp
+index 1e94143e..b28d3608 100644
+--- a/Code/GraphMol/Descriptors/Wrap/rdMolDescriptors.cpp
++++ b/Code/GraphMol/Descriptors/Wrap/rdMolDescriptors.cpp
+@@ -31,6 +31,16 @@
+ 
+ namespace python = boost::python;
+ 
++// Workaround for bug in Visual Studio 2015 Update 3
++#if defined(_MSC_VER) && (_MSC_VER == 1900) && (_MSC_FULL_VER >= 190024210)
++namespace boost {
++  template<> const volatile ExplicitBitVect* get_pointer(const volatile ExplicitBitVect* p) { return p; }
++  template<> const volatile RDKit::Descriptors::PropertyFunctor* get_pointer(const volatile RDKit::Descriptors::PropertyFunctor* p) { return p; }
++  template<> const volatile RDKit::ROMol* get_pointer(const volatile RDKit::ROMol* p) { return p; }
++  template<> const volatile Queries::RangeQuery<double, RDKit::ROMol const &, 1>* get_pointer(const volatile Queries::RangeQuery<double, RDKit::ROMol const &, 1>* p) { return p; }
++}
++#endif
++
+ namespace {
+ std::vector<unsigned int> atomPairTypes(
+     RDKit::AtomPairs::atomNumberTypes,
+diff --git a/Code/GraphMol/FilterCatalog/Wrap/FilterCatalog.cpp b/Code/GraphMol/FilterCatalog/Wrap/FilterCatalog.cpp
+index c2a4cdb3..ec4a06de 100644
+--- a/Code/GraphMol/FilterCatalog/Wrap/FilterCatalog.cpp
++++ b/Code/GraphMol/FilterCatalog/Wrap/FilterCatalog.cpp
+@@ -40,6 +40,23 @@
+ 
+ namespace python = boost::python;
+ 
++// Workaround for bug in Visual Studio 2015 Update 3
++#if defined(_MSC_VER) && (_MSC_VER == 1900) && (_MSC_FULL_VER >= 190024210)
++namespace boost {
++  template<> const volatile RDKit::FilterCatalogEntry* get_pointer(const volatile RDKit::FilterCatalogEntry* p) { return p; }
++  template<> const volatile RDKit::FilterMatcherBase* get_pointer(const volatile RDKit::FilterMatcherBase* p) { return p; }
++  template<> const volatile RDKit::SmartsMatcher* get_pointer(const volatile RDKit::SmartsMatcher* p) { return p; }
++  template<> const volatile RDKit::ExclusionList* get_pointer(const volatile RDKit::ExclusionList* p) { return p; }
++  template<> const volatile RDKit::FilterCatalogParams* get_pointer(const volatile RDKit::FilterCatalogParams* p) { return p; }
++  template<> const volatile RDKit::FilterMatchOps::And* get_pointer(const volatile RDKit::FilterMatchOps::And* p) { return p; }
++  template<> const volatile RDKit::FilterMatchOps::Or* get_pointer(const volatile RDKit::FilterMatchOps::Or* p) { return p; }
++  template<> const volatile RDKit::FilterMatchOps::Not* get_pointer(const volatile RDKit::FilterMatchOps::Not* p) { return p; }
++  template<> const volatile RDKit::FilterHierarchyMatcher* get_pointer(const volatile RDKit::FilterHierarchyMatcher* p) { return p; }
++  template<> const volatile RDKit::FilterCatalog* get_pointer(const volatile RDKit::FilterCatalog* p) { return p; }
++  template<> const volatile RDKit::ROMol* get_pointer(const volatile RDKit::ROMol* p) { return p; }
++}
++#endif
++
+ namespace RDKit {
+ 
+ struct filtercatalog_pickle_suite : python::pickle_suite {
+diff --git a/Code/GraphMol/FragCatalog/Wrap/FragCatParams.cpp b/Code/GraphMol/FragCatalog/Wrap/FragCatParams.cpp
+index f57d77d6..0a5eb986 100644
+--- a/Code/GraphMol/FragCatalog/Wrap/FragCatParams.cpp
++++ b/Code/GraphMol/FragCatalog/Wrap/FragCatParams.cpp
+@@ -20,6 +20,16 @@
+ #include <Catalogs/CatalogParams.h>
+ 
+ namespace python = boost::python;
++
++// Workaround for bug in Visual Studio 2015 Update 3
++#if defined(_MSC_VER) && (_MSC_VER == 1900) && (_MSC_FULL_VER >= 190024210)
++namespace boost {
++  template<> const volatile RDKit::FragCatParams* get_pointer(const volatile RDKit::FragCatParams* p) { return p; }
++  template<> const volatile RDKit::ROMol* get_pointer(const volatile RDKit::ROMol* p) { return p; }
++  template<> const volatile ExplicitBitVect* get_pointer(const volatile ExplicitBitVect* p) { return p; }
++}
++#endif
++
+ namespace RDKit {
+ struct fragparams_wrapper {
+   static void wrap() {
+diff --git a/Code/GraphMol/MolCatalog/Wrap/rdMolCatalog.cpp b/Code/GraphMol/MolCatalog/Wrap/rdMolCatalog.cpp
+index c4b070fa..5b90b33c 100644
+--- a/Code/GraphMol/MolCatalog/Wrap/rdMolCatalog.cpp
++++ b/Code/GraphMol/MolCatalog/Wrap/rdMolCatalog.cpp
+@@ -10,6 +10,15 @@
+ #include <GraphMol/MolCatalog/MolCatalogParams.h>
+ 
+ namespace python = boost::python;
++
++// Workaround for bug in Visual Studio 2015 Update 3
++#if defined(_MSC_VER) && (_MSC_VER == 1900) && (_MSC_FULL_VER >= 190024210)
++namespace boost {
++  template<> const volatile RDKit::ROMol* get_pointer(const volatile RDKit::ROMol* p) { return p; }
++  template<> const volatile RDCatalog::HierarchCatalog<RDKit::MolCatalogEntry, RDKit::MolCatalogParams, int>* get_pointer(const volatile RDCatalog::HierarchCatalog<RDKit::MolCatalogEntry, RDKit::MolCatalogParams, int>* p) { return p; }
++}
++#endif
++
+ using namespace RDKit;
+ namespace {
+ struct molcatalog_pickle_suite : python::pickle_suite {
+diff --git a/Code/GraphMol/MolChemicalFeatures/Wrap/MolChemicalFeature.cpp b/Code/GraphMol/MolChemicalFeatures/Wrap/MolChemicalFeature.cpp
+index 98056d0f..de919d65 100644
+--- a/Code/GraphMol/MolChemicalFeatures/Wrap/MolChemicalFeature.cpp
++++ b/Code/GraphMol/MolChemicalFeatures/Wrap/MolChemicalFeature.cpp
+@@ -19,6 +19,14 @@
+ 
+ namespace python = boost::python;
+ 
++// Workaround for bug in Visual Studio 2015 Update 3
++#if defined(_MSC_VER) && (_MSC_VER == 1900) && (_MSC_FULL_VER >= 190024210)
++namespace boost {
++  template<> const volatile RDKit::MolChemicalFeature* get_pointer(const volatile RDKit::MolChemicalFeature* p) { return p; }
++  template<> const volatile RDKit::ROMol* get_pointer(const volatile RDKit::ROMol* p) { return p; }
++}
++#endif
++
+ namespace RDKit {
+ PyObject *getFeatAtomIds(const MolChemicalFeature &feat) {
+   const MolChemicalFeature::AtomPtrContainer &atoms = feat.getAtoms();
+diff --git a/Code/GraphMol/MolDraw2D/Wrap/rdMolDraw2D.cpp b/Code/GraphMol/MolDraw2D/Wrap/rdMolDraw2D.cpp
+index 4d3ec108..2bc4aca0 100644
+--- a/Code/GraphMol/MolDraw2D/Wrap/rdMolDraw2D.cpp
++++ b/Code/GraphMol/MolDraw2D/Wrap/rdMolDraw2D.cpp
+@@ -25,6 +25,13 @@
+ 
+ namespace python = boost::python;
+ 
++// Workaround for bug in Visual Studio 2015 Update 3
++#if defined(_MSC_VER) && (_MSC_VER == 1900) && (_MSC_FULL_VER >= 190024210)
++namespace boost {
++  template<> const volatile RDKit::ROMol* get_pointer(const volatile RDKit::ROMol* p) { return p; }
++}
++#endif
++
+ namespace RDKit {
+ namespace {
+ void pyDictToColourMap(python::object pyo, ColourPalette &res) {
+diff --git a/Code/GraphMol/ReducedGraphs/Wrap/rdReducedGraphs.cpp b/Code/GraphMol/ReducedGraphs/Wrap/rdReducedGraphs.cpp
+index 842ab618..df15043a 100644
+--- a/Code/GraphMol/ReducedGraphs/Wrap/rdReducedGraphs.cpp
++++ b/Code/GraphMol/ReducedGraphs/Wrap/rdReducedGraphs.cpp
+@@ -25,6 +25,13 @@
+ 
+ namespace python = boost::python;
+ 
++// Workaround for bug in Visual Studio 2015 Update 3
++#if defined(_MSC_VER) && (_MSC_VER == 1900) && (_MSC_FULL_VER >= 190024210)
++namespace boost {
++  template<> const volatile RDKit::ROMol* get_pointer(const volatile RDKit::ROMol* p) { return p; }
++}
++#endif
++
+ namespace {
+ RDKit::ROMol *GenerateMolExtendedReducedGraphHelper(const RDKit::ROMol &mol,
+                                                     python::object atomTypes) {
+diff --git a/Code/GraphMol/SLNParse/Wrap/rdSLNParse.cpp b/Code/GraphMol/SLNParse/Wrap/rdSLNParse.cpp
+index 295a8354..cdac6bec 100644
+--- a/Code/GraphMol/SLNParse/Wrap/rdSLNParse.cpp
++++ b/Code/GraphMol/SLNParse/Wrap/rdSLNParse.cpp
+@@ -42,6 +42,13 @@
+ 
+ namespace python = boost::python;
+ 
++// Workaround for bug in Visual Studio 2015 Update 3
++#if defined(_MSC_VER) && (_MSC_VER == 1900) && (_MSC_FULL_VER >= 190024210)
++namespace boost {
++  template<> const volatile RDKit::ROMol* get_pointer(const volatile RDKit::ROMol* p) { return p; }
++}
++#endif
++
+ void rdSLNParseExceptionTranslator(RDKit::SLNParseException const &x) {
+   std::ostringstream ss;
+   ss << "SLNParseException: " << x.message();
+diff --git a/Code/GraphMol/SubstructLibrary/Wrap/SubstructLibraryWrap.cpp b/Code/GraphMol/SubstructLibrary/Wrap/SubstructLibraryWrap.cpp
+index 0ccf050c..1a32c4a1 100644
+--- a/Code/GraphMol/SubstructLibrary/Wrap/SubstructLibraryWrap.cpp
++++ b/Code/GraphMol/SubstructLibrary/Wrap/SubstructLibraryWrap.cpp
+@@ -36,6 +36,19 @@
+ 
+ namespace python = boost::python;
+ 
++// Workaround for bug in Visual Studio 2015 Update 3
++#if defined(_MSC_VER) && (_MSC_VER == 1900) && (_MSC_FULL_VER >= 190024210)
++namespace boost {
++  template<> const volatile ExplicitBitVect* get_pointer(const volatile ExplicitBitVect* p) { return p; }
++  template<> const volatile RDKit::FPHolderBase* get_pointer(const volatile RDKit::FPHolderBase* p) { return p; }
++  template<> const volatile RDKit::MolHolder* get_pointer(const volatile RDKit::MolHolder* p) { return p; }
++  template<> const volatile RDKit::CachedMolHolder* get_pointer(const volatile RDKit::CachedMolHolder* p) { return p; }
++  template<> const volatile RDKit::CachedSmilesMolHolder* get_pointer(const volatile RDKit::CachedSmilesMolHolder* p) { return p; }
++  template<> const volatile RDKit::CachedTrustedSmilesMolHolder* get_pointer(const volatile RDKit::CachedTrustedSmilesMolHolder* p) { return p; }
++  template<> const volatile RDKit::PatternHolder* get_pointer(const volatile RDKit::PatternHolder* p) { return p; }
++}
++#endif
++
+ namespace RDKit {
+ 
+ const char * MolHolderBaseDoc = "Base class for holding molecules used in the Substructure Library.\n" \
+diff --git a/Code/GraphMol/Wrap/Atom.cpp b/Code/GraphMol/Wrap/Atom.cpp
+index b405dafb..455fe3bf 100644
+--- a/Code/GraphMol/Wrap/Atom.cpp
++++ b/Code/GraphMol/Wrap/Atom.cpp
+@@ -26,6 +26,15 @@
+ #include <algorithm>
+ 
+ namespace python = boost::python;
++
++// Workaround for bug in Visual Studio 2015 Update 3
++#if defined(_MSC_VER) && (_MSC_VER == 1900) && (_MSC_FULL_VER >= 190024210)
++namespace boost {
++  template<> const volatile RDKit::AtomPDBResidueInfo* get_pointer(const volatile RDKit::AtomPDBResidueInfo* p) { return p; }
++  template<> const volatile RDKit::AtomMonomerInfo* get_pointer(const volatile RDKit::AtomMonomerInfo* p) { return p; }
++}
++#endif
++
+ namespace RDKit {
+ 
+ void expandQuery(QueryAtom *self, const QueryAtom *other,
+diff --git a/Code/GraphMol/Wrap/ForwardSDMolSupplier.cpp b/Code/GraphMol/Wrap/ForwardSDMolSupplier.cpp
+index da25cad5..de9837fa 100644
+--- a/Code/GraphMol/Wrap/ForwardSDMolSupplier.cpp
++++ b/Code/GraphMol/Wrap/ForwardSDMolSupplier.cpp
+@@ -128,4 +128,11 @@ struct forwardsdmolsup_wrap {
+ };
+ }
+ 
++// Workaround for bug in Visual Studio 2015 Update 3
++#if defined(_MSC_VER) && (_MSC_VER == 1900) && (_MSC_FULL_VER >= 190024210)
++namespace boost {
++  template<> const volatile LocalForwardSDMolSupplier* get_pointer(const volatile LocalForwardSDMolSupplier* p) { return p; };
++}
++#endif
++
+ void wrap_forwardsdsupplier() { RDKit::forwardsdmolsup_wrap::wrap(); }
+diff --git a/Code/GraphMol/Wrap/Mol.cpp b/Code/GraphMol/Wrap/Mol.cpp
+index 30fe25e8..87e167e7 100644
+--- a/Code/GraphMol/Wrap/Mol.cpp
++++ b/Code/GraphMol/Wrap/Mol.cpp
+@@ -705,4 +705,12 @@ struct mol_wrapper {
+   };
+ };
+ }  // end of namespace
++
++// Workaround for bug in Visual Studio 2015 Update 3
++#if defined(_MSC_VER) && (_MSC_VER == 1900) && (_MSC_FULL_VER >= 190024210)
++namespace boost {
++  template<> const volatile RDKit::ReadWriteMol* get_pointer(const volatile RDKit::ReadWriteMol* p) { return p; }
++}
++#endif
++
+ void wrap_mol() { RDKit::mol_wrapper::wrap(); }
+diff --git a/Code/GraphMol/Wrap/MolOps.cpp b/Code/GraphMol/Wrap/MolOps.cpp
+index 23bd84b5..a30f9957 100644
+--- a/Code/GraphMol/Wrap/MolOps.cpp
++++ b/Code/GraphMol/Wrap/MolOps.cpp
+@@ -32,6 +32,15 @@
+ #include <sstream>
+ #include <GraphMol/MolDraw2D/MolDraw2DSVG.h>
+ namespace python = boost::python;
++
++// Workaround for bug in Visual Studio 2015 Update 3
++#if defined(_MSC_VER) && (_MSC_VER == 1900) && (_MSC_FULL_VER >= 190024210)
++namespace boost {
++  template<> const volatile RDKit::ROMol* get_pointer(const volatile RDKit::ROMol* p) { return p; }
++  template<> const volatile ExplicitBitVect* get_pointer(const volatile ExplicitBitVect* p) { return p; }
++}
++#endif
++
+ using boost_adaptbx::python::streambuf;
+ 
+ namespace RDKit {
+diff --git a/Code/GraphMol/Wrap/Queries.cpp b/Code/GraphMol/Wrap/Queries.cpp
+index 0f0f9f0f..d21ec161 100644
+--- a/Code/GraphMol/Wrap/Queries.cpp
++++ b/Code/GraphMol/Wrap/Queries.cpp
+@@ -17,6 +17,15 @@
+ #include <RDGeneral/types.h>
+ 
+ namespace python = boost::python;
++
++// Workaround for bug in Visual Studio 2015 Update 3
++#if defined(_MSC_VER) && (_MSC_VER == 1900) && (_MSC_FULL_VER >= 190024210)
++namespace boost {
++  template<> const volatile RDKit::QueryBond* get_pointer(const volatile RDKit::QueryBond* p) { return p; }
++  template<> const volatile RDKit::QueryAtom* get_pointer(const volatile RDKit::QueryAtom* p) { return p; }
++}
++#endif
++
+ namespace RDKit {
+ 
+ /*
+diff --git a/Code/GraphMol/Wrap/SDMolSupplier.cpp b/Code/GraphMol/Wrap/SDMolSupplier.cpp
+index 77a0e99b..bfbbdd60 100644
+--- a/Code/GraphMol/Wrap/SDMolSupplier.cpp
++++ b/Code/GraphMol/Wrap/SDMolSupplier.cpp
+@@ -23,6 +23,13 @@
+ 
+ namespace python = boost::python;
+ 
++// Workaround for bug in Visual Studio 2015 Update 3
++#if defined(_MSC_VER) && (_MSC_VER == 1900) && (_MSC_FULL_VER >= 190024210)
++namespace boost {
++  template<> const volatile RDKit::SDMolSupplier* get_pointer(const volatile RDKit::SDMolSupplier* p) { return p; }
++}
++#endif
++
+ namespace RDKit {
+ void setDataHelper(SDMolSupplier &self, const std::string &text, bool sanitize,
+                    bool removeHs, bool strictParsing) {
+diff --git a/Code/GraphMol/Wrap/SmilesMolSupplier.cpp b/Code/GraphMol/Wrap/SmilesMolSupplier.cpp
+index adda79a8..c83baa44 100644
+--- a/Code/GraphMol/Wrap/SmilesMolSupplier.cpp
++++ b/Code/GraphMol/Wrap/SmilesMolSupplier.cpp
+@@ -22,6 +22,13 @@
+ 
+ namespace python = boost::python;
+ 
++// Workaround for bug in Visual Studio 2015 Update 3
++#if defined(_MSC_VER) && (_MSC_VER == 1900) && (_MSC_FULL_VER >= 190024210)
++namespace boost {
++  template<> const volatile RDKit::SmilesMolSupplier* get_pointer(const volatile RDKit::SmilesMolSupplier* p) { return p; }
++}
++#endif
++
+ namespace RDKit {
+ 
+ SmilesMolSupplier *SmilesSupplierFromText(
+diff --git a/Code/GraphMol/Wrap/TDTMolSupplier.cpp b/Code/GraphMol/Wrap/TDTMolSupplier.cpp
+index 6b4a7708..3e9e648f 100644
+--- a/Code/GraphMol/Wrap/TDTMolSupplier.cpp
++++ b/Code/GraphMol/Wrap/TDTMolSupplier.cpp
+@@ -20,6 +20,13 @@
+ 
+ namespace python = boost::python;
+ 
++// Workaround for bug in Visual Studio 2015 Update 3
++#if defined(_MSC_VER) && (_MSC_VER == 1900) && (_MSC_FULL_VER >= 190024210)
++namespace boost {
++  template<> const volatile RDKit::TDTMolSupplier* get_pointer(const volatile RDKit::TDTMolSupplier* p) { return p; }
++}
++#endif
++
+ namespace RDKit {
+ 
+ std::string tdtMolSupplierClassDoc =
+diff --git a/Code/GraphMol/Wrap/rdchem.cpp b/Code/GraphMol/Wrap/rdchem.cpp
+index 5ff8a377..e540582e 100644
+--- a/Code/GraphMol/Wrap/rdchem.cpp
++++ b/Code/GraphMol/Wrap/rdchem.cpp
+@@ -25,6 +25,16 @@
+ 
+ #include "seqs.hpp"
+ namespace python = boost::python;
++
++// Workaround for bug in Visual Studio 2015 Update 3
++#if defined(_MSC_VER) && (_MSC_VER == 1900) && (_MSC_FULL_VER >= 190024210)
++namespace boost {
++  template<> const volatile RDKit::Bond* get_pointer(const volatile RDKit::Bond* p) { return p; }
++  template<> const volatile RDKit::Atom* get_pointer(const volatile RDKit::Atom* p) { return p; }
++  template<> const volatile RDKit::ROMol* get_pointer(const volatile RDKit::ROMol* p) { return p; }
++}
++#endif
++
+ using namespace RDKit;
+ 
+ namespace RDKit {
+diff --git a/Code/GraphMol/Wrap/rdmolfiles.cpp b/Code/GraphMol/Wrap/rdmolfiles.cpp
+index fd5534bc..5232fdfe 100644
+--- a/Code/GraphMol/Wrap/rdmolfiles.cpp
++++ b/Code/GraphMol/Wrap/rdmolfiles.cpp
+@@ -33,6 +33,14 @@
+ #include <GraphMol/SanitException.h>
+ 
+ namespace python = boost::python;
++
++// Workaround for bug in Visual Studio 2015 Update 3
++#if defined(_MSC_VER) && (_MSC_VER == 1900) && (_MSC_FULL_VER >= 190024210)
++namespace boost {
++  template<> const volatile RDKit::ROMol* get_pointer(const volatile RDKit::ROMol* p) { return p; }
++}
++#endif
++
+ using namespace RDKit;
+ 
+ void rdSanitExceptionTranslator(RDKit::MolSanitizeException const &x) {
+diff --git a/External/AvalonTools/Wrap/pyAvalonTools.cpp b/External/AvalonTools/Wrap/pyAvalonTools.cpp
+index ffab0fe8..31533a40 100755
+--- a/External/AvalonTools/Wrap/pyAvalonTools.cpp
++++ b/External/AvalonTools/Wrap/pyAvalonTools.cpp
+@@ -15,6 +15,13 @@ extern "C" {
+ #include "struchk.h"
+ }
+ 
++// Workaround for bug in Visual Studio 2015 Update 3
++#if defined(_MSC_VER) && (_MSC_VER == 1900) && (_MSC_FULL_VER >= 190024210)
++namespace boost {
++  template<> const volatile ExplicitBitVect* get_pointer(const volatile ExplicitBitVect* p) { return p; }
++}
++#endif
++
+ namespace python = boost::python;
+ 
+ namespace {

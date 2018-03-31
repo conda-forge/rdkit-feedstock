@@ -10,9 +10,10 @@ source:
   fn:  {{ filename }}
   url: https://github.com/rdkit/rdkit/archive/{{ filename }}
   sha256: 6a4d9e9eb0ca06cbcdc20505f0c6ea0b1167b4dcdf7d1185871ba16ce701a5f4
+  patches:
+    - vs2015.patch
 
 build:
-  skip: true  # [win]
   number: 0
 
 requirements:
