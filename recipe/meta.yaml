@@ -37,6 +37,7 @@ requirements:
     - python
     - six
     - numpy >=1.11
+    - pycairo
 
 test:
   imports:
