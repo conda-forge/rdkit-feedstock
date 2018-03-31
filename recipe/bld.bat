@@ -17,8 +17,8 @@ cmake ^
     .
 if errorlevel 1 exit 1
 
-jom -j%CPU_COUNT%
+cmake --build . --config Release
 if errorlevel 1 exit 1
 
-jom install
+cmake --build . --config Release --target install
 if errorlevel 1 exit 1
