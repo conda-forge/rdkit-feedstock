@@ -14,14 +14,16 @@ Summary: RDKit is a collection of cheminformatics and machine-learning software 
 Current build status
 ====================
 
-Linux: [![Circle CI](https://circleci.com/gh/conda-forge/rdkit-feedstock.svg?style=shield)](https://circleci.com/gh/conda-forge/rdkit-feedstock)
-OSX: [![TravisCI](https://travis-ci.org/conda-forge/rdkit-feedstock.svg?branch=master)](https://travis-ci.org/conda-forge/rdkit-feedstock)
-Windows: [![AppVeyor](https://ci.appveyor.com/api/projects/status/github/conda-forge/rdkit-feedstock?svg=True)](https://ci.appveyor.com/project/conda-forge/rdkit-feedstock/branch/master)
+[![Linux](https://img.shields.io/circleci/project/github/conda-forge/rdkit-feedstock/master.svg?label=Linux)](https://circleci.com/gh/conda-forge/rdkit-feedstock)
+[![OSX](https://img.shields.io/travis/conda-forge/rdkit-feedstock/master.svg?label=macOS)](https://travis-ci.org/conda-forge/rdkit-feedstock)
+[![Windows](https://img.shields.io/appveyor/ci/conda-forge/rdkit-feedstock/master.svg?label=Windows)](https://ci.appveyor.com/project/conda-forge/rdkit-feedstock/branch/master)
 
 Current release info
 ====================
-Version: [![Anaconda-Server Badge](https://anaconda.org/conda-forge/rdkit/badges/version.svg)](https://anaconda.org/conda-forge/rdkit)
-Downloads: [![Anaconda-Server Badge](https://anaconda.org/conda-forge/rdkit/badges/downloads.svg)](https://anaconda.org/conda-forge/rdkit)
+
+| Name | Downloads | Version | Platforms |
+| --- | --- | --- | --- |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-rdkit-green.svg)](https://anaconda.org/conda-forge/rdkit) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/rdkit.svg)](https://anaconda.org/conda-forge/rdkit) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/rdkit.svg)](https://anaconda.org/conda-forge/rdkit) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/rdkit.svg)](https://anaconda.org/conda-forge/rdkit) |
 
 Installing rdkit
 ================
