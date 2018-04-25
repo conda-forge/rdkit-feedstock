@@ -40,7 +40,6 @@ requirements:
     - six
     - numpy >=1.11
     - pycairo
-    - libcxx >=4  # [osx]
 
 test:
   imports:
