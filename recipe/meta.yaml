@@ -19,24 +19,23 @@ build:
 
 requirements:
   build:
-    - toolchain
+    - {{ compiler('cxx') }}
     - cmake
     - requests
-    - boost 1.66.0
-    - python
-    - numpy 1.11.*
     - pillow
     - freetype 2.8.1
     - eigen
     - pandas
-    - cairo 1.14.*
     - jom  # [win]
     - pkg-config  # [not win]
-    - clangdev 4.*  # [osx]
-    - libcxx 4.*  # [osx]
+  host:
+    - cairo 1.14.*
+    - boost 1.66.*
+    - python
+    - numpy 1.11.*
   run:
     - cairo 1.14.*
-    - boost 1.66.0
+    - boost 1.66.*
     - python
     - six
     - numpy >=1.11
