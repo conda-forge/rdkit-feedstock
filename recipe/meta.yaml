@@ -32,6 +32,8 @@ requirements:
     - cairo 1.14.*
     - jom  # [win]
     - pkg-config  # [not win]
+    - clangdev 4.*  # [osx]
+    - libcxx 4.*  # [osx]
   run:
     - cairo 1.14.*
     - boost 1.66.0
@@ -39,6 +41,7 @@ requirements:
     - six
     - numpy >=1.11
     - pycairo
+    - libcxx >=4  # [osx]
 
 test:
   imports:
