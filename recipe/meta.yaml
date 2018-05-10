@@ -19,7 +19,8 @@ build:
 
 requirements:
   build:
-    - {{ compiler('cxx') }}
+    - {{ compiler('cxx') }}  # [not osx]
+    - clang_osx-64  # [osx]
     - cmake
     - requests
     - jom  # [win]
