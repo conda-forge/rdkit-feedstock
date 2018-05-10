@@ -22,24 +22,26 @@ requirements:
     - {{ compiler('cxx') }}
     - cmake
     - requests
-    - pillow
-    - freetype 2.8.1
-    - eigen
-    - pandas
     - jom  # [win]
     - pkg-config  # [not win]
   host:
-    - cairo 1.14.*
-    - boost 1.66.*
+    - cairo
+    - boost
+    - eigen
+    - freetype
     - python
-    - numpy 1.11.*
+    - numpy
+    - pillow
+    - pandas
   run:
-    - cairo 1.14.*
-    - boost 1.66.*
+    - {{ pin_compatible('boost', max_pin='x.x.x') }}
+    - {{ pin_compatible('cairo') }}
     - python
-    - six
-    - numpy >=1.11
+    - pillow
+    - pandas
+    - {{ pin_compatible('numpy') }}
     - pycairo
+    - six
 
 test:
   imports:
