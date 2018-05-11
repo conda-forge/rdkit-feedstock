@@ -1,0 +1,23 @@
+boost:
+- 1.66.0
+cairo:
+- '1.14'
+cxx_compiler:
+- vs2015
+freetype:
+- 2.8.1
+numpy:
+- '1.11'
+pin_run_as_build:
+  cairo:
+    max_pin: x.x
+  freetype:
+    max_pin: x.x.x
+  python:
+    max_pin: x.x
+    min_pin: x.x
+python:
+- '3.6'
+zip_keys:
+- - python
+  - cxx_compiler

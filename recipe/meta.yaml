@@ -1,5 +1,5 @@
 {% set name = "rdkit" %}
-{% set version = "2017.09.3" %}
+{% set version = "2018.03.1" %}
 {% set filename = "Release_%s.tar.gz" % version.replace(".", "_") %}
 
 package:
@@ -9,35 +9,41 @@ package:
 source:
   fn:  {{ filename }}
   url: https://github.com/rdkit/rdkit/archive/{{ filename }}
-  sha256: 6a4d9e9eb0ca06cbcdc20505f0c6ea0b1167b4dcdf7d1185871ba16ce701a5f4
+  sha256: 9edac0f57c963947b59dfe6f5a84cf3bd2d93ca7111d4d3cf883c9c61756905d
   patches:
     - vs2015.patch  # [win and py>=35]
 
 build:
   number: 0
+  skip: true  # [win and py27]
 
 requirements:
   build:
-    - toolchain
+    - {{ compiler('cxx') }}  # [not osx]
+    - clang_osx-64  # [osx]
+    - clangxx_osx-64  # [osx]
     - cmake
     - requests
-    - boost 1.66.0
-    - python
-    - numpy 1.11.*
-    - pillow
-    - freetype 2.8.1
-    - eigen
-    - pandas
-    - cairo 1.14.*
     - jom  # [win]
     - pkg-config  # [not win]
-  run:
-    - cairo 1.14.*
-    - boost 1.66.0
+  host:
+    - cairo
+    - boost
+    - eigen
+    - freetype
     - python
-    - six
-    - numpy >=1.11
+    - numpy
+    - pillow
+    - pandas
+  run:
+    - {{ pin_compatible('boost', max_pin='x.x.x') }}
+    - {{ pin_compatible('cairo') }}
+    - python
+    - pillow
+    - pandas
+    - {{ pin_compatible('numpy') }}
     - pycairo
+    - six
 
 test:
   imports:
