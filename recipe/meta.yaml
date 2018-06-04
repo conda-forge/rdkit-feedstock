@@ -65,6 +65,8 @@ about:
   license: BSD 3-Clause
   license_file: license.txt
   summary: 'RDKit is a collection of cheminformatics and machine-learning software written in C++ and Python.'
+  doc_url: http://www.rdkit.org/docs/index.html
+  dev_url: https://github.com/rdkit/rdkit
 
 extra:
   recipe-maintainers:
