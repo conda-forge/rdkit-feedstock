@@ -23,9 +23,7 @@ requirements:
     - clang_osx-64  # [osx]
     - clangxx_osx-64  # [osx]
     - cmake
-    - requests
     - jom  # [win]
-    - pkg-config  # [not win]
   host:
     - cairo
     - boost
