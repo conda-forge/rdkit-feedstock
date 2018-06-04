@@ -9,12 +9,14 @@ freetype:
 numpy:
 - '1.9'
 pin_run_as_build:
+  boost:
+    max_pin: x.x.x
   cairo:
     max_pin: x.x
   freetype:
-    max_pin: x.x.x
-  python:
     max_pin: x.x
+  python:
     min_pin: x.x
+    max_pin: x.x
 python:
 - '2.7'
