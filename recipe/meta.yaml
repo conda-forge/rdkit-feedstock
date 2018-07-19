@@ -1,5 +1,5 @@
 {% set name = "rdkit" %}
-{% set version = "2018.03.2" %}
+{% set version = "2018.03.3" %}
 {% set filename = "Release_%s.tar.gz" % version.replace(".", "_") %}
 
 package:
@@ -9,7 +9,7 @@ package:
 source:
   fn:  {{ filename }}
   url: https://github.com/rdkit/rdkit/archive/{{ filename }}
-  sha256: 29eeba93e723f0f9d61e31cf0f89ec18ba942a7f9e416dbc1a92122fce08cbed
+  sha256: f8577a8f46dcc140acf3bcd3a2f50ba3e1a333d0f24b52d63832c96754b2bb1f
   patches:
     - vs2015.patch  # [win and py>=35]
 
@@ -26,7 +26,7 @@ requirements:
     - jom  # [win]
   host:
     - cairo
-    - boost
+    - boost 1.66.*
     - eigen
     - freetype
     - python
@@ -34,7 +34,7 @@ requirements:
     - pillow
     - pandas
   run:
-    - boost
+    - boost 1.66.*
     - cairo
     - python
     - pillow
