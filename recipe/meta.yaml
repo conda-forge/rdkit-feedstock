@@ -14,7 +14,7 @@ source:
     - vs2015.patch  # [win and py>=35]
 
 build:
-  number: 0
+  number: 1000
   skip: true  # [win and py27]
 
 requirements:
