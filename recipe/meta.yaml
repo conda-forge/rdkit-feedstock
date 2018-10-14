@@ -26,7 +26,6 @@ requirements:
     - jom  # [win]
   host:
     - cairo
-    - boost 1.66.*
     - eigen
     - freetype
     - python
@@ -34,7 +33,6 @@ requirements:
     - pillow
     - pandas
   run:
-    - boost 1.66.*
     - cairo
     - python
     - pillow
