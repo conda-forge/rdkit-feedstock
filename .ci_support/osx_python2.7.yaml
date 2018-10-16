@@ -1,7 +1,15 @@
 MACOSX_DEPLOYMENT_TARGET:
 - '10.9'
+build_number_decrement:
+- '0'
 cairo:
 - '1.14'
+channel_sources:
+- conda-forge,defaults
+channel_targets:
+- conda-forge main
+docker_image:
+- condaforge/linux-anvil
 freetype:
 - 2.9.1
 macos_machine:
@@ -20,3 +28,7 @@ pin_run_as_build:
     max_pin: x.x
 python:
 - '2.7'
+zip_keys:
+- - channel_sources
+  - channel_targets
+  - build_number_decrement

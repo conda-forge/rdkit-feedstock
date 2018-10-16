@@ -12,9 +12,10 @@ source:
   sha256: 9e1a63f3b8c64b9754416073a20292ea79d33ac8aa1485259df1b8db2bfa0113
   patches:
     - vs2015.patch  # [win and py>=35]
+    - boost-1.67.patch
 
 build:
-  number: 0
+  number: 1000
   skip: true  # [win and py27]
 
 requirements:
@@ -25,8 +26,8 @@ requirements:
     - cmake
     - jom  # [win]
   host:
+    - boost
     - cairo
-    - boost 1.66.*
     - eigen
     - freetype
     - python
@@ -34,7 +35,7 @@ requirements:
     - pillow
     - pandas
   run:
-    - boost 1.66.*
+    - boost
     - cairo
     - python
     - pillow
