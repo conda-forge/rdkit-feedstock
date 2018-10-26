@@ -1,5 +1,5 @@
 {% set name = "rdkit" %}
-{% set version = "2018.03.4" %}
+{% set version = "2018.09.1" %}
 {% set filename = "Release_%s.tar.gz" % version.replace(".", "_") %}
 
 package:
@@ -9,10 +9,9 @@ package:
 source:
   fn:  {{ filename }}
   url: https://github.com/rdkit/rdkit/archive/{{ filename }}
-  sha256: 9e1a63f3b8c64b9754416073a20292ea79d33ac8aa1485259df1b8db2bfa0113
+  sha256: 61c14652a05a6f6b216ff099381c4dd32048861ba9d96f75a017084e81848baa
   patches:
     - vs2015.patch  # [win and py>=35]
-    - boost-1.67.patch
 
 build:
   number: 1000

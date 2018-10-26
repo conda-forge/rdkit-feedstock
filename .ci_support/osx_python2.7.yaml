@@ -1,5 +1,7 @@
 MACOSX_DEPLOYMENT_TARGET:
 - '10.9'
+boost:
+- 1.68.0
 build_number_decrement:
 - '0'
 cairo:
@@ -19,6 +21,8 @@ macos_min_version:
 numpy:
 - '1.9'
 pin_run_as_build:
+  boost:
+    max_pin: x.x.x
   cairo:
     max_pin: x.x
   freetype:
