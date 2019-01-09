@@ -57,6 +57,8 @@ test:
     - rdkit.SimDivFilters
     - rdkit.VLib
     - rdkit.VLib.NodeLib
+  commands:
+    python -c "from rdkit.Chem import MolFromSmiles; list(MolFromSmiles('CCO').GetAtoms()"
 
 about:
   home: http://rdkit.org
