@@ -3,7 +3,7 @@ boost:
 build_number_decrement:
 - '1000'
 cairo:
-- '1.14'
+- '1.16'
 channel_sources:
 - conda-forge,defaults
 channel_targets:
