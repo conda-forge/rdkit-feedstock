@@ -1,7 +1,7 @@
 boost:
 - 1.68.0
 cairo:
-- '1.14'
+- '1.16'
 channel_sources:
 - conda-forge,defaults
 channel_targets:
