@@ -53,7 +53,7 @@ index d0a97fc3..d68bb1e9 100644
  
  namespace RDGeom {
 diff --git a/Code/GraphMol/ChemReactions/Wrap/Enumerate.cpp b/Code/GraphMol/ChemReactions/Wrap/Enumerate.cpp
-index f8c2335c..988f685a 100644
+index a9c5c2e4..10fc085f 100644
 --- a/Code/GraphMol/ChemReactions/Wrap/Enumerate.cpp
 +++ b/Code/GraphMol/ChemReactions/Wrap/Enumerate.cpp
 @@ -39,6 +39,17 @@
@@ -89,10 +89,10 @@ index f8c2335c..988f685a 100644
    RDKit::enumeration_wrapper::wrap();
  }
 diff --git a/Code/GraphMol/ChemReactions/Wrap/rdChemReactions.cpp b/Code/GraphMol/ChemReactions/Wrap/rdChemReactions.cpp
-index 0fa7b40a..1842659c 100644
+index 4e5b026b..7462443c 100644
 --- a/Code/GraphMol/ChemReactions/Wrap/rdChemReactions.cpp
 +++ b/Code/GraphMol/ChemReactions/Wrap/rdChemReactions.cpp
-@@ -50,6 +50,14 @@
+@@ -52,6 +52,14 @@
  
  namespace python = boost::python;
  
@@ -108,7 +108,7 @@ index 0fa7b40a..1842659c 100644
      RDKit::ChemicalReactionParserException const &x) {
    std::ostringstream ss;
 diff --git a/Code/GraphMol/Descriptors/Wrap/rdMolDescriptors.cpp b/Code/GraphMol/Descriptors/Wrap/rdMolDescriptors.cpp
-index 636cd831..8da8ffd3 100644
+index 58d51a2b..5304a486 100644
 --- a/Code/GraphMol/Descriptors/Wrap/rdMolDescriptors.cpp
 +++ b/Code/GraphMol/Descriptors/Wrap/rdMolDescriptors.cpp
 @@ -31,6 +31,16 @@
@@ -198,7 +198,7 @@ index ac1a01b9..46f475ed 100644
  namespace {
  struct molcatalog_pickle_suite : python::pickle_suite {
 diff --git a/Code/GraphMol/MolChemicalFeatures/Wrap/MolChemicalFeature.cpp b/Code/GraphMol/MolChemicalFeatures/Wrap/MolChemicalFeature.cpp
-index 98056d0f..de919d65 100644
+index 2e137978..50766862 100644
 --- a/Code/GraphMol/MolChemicalFeatures/Wrap/MolChemicalFeature.cpp
 +++ b/Code/GraphMol/MolChemicalFeatures/Wrap/MolChemicalFeature.cpp
 @@ -19,6 +19,14 @@
@@ -217,7 +217,7 @@ index 98056d0f..de919d65 100644
  PyObject *getFeatAtomIds(const MolChemicalFeature &feat) {
    const MolChemicalFeature::AtomPtrContainer &atoms = feat.getAtoms();
 diff --git a/Code/GraphMol/MolDraw2D/Wrap/rdMolDraw2D.cpp b/Code/GraphMol/MolDraw2D/Wrap/rdMolDraw2D.cpp
-index 507f5095..a76025e7 100644
+index 6f4e074a..0d668786 100644
 --- a/Code/GraphMol/MolDraw2D/Wrap/rdMolDraw2D.cpp
 +++ b/Code/GraphMol/MolDraw2D/Wrap/rdMolDraw2D.cpp
 @@ -25,6 +25,13 @@
@@ -233,7 +233,7 @@ index 507f5095..a76025e7 100644
 +
  namespace RDKit {
  namespace {
- void pyDictToColourMap(python::object pyo, ColourPalette &res) {
+ void tagAtomHelper(MolDraw2DSVG &self, const ROMol &mol, double radius,
 diff --git a/Code/GraphMol/ReducedGraphs/Wrap/rdReducedGraphs.cpp b/Code/GraphMol/ReducedGraphs/Wrap/rdReducedGraphs.cpp
 index dd2de7d2..113e3399 100644
 --- a/Code/GraphMol/ReducedGraphs/Wrap/rdReducedGraphs.cpp
@@ -271,7 +271,7 @@ index 295a8354..cdac6bec 100644
    std::ostringstream ss;
    ss << "SLNParseException: " << x.message();
 diff --git a/Code/GraphMol/SubstructLibrary/Wrap/SubstructLibraryWrap.cpp b/Code/GraphMol/SubstructLibrary/Wrap/SubstructLibraryWrap.cpp
-index 191805c3..7ee1f9e8 100644
+index ed614346..5e28c81f 100644
 --- a/Code/GraphMol/SubstructLibrary/Wrap/SubstructLibraryWrap.cpp
 +++ b/Code/GraphMol/SubstructLibrary/Wrap/SubstructLibraryWrap.cpp
 @@ -36,6 +36,19 @@
@@ -295,7 +295,7 @@ index 191805c3..7ee1f9e8 100644
  
  const char *MolHolderBaseDoc =
 diff --git a/Code/GraphMol/Wrap/Atom.cpp b/Code/GraphMol/Wrap/Atom.cpp
-index a51b2bb4..c754a740 100644
+index b660db94..354c829e 100644
 --- a/Code/GraphMol/Wrap/Atom.cpp
 +++ b/Code/GraphMol/Wrap/Atom.cpp
 @@ -26,6 +26,15 @@
@@ -315,12 +315,12 @@ index a51b2bb4..c754a740 100644
  void expandQuery(QueryAtom *self, const QueryAtom *other,
                   Queries::CompositeQueryType how, bool maintainOrder) {
 diff --git a/Code/GraphMol/Wrap/ForwardSDMolSupplier.cpp b/Code/GraphMol/Wrap/ForwardSDMolSupplier.cpp
-index 9eef6564..1c22e30b 100644
+index 887f71f7..20da6296 100644
 --- a/Code/GraphMol/Wrap/ForwardSDMolSupplier.cpp
 +++ b/Code/GraphMol/Wrap/ForwardSDMolSupplier.cpp
-@@ -128,4 +128,11 @@ struct forwardsdmolsup_wrap {
+@@ -135,4 +135,11 @@ struct forwardsdmolsup_wrap {
  };
- }
+ }  // namespace RDKit
  
 +// Workaround for bug in Visual Studio 2015 Update 3
 +#if defined(_MSC_VER) && (_MSC_VER == 1900) && (_MSC_FULL_VER >= 190024210)
@@ -331,13 +331,13 @@ index 9eef6564..1c22e30b 100644
 +
  void wrap_forwardsdsupplier() { RDKit::forwardsdmolsup_wrap::wrap(); }
 diff --git a/Code/GraphMol/Wrap/Mol.cpp b/Code/GraphMol/Wrap/Mol.cpp
-index 8721a5a9..1a0459be 100644
+index bea025db..c6215b94 100644
 --- a/Code/GraphMol/Wrap/Mol.cpp
 +++ b/Code/GraphMol/Wrap/Mol.cpp
-@@ -705,4 +705,12 @@ struct mol_wrapper {
+@@ -794,4 +794,12 @@ struct mol_wrapper {
    };
  };
- }  // end of namespace
+ }  // namespace RDKit
 +
 +// Workaround for bug in Visual Studio 2015 Update 3
 +#if defined(_MSC_VER) && (_MSC_VER == 1900) && (_MSC_FULL_VER >= 190024210)
@@ -348,7 +348,7 @@ index 8721a5a9..1a0459be 100644
 +
  void wrap_mol() { RDKit::mol_wrapper::wrap(); }
 diff --git a/Code/GraphMol/Wrap/MolOps.cpp b/Code/GraphMol/Wrap/MolOps.cpp
-index e10cb5db..b85f3b05 100644
+index a8dd3100..05186484 100644
 --- a/Code/GraphMol/Wrap/MolOps.cpp
 +++ b/Code/GraphMol/Wrap/MolOps.cpp
 @@ -32,6 +32,15 @@
@@ -368,7 +368,7 @@ index e10cb5db..b85f3b05 100644
  
  namespace RDKit {
 diff --git a/Code/GraphMol/Wrap/Queries.cpp b/Code/GraphMol/Wrap/Queries.cpp
-index 14a9f894..4abba2fc 100644
+index 48cb10e3..aa61b537 100644
 --- a/Code/GraphMol/Wrap/Queries.cpp
 +++ b/Code/GraphMol/Wrap/Queries.cpp
 @@ -16,6 +16,15 @@
@@ -388,10 +388,10 @@ index 14a9f894..4abba2fc 100644
  
  /*
 diff --git a/Code/GraphMol/Wrap/SDMolSupplier.cpp b/Code/GraphMol/Wrap/SDMolSupplier.cpp
-index 77a0e99b..bfbbdd60 100644
+index 53868b8f..7a278f9b 100644
 --- a/Code/GraphMol/Wrap/SDMolSupplier.cpp
 +++ b/Code/GraphMol/Wrap/SDMolSupplier.cpp
-@@ -23,6 +23,13 @@
+@@ -22,6 +22,13 @@
  
  namespace python = boost::python;
  
@@ -406,7 +406,7 @@ index 77a0e99b..bfbbdd60 100644
  void setDataHelper(SDMolSupplier &self, const std::string &text, bool sanitize,
                     bool removeHs, bool strictParsing) {
 diff --git a/Code/GraphMol/Wrap/SmilesMolSupplier.cpp b/Code/GraphMol/Wrap/SmilesMolSupplier.cpp
-index b367ddc9..30bf22a4 100644
+index 72b06441..9de21bbf 100644
 --- a/Code/GraphMol/Wrap/SmilesMolSupplier.cpp
 +++ b/Code/GraphMol/Wrap/SmilesMolSupplier.cpp
 @@ -22,6 +22,13 @@
@@ -424,7 +424,7 @@ index b367ddc9..30bf22a4 100644
  
  SmilesMolSupplier *SmilesSupplierFromText(
 diff --git a/Code/GraphMol/Wrap/TDTMolSupplier.cpp b/Code/GraphMol/Wrap/TDTMolSupplier.cpp
-index 6b4a7708..3e9e648f 100644
+index 8110a261..100f1c8b 100644
 --- a/Code/GraphMol/Wrap/TDTMolSupplier.cpp
 +++ b/Code/GraphMol/Wrap/TDTMolSupplier.cpp
 @@ -20,6 +20,13 @@
@@ -442,7 +442,7 @@ index 6b4a7708..3e9e648f 100644
  
  std::string tdtMolSupplierClassDoc =
 diff --git a/Code/GraphMol/Wrap/rdchem.cpp b/Code/GraphMol/Wrap/rdchem.cpp
-index f7df2b36..18dac850 100644
+index 021ab8c5..a0d8c9dc 100644
 --- a/Code/GraphMol/Wrap/rdchem.cpp
 +++ b/Code/GraphMol/Wrap/rdchem.cpp
 @@ -26,6 +26,16 @@
@@ -463,10 +463,10 @@ index f7df2b36..18dac850 100644
  
  namespace RDKit {
 diff --git a/Code/GraphMol/Wrap/rdmolfiles.cpp b/Code/GraphMol/Wrap/rdmolfiles.cpp
-index ed0e689b..fbaacd14 100644
+index 5f582355..cf1b6157 100644
 --- a/Code/GraphMol/Wrap/rdmolfiles.cpp
 +++ b/Code/GraphMol/Wrap/rdmolfiles.cpp
-@@ -33,6 +33,14 @@
+@@ -34,6 +34,14 @@
  #include <GraphMol/SanitException.h>
  
  namespace python = boost::python;
