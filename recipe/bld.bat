@@ -1,5 +1,6 @@
 cmake ^
     -G "NMake Makefiles JOM" ^
+    -D RDK_BUILD_PGSQL=ON ^
     -D RDK_INSTALL_INTREE=OFF ^
     -D RDK_BUILD_INCHI_SUPPORT=ON ^
     -D RDK_BUILD_AVALON_SUPPORT=ON ^
@@ -22,7 +23,4 @@ cmake ^
 if errorlevel 1 exit 1
 
 cmake --build . --config Release
-if errorlevel 1 exit 1
-
-cmake --build . --config Release --target install
 if errorlevel 1 exit 1

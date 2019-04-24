@@ -3,7 +3,7 @@
 {% set filename = "Release_%s.tar.gz" % version.replace(".", "_") %}
 
 package:
-  name: {{ name|lower }}
+  name: {{ name|lower }}-split
   version: {{ version }}
 
 source:
@@ -31,6 +31,7 @@ requirements:
     - numpy
     - pillow
     - pandas
+    - postgresql
   run:
     - boost
     - cairo
@@ -41,22 +42,70 @@ requirements:
     - pycairo
     - six
 
-test:
-  imports:
-    - rdkit
-    - rdkit.Avalon
-    - rdkit.Chem
-    - rdkit.Chem.AllChem
-    - rdkit.DataManip
-    - rdkit.Dbase
-    - rdkit.DistanceGeometry
-    - rdkit.ForceField
-    - rdkit.Geometry
-    - rdkit.ML
-    - rdkit.Numerics
-    - rdkit.SimDivFilters
-    - rdkit.VLib
-    - rdkit.VLib.NodeLib
+outputs:
+  - name: rdkit
+    requirements:
+      build:
+        - {{ compiler('cxx') }}
+        - cmake
+        - jom  # [win]
+      host:
+        - boost
+        - cairo
+        - eigen
+        - freetype
+        - python
+        - numpy
+        - pillow
+        - pandas
+        - postgresql
+      run:
+        - boost
+        - cairo
+        - python
+        - pillow
+        - pandas
+        - {{ pin_compatible('numpy') }}
+        - pycairo
+        - six
+    script: install-rdkit.sh  # [unix]
+    script: install-rdkit.bat  # [win]
+    test:
+      imports:
+        - rdkit
+        - rdkit.Avalon
+        - rdkit.Chem
+        - rdkit.Chem.AllChem
+        - rdkit.DataManip
+        - rdkit.Dbase
+        - rdkit.DistanceGeometry
+        - rdkit.ForceField
+        - rdkit.Geometry
+        - rdkit.ML
+        - rdkit.Numerics
+        - rdkit.SimDivFilters
+        - rdkit.VLib
+        - rdkit.VLib.NodeLib
+
+  - name: rdkit-postgresql
+    script: install-rdkit-postgresql.sh  # [unix]
+    script: install-rdkit-postgresql.bat  # [win]
+    build:
+      run_exports:
+        - {{ pin_subpackage('rdkit-postgresql') }}
+    requirements:
+      build:
+        - {{ compiler('cxx') }}
+        - cmake
+        - jom  # [win]
+      host:
+        - {{ pin_subpackage('rdkit', exact=True) }}
+        - postgresql
+      run:
+        - {{ pin_subpackage('rdkit', exact=True) }}
+        - postgresql
+    about:
+      summary: The postgresql extension of RDKit
 
 about:
   home: http://rdkit.org
@@ -70,3 +119,4 @@ extra:
   recipe-maintainers:
     - pstjohn
     - mcs07
+    - bgruening

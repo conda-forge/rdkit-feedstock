@@ -1,5 +1,7 @@
 #!/bin/bash
 
+rm -rf Code/PgSQL
+
 PY_INC=`$PYTHON -c "from distutils import sysconfig; print (sysconfig.get_python_inc(0, '$PREFIX'))"`
 
 if [ "$OSX_ARCH" == "x86_64" ]; then
@@ -8,6 +10,7 @@ if [ "$OSX_ARCH" == "x86_64" ]; then
 fi
 
 cmake \
+    -D RDK_BUILD_PGSQL=ON \
     -D RDK_INSTALL_INTREE=OFF \
     -D RDK_INSTALL_STATIC_LIBS=OFF \
     -D RDK_BUILD_INCHI_SUPPORT=ON \
@@ -30,4 +33,3 @@ cmake \
     .
 
 make -j$CPU_COUNT
-make install
