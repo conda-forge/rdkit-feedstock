@@ -1,5 +1,5 @@
 boost:
-- 1.68.0
+- 1.70.0
 cairo:
 - '1.16'
 channel_sources:
@@ -11,7 +11,7 @@ cxx_compiler:
 freetype:
 - 2.9.1
 numpy:
-- '1.11'
+- '1.14'
 pin_run_as_build:
   boost:
     max_pin: x.x.x
