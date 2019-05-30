@@ -16,6 +16,7 @@ cmake ^
     -D PYTHON_INSTDIR="%SP_DIR%" ^
     -D BOOST_ROOT="%LIBRARY_PREFIX%" ^
     -D Boost_NO_SYSTEM_PATHS=ON ^
+    -D Boost_NO_BOOST_CMAKE=ON ^
     -D CMAKE_INSTALL_PREFIX="%LIBRARY_PREFIX%" ^
     -D CMAKE_BUILD_TYPE=Release ^
     .
