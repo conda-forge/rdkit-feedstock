@@ -9,7 +9,7 @@ package:
 source:
   fn:  {{ filename }}
   url: https://github.com/rdkit/rdkit/archive/{{ filename }}
-  sha256: 241a93e537800feb80d28df325463508e6a96a7b695c20a07496416411b66343
+  sha256: 33c8eb5b3162296662ec06f8dd58e11fc21fa2ebcb13b456fcb3c4f3a39a357c
   patches:
     - vs2015.patch  # [win and py>=35]
 
