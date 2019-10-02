@@ -14,7 +14,7 @@ source:
     - vs2015.patch  # [win and py>=35]
 
 build:
-  number: 0
+  number: 1
   skip: true  # [py27]
 
 requirements:
@@ -47,6 +47,7 @@ test:
     - rdkit.Avalon
     - rdkit.Chem
     - rdkit.Chem.AllChem
+    - rdkit.Chem.rdFreeSASA
     - rdkit.DataManip
     - rdkit.Dbase
     - rdkit.DistanceGeometry
