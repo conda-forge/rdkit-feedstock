@@ -47,7 +47,6 @@ test:
     - rdkit.Avalon
     - rdkit.Chem
     - rdkit.Chem.AllChem
-    - rdkit.Chem.rdFreeSASA
     - rdkit.DataManip
     - rdkit.Dbase
     - rdkit.DistanceGeometry
