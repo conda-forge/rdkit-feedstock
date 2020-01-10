@@ -1,5 +1,5 @@
 {% set name = "rdkit" %}
-{% set version = "2019.09.2" %}
+{% set version = "2019.09.3" %}
 {% set filename = "Release_%s.tar.gz" % version.replace(".", "_") %}
 
 package:
@@ -9,10 +9,7 @@ package:
 source:
   fn:  {{ filename }}
   url: https://github.com/rdkit/rdkit/archive/{{ filename }}
-  sha256: 0676da2dc2fa060f9ee2492bdcea2e238f6630dc78cafc549f7368b0cdb397e1
-  patches:
-    # Temporary patch for v2019.09.1 - see https://github.com/rdkit/rdkit/issues/2752
-    - molhash-enum.patch
+  sha256: 88bbc298eb6c17584471b17a34e202b1da3d59d92ea5b6b6dcda635b739f76f2
 
 build:
   number: 0
