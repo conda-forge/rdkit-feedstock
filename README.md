@@ -7,7 +7,7 @@ Package license: BSD 3-Clause
 
 Feedstock license: BSD 3-Clause
 
-Summary: The RDKit is a collection of cheminformatics and machine-learning software written in C++ and Python.
+Summary: RDKit is a collection of cheminformatics and machine-learning software written in C++ and Python.
 
 
 
@@ -29,66 +29,66 @@ Current build status
         <table>
           <thead><tr><th>Variant</th><th>Status</th></tr></thead>
           <tbody><tr>
-              <td>linux_python3.6</td>
+              <td>linux_python3.6.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=1832&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/rdkit-feedstock?branchName=master&jobName=linux&configuration=linux_python3.6" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/rdkit-feedstock?branchName=master&jobName=linux&configuration=linux_python3.6.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_python3.7</td>
+              <td>linux_python3.7.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=1832&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/rdkit-feedstock?branchName=master&jobName=linux&configuration=linux_python3.7" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/rdkit-feedstock?branchName=master&jobName=linux&configuration=linux_python3.7.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_python3.8</td>
+              <td>linux_python3.8.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=1832&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/rdkit-feedstock?branchName=master&jobName=linux&configuration=linux_python3.8" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/rdkit-feedstock?branchName=master&jobName=linux&configuration=linux_python3.8.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>osx_python3.6</td>
+              <td>osx_python3.6.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=1832&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/rdkit-feedstock?branchName=master&jobName=osx&configuration=osx_python3.6" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/rdkit-feedstock?branchName=master&jobName=osx&configuration=osx_python3.6.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>osx_python3.7</td>
+              <td>osx_python3.7.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=1832&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/rdkit-feedstock?branchName=master&jobName=osx&configuration=osx_python3.7" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/rdkit-feedstock?branchName=master&jobName=osx&configuration=osx_python3.7.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>osx_python3.8</td>
+              <td>osx_python3.8.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=1832&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/rdkit-feedstock?branchName=master&jobName=osx&configuration=osx_python3.8" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/rdkit-feedstock?branchName=master&jobName=osx&configuration=osx_python3.8.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>win_cxx_compilervs2015python3.6</td>
+              <td>win_python3.6.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=1832&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/rdkit-feedstock?branchName=master&jobName=win&configuration=win_cxx_compilervs2015python3.6" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/rdkit-feedstock?branchName=master&jobName=win&configuration=win_python3.6.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>win_cxx_compilervs2015python3.7</td>
+              <td>win_python3.7.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=1832&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/rdkit-feedstock?branchName=master&jobName=win&configuration=win_cxx_compilervs2015python3.7" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/rdkit-feedstock?branchName=master&jobName=win&configuration=win_python3.7.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>win_cxx_compilervs2015python3.8</td>
+              <td>win_python3.8.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=1832&branchName=master">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/rdkit-feedstock?branchName=master&jobName=win&configuration=win_cxx_compilervs2015python3.8" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/rdkit-feedstock?branchName=master&jobName=win&configuration=win_python3.8.____cpython" alt="variant">
                 </a>
               </td>
             </tr>
