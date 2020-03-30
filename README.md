@@ -7,7 +7,7 @@ Package license: BSD 3-Clause
 
 Feedstock license: BSD 3-Clause
 
-Summary: RDKit is a collection of cheminformatics and machine-learning software written in C++ and Python.
+Summary: The RDKit is a collection of cheminformatics and machine-learning software written in C++ and Python.
 
 
 
