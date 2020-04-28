@@ -12,7 +12,7 @@ source:
   sha256: efcaaeb74a888f503a244e6d5c4d7d766c6a204592c8f182db74eb0ed923abda
 
 build:
-  number: 1
+  number: 2
   skip: true  # [py27]
 
 requirements:
@@ -38,7 +38,22 @@ requirements:
     - {{ pin_compatible('numpy') }}
     - pycairo
     - six
-
+    
+outputs:
+  - name: rdkit
+  - name: rdkit-dev
+    script: install_rdkit_dev.bat  # [win]
+    requirements:
+      run:
+        - rdkit
+    test:
+      commands:
+        - if not exist %LIBRARY_INC%\\rdkit\\Catalogs\\Catalog.h exit 1   # [win]
+    about:
+      summary: 'RDKit headers and library used in rdkit package'
+      license: BSD-3-Clause
+      license_file: license.txt
+      
 test:
   imports:
     - rdkit
