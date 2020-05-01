@@ -111,6 +111,7 @@ Current release info
 | Name | Downloads | Version | Platforms |
 | --- | --- | --- | --- |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-rdkit-green.svg)](https://anaconda.org/conda-forge/rdkit) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/rdkit.svg)](https://anaconda.org/conda-forge/rdkit) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/rdkit.svg)](https://anaconda.org/conda-forge/rdkit) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/rdkit.svg)](https://anaconda.org/conda-forge/rdkit) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-rdkit--dev-green.svg)](https://anaconda.org/conda-forge/rdkit-dev) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/rdkit-dev.svg)](https://anaconda.org/conda-forge/rdkit-dev) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/rdkit-dev.svg)](https://anaconda.org/conda-forge/rdkit-dev) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/rdkit-dev.svg)](https://anaconda.org/conda-forge/rdkit-dev) |
 
 Installing rdkit
 ================
@@ -121,10 +122,10 @@ Installing `rdkit` from the `conda-forge` channel can be achieved by adding `con
 conda config --add channels conda-forge
 ```
 
-Once the `conda-forge` channel has been enabled, `rdkit` can be installed with:
+Once the `conda-forge` channel has been enabled, `rdkit, rdkit-dev` can be installed with:
 
 ```
-conda install rdkit
+conda install rdkit rdkit-dev
 ```
 
 It is possible to list all of the versions of `rdkit` available on your platform with:
