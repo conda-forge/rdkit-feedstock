@@ -1,5 +1,5 @@
 {% set name = "rdkit" %}
-{% set version = "2020.03.1" %}
+{% set version = "2020.03.2" %}
 {% set filename = "Release_%s.tar.gz" % version.replace(".", "_") %}
 
 package:
@@ -7,12 +7,12 @@ package:
   version: {{ version }}
 
 source:
-  fn:  {{ filename }}
+  fn: {{ filename }}
   url: https://github.com/rdkit/rdkit/archive/{{ filename }}
-  sha256: efcaaeb74a888f503a244e6d5c4d7d766c6a204592c8f182db74eb0ed923abda
+  sha256: cb7f8e68d8ed2661c3af85bc4e25573d675c99a4ce0464ecfdc1da4da370030d
 
 build:
-  number: 3
+  number: 0
   skip: true  # [py27]
 
 requirements:
@@ -38,7 +38,7 @@ requirements:
     - {{ pin_compatible('numpy') }}
     - pycairo
     - six
-      
+
 test:
   imports:
     - rdkit
@@ -55,7 +55,7 @@ test:
     - rdkit.SimDivFilters
     - rdkit.VLib
     - rdkit.VLib.NodeLib
-    
+
 outputs:
   - name: rdkit
   - name: rdkit-dev
@@ -67,7 +67,7 @@ outputs:
       commands:
         - if not exist %LIBRARY_INC%\\rdkit\\Catalogs\\Catalog.h exit 1   # [win]
     about:
-      summary: 'RDKit headers and library used in rdkit package'
+      summary: RDKit headers and library used in rdkit package
       license: BSD-3-Clause
       license_file: license.txt
 
@@ -75,7 +75,7 @@ about:
   home: http://rdkit.org
   license: BSD-3-Clause
   license_file: license.txt
-  summary: 'RDKit is a collection of cheminformatics and machine-learning software written in C++ and Python.'
+  summary: RDKit is a collection of cheminformatics and machine-learning software written in C++ and Python.
   doc_url: http://www.rdkit.org/docs/index.html
   dev_url: https://github.com/rdkit/rdkit
 
