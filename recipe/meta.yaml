@@ -9,7 +9,7 @@ package:
 source:
   fn: {{ filename }}
   url: https://github.com/rdkit/rdkit/archive/{{ filename }}
-  sha256: 386dc89aaf8dd9c95ad3f96a977763c85f6e0e7371fe7cb3c43375ee2c9509e4
+  sha256: f25529dd80795a499907b90625c4d107ad10211aaf138a07e1a0d8e3426d78c4
 
 build:
   number: 0
