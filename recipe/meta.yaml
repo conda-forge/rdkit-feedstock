@@ -12,7 +12,7 @@ source:
   sha256: f25529dd80795a499907b90625c4d107ad10211aaf138a07e1a0d8e3426d78c4
 
 build:
-  number: 0
+  number: 1
   skip: true  # [py27]
 
 requirements:
@@ -20,6 +20,7 @@ requirements:
     - {{ compiler('cxx') }}
     - cmake
     - jom  # [win]
+    - make # [unix]
   host:
     - boost
     - cairo
