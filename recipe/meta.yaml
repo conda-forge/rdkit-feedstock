@@ -20,7 +20,7 @@ requirements:
     - {{ compiler('cxx') }}
     - cmake
     - jom  # [win]
-    - make # [unix]
+    - make  # [unix]
   host:
     - boost
     - cairo
