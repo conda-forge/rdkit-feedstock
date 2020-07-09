@@ -1,0 +1,34 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 8c0a69970..565c1c22a 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -40,7 +40,7 @@ option(RDK_BUILD_SWIG_JAVA_WRAPPER "build the SWIG JAVA wrappers (does nothing i
+ option(RDK_BUILD_SWIG_CSHARP_WRAPPER "build the experimental SWIG C# wrappers (does nothing if RDK_BUILD_SWIG_WRAPPERS is not set)" OFF )
+ option(RDK_SWIG_STATIC "statically link rdkit libraries into the SWIG wrappers" ON )
+ option(RDK_TEST_MMFF_COMPLIANCE "run MMFF compliance tests (requires tar/gzip)" ON )
+-option(RDK_BUILD_CPP_TESTS "build the c++ tests (disabing can speed up builds" ON)
++option(RDK_BUILD_CPP_TESTS "build the c++ tests (disabing can speed up builds)" ON)
+ option(RDK_USE_FLEXBISON "use flex/bison, if available, to build the SMILES/SMARTS/SLN parsers" OFF)
+ option(RDK_TEST_COVERAGE "Use G(L)COV to compute test coverage" OFF)
+ option(RDK_USE_BOOST_SERIALIZATION "Use the boost serialization library if available" ON)
+@@ -65,7 +65,11 @@ set(RDK_BOOST_VERSION "1.58.0")
+ 
+ if(NOT MSVC)
+   if(RDK_OPTIMIZE_POPCNT)
++    if(CMAKE_HOST_SYSTEM_PROCESSOR STREQUAL "ppc64le")
++      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mpopcntb")
++    else()
+       set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mpopcnt")
++    endif()
+   endif()
+ endif()
+ 
+@@ -263,7 +267,7 @@ if(RDK_BUILD_PYTHON_WRAPPERS)
+   if(WIN32 OR "${Py_ENABLE_SHARED}" STREQUAL "1")
+     target_link_libraries(rdkit_py_base INTERFACE ${PYTHON_LIBRARIES} )
+   endif()
+-  
++
+   find_package(NumPy REQUIRED)
+   target_include_directories(rdkit_base INTERFACE ${PYTHON_NUMPY_INCLUDE_PATH})
+ 

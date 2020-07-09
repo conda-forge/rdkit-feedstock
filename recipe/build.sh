@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -euxo pipefail
+
 cmake \
     -D CMAKE_BUILD_TYPE=Release \
     -D CMAKE_INSTALL_PREFIX="$PREFIX" \
@@ -10,7 +12,7 @@ cmake \
     -D PYTHON_INSTDIR="$SP_DIR" \
     -D RDK_BUILD_AVALON_SUPPORT=ON \
     -D RDK_BUILD_CAIRO_SUPPORT=ON \
-    -D RDK_BUILD_CPP_TESTS=OFF \
+    -D RDK_BUILD_CPP_TESTS=ON \
     -D RDK_BUILD_INCHI_SUPPORT=ON \
     -D RDK_BUILD_FREESASA_SUPPORT=ON \
     -D RDK_BUILD_YAEHMOP_SUPPORT=ON \
@@ -20,3 +22,8 @@ cmake \
 
 make -j$CPU_COUNT
 make install
+
+## Remove before merge
+#  Remember to set RDK_BUILD_CPP_TESTS back to OFF
+export RDBASE="$SRC_DIR"
+ctest --output-on-failure
