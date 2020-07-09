@@ -1,5 +1,5 @@
 {% set name = "rdkit" %}
-{% set version = "2020.03.3" %}
+{% set version = "2020.03.4" %}
 {% set filename = "Release_%s.tar.gz" % version.replace(".", "_") %}
 
 package:
@@ -9,7 +9,7 @@ package:
 source:
   fn: {{ filename }}
   url: https://github.com/rdkit/rdkit/archive/{{ filename }}
-  sha256: f25529dd80795a499907b90625c4d107ad10211aaf138a07e1a0d8e3426d78c4
+  sha256: 52358f46e8099e0090c2bcf35477b372fe9f91c229b50937e29c8e0eafcd0ae7
   patches:
     - ppc64le-popcnt.patch
 
