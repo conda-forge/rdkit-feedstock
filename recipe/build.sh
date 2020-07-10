@@ -2,6 +2,13 @@
 
 set -euxo pipefail
 
+POPCNT_OPTIMIZATION="ON"
+if [[ "$target_platform" == linux-ppc64le || "$target_platform" == linux-aarch64 ]]; then
+    # PowerPC includes -mcpu=power8 optimizations already
+    # ARM does not have popcnt instructions, afaik
+    POPCNT_OPTIMIZATION="OFF"
+fi
+
 cmake \
     -D CMAKE_BUILD_TYPE=Release \
     -D CMAKE_INSTALL_PREFIX="$PREFIX" \
@@ -18,6 +25,7 @@ cmake \
     -D RDK_BUILD_YAEHMOP_SUPPORT=ON \
     -D RDK_INSTALL_INTREE=OFF \
     -D RDK_INSTALL_STATIC_LIBS=OFF \
+    -D RDK_OPTIMIZE_POPCNT=${POPCNT_OPTIMIZATION} \
     .
 
 make -j$CPU_COUNT
