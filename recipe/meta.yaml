@@ -10,12 +10,9 @@ source:
   fn: {{ filename }}
   url: https://github.com/rdkit/rdkit/archive/{{ filename }}
   sha256: 52358f46e8099e0090c2bcf35477b372fe9f91c229b50937e29c8e0eafcd0ae7
-  patches:
-    - ppc64le-popcnt.patch
 
 build:
   number: 1
-  skip: true  # [py27]
 
 requirements:
   build:
@@ -86,3 +83,4 @@ extra:
   recipe-maintainers:
     - pstjohn
     - mcs07
+    - jaimergp
