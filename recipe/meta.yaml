@@ -12,14 +12,15 @@ source:
   sha256: d5cf193fba2309cfbb742a547dc81ad01cbbde5835e6bbf8f7b60afbb1b0c3b1
 
 build:
-  number: 0
-  skip: true  # [py27]
+  number: 1
 
 requirements:
   build:
     - {{ compiler('cxx') }}
     - cmake
     - jom  # [win]
+    - make  # [unix]
+    - pkg-config
   host:
     - boost
     - cairo
@@ -83,3 +84,4 @@ extra:
   recipe-maintainers:
     - pstjohn
     - mcs07
+    - jaimergp
