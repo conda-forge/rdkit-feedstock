@@ -1,15 +1,9 @@
-BUILD:
-- aarch64-conda_cos7-linux-gnu
 boost:
-- '1.72'
+- 1.74.0
 cairo:
 - '1.16'
-cdt_arch:
-- aarch64
-cdt_name:
-- cos7
 channel_sources:
-- conda-forge
+- conda-forge,defaults
 channel_targets:
 - conda-forge main
 cxx_compiler:
@@ -17,7 +11,7 @@ cxx_compiler:
 cxx_compiler_version:
 - '7'
 docker_image:
-- condaforge/linux-anvil-aarch64
+- condaforge/linux-anvil-comp7
 freetype:
 - 2.9.1
 numpy:
@@ -35,4 +29,4 @@ pin_run_as_build:
 python:
 - 3.6.* *_cpython
 target_platform:
-- linux-aarch64
+- linux-64

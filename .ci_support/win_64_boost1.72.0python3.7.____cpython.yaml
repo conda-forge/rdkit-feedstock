@@ -1,5 +1,5 @@
 boost:
-- '1.72'
+- 1.72.0
 cairo:
 - '1.16'
 channel_sources:
