@@ -1,0 +1,41 @@
+BUILD:
+- aarch64-conda_cos7-linux-gnu
+boost:
+- 1.74.0
+cairo:
+- '1.16'
+cdt_arch:
+- aarch64
+cdt_name:
+- cos7
+channel_sources:
+- conda-forge
+channel_targets:
+- conda-forge main
+cxx_compiler:
+- gxx
+cxx_compiler_version:
+- '7'
+docker_image:
+- condaforge/linux-anvil-aarch64
+freetype:
+- 2.9.1
+numpy:
+- '1.16'
+pin_run_as_build:
+  boost:
+    max_pin: x.x.x
+  cairo:
+    max_pin: x.x
+  freetype:
+    max_pin: x
+  python:
+    min_pin: x.x
+    max_pin: x.x
+python:
+- 3.8.* *_cpython
+target_platform:
+- linux-aarch64
+zip_keys:
+- - numpy
+  - python
