@@ -38,6 +38,9 @@ requirements:
     - pandas
     - {{ pin_compatible('numpy') }}
     - pycairo
+    - matplotlib-base
+    - sqlalchemy
+    - reportlab
 
 test:
   imports:
