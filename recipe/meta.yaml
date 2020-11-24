@@ -38,7 +38,6 @@ requirements:
     - pandas
     - {{ pin_compatible('numpy') }}
     - pycairo
-    - six
 
 test:
   imports:
