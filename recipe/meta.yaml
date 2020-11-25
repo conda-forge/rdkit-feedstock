@@ -1,5 +1,5 @@
 {% set name = "rdkit" %}
-{% set version = "2020.09.1" %}
+{% set version = "2020.09.2" %}
 {% set filename = "Release_%s.tar.gz" % version.replace(".", "_") %}
 
 package:
@@ -9,7 +9,7 @@ package:
 source:
   fn: {{ filename }}
   url: https://github.com/rdkit/rdkit/archive/{{ filename }}
-  sha256: ac105498be52ff77f7e9328c41d0e61a2318cac0789d6efc30f5f50dc78a992c
+  sha256: 44663970859c0ec993f94a56b692231557df02c267853a2ee3c1f609cef93ae9
 
 build:
   number: 0
@@ -38,7 +38,9 @@ requirements:
     - pandas
     - {{ pin_compatible('numpy') }}
     - pycairo
-    - six
+    - matplotlib-base
+    - sqlalchemy
+    - reportlab
 
 test:
   imports:
