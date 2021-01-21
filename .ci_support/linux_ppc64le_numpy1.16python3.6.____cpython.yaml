@@ -33,5 +33,5 @@ python:
 target_platform:
 - linux-ppc64le
 zip_keys:
-- - numpy
-  - python
+- - python
+  - numpy
