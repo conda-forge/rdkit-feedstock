@@ -20,6 +20,10 @@ jobs:
         CONFIG: linux_64_numpy1.17python3.8.____cpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
+      linux_64_numpy1.18python3.6.____73_pypy:
+        CONFIG: linux_64_numpy1.18python3.6.____73_pypy
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
       linux_64_numpy1.19python3.9.____cpython:
         CONFIG: linux_64_numpy1.19python3.9.____cpython
         UPLOAD_PACKAGES: 'True'
@@ -34,6 +38,10 @@ jobs:
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-ppc64le
       linux_ppc64le_numpy1.17python3.8.____cpython:
         CONFIG: linux_ppc64le_numpy1.17python3.8.____cpython
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-ppc64le
+      linux_ppc64le_numpy1.18python3.6.____73_pypy:
+        CONFIG: linux_ppc64le_numpy1.18python3.6.____73_pypy
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-ppc64le
       linux_ppc64le_numpy1.19python3.9.____cpython:
@@ -66,3 +74,16 @@ jobs:
       BINSTAR_TOKEN: $(BINSTAR_TOKEN)
       FEEDSTOCK_TOKEN: $(FEEDSTOCK_TOKEN)
       STAGING_BINSTAR_TOKEN: $(STAGING_BINSTAR_TOKEN)
+  - script: |
+        full_artifact_name="conda_artifacts_$(build.BuildId)_$(CONFIG)"
+        artifact_name=`echo "$full_artifact_name" | head -c 80`
+        echo "##vso[task.setVariable variable=ARTIFACT_NAME]$artifact_name"
+        if [ -d build_artifacts ]; then
+          echo "##vso[task.setVariable variable=CONDA_BLD_DIR_EXISTS]true"
+        fi
+    displayName: Check for conda build artifacts
+    condition: succeededOrFailed()
+
+  - publish: build_artifacts/
+    artifact: $(ARTIFACT_NAME)
+    condition: eq(variables.CONDA_BLD_DIR_EXISTS, 'true')
