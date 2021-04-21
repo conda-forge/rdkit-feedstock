@@ -15,7 +15,7 @@ if [[ "$target_platform" == linux-ppc64le ]]; then
     EXTRA_CMAKE_FLAGS+=" -D PYTHON_NUMPY_INCLUDE_PATH=${SP_DIR}/numpy/core/include"
 fi
 
-cmake \
+cmake ${CMAKE_ARGS} \
     -D CMAKE_BUILD_TYPE=Release \
     -D CMAKE_INSTALL_PREFIX="$PREFIX" \
     -D BOOST_ROOT="$PREFIX" \
