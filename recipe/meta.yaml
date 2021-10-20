@@ -1,5 +1,5 @@
 {% set name = "rdkit" %}
-{% set version = "2021.03.5" %}
+{% set version = "2021.09.1" %}
 {% set filename = "Release_%s.tar.gz" % version.replace(".", "_") %}
 
 package:
@@ -9,7 +9,7 @@ package:
 source:
   fn: {{ filename }}
   url: https://github.com/rdkit/rdkit/archive/{{ filename }}
-  sha256: ee7ed4189ab03cf805ab9db59121ab3ebcba4c799389d053046d7cab4dd8401e
+  sha256: 4d8d38adebdb0da51171ba67c6664555cb33d3fb5c62e35c8562d799dd812761
 
 build:
   number: 0
