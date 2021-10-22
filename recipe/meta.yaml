@@ -46,6 +46,8 @@ requirements:
     - reportlab
 
 test:
+  commands:
+    - python -c "import rdkit; assert rdkit.__version__ == '{{ version }}'"
   imports:
     - rdkit
     - rdkit.Avalon
