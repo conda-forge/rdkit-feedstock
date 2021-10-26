@@ -33,6 +33,14 @@ requirements:
     - numpy
     - pillow
     - pandas
+    - catch2 2.12.4
+    - inchi 1.0.5
+    - avalontoolkit 1.2.0
+    - freesasa 2.0.3
+    - maeparser 1.2.4
+    - coordgen 2.0.3
+    - RingDecomposerLib 1.1.3 *rdkit*
+    - rapidjson 1.1.0
   run:
     - boost
     - cairo
@@ -44,6 +52,14 @@ requirements:
     - matplotlib-base
     - sqlalchemy
     - reportlab
+    - {{ pin_compatible('catch2', exact=True) }}
+    - {{ pin_compatible('inchi', exact=True) }}
+    - {{ pin_compatible('avalontoolkit', exact=True) }}
+    - {{ pin_compatible('freesasa', exact=True) }}
+    - {{ pin_compatible('maeparser', exact=True) }}
+    - {{ pin_compatible('coordgen', exact=True) }}
+    - {{ pin_compatible('RingDecomposerLib', exact=True) }}
+    - {{ pin_compatible('rapidjson', exact=True) }}
 
 test:
   commands:
