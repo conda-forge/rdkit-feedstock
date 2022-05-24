@@ -25,3 +25,7 @@ if errorlevel 1 exit 1
 
 cmake --build . --config Release --target install
 if errorlevel 1 exit 1
+
+REM copy .dll files to LIBRARY_BIN
+copy bin\*.dll %LIBRARY_BIN%
+
