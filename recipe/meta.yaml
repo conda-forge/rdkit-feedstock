@@ -1,5 +1,5 @@
 {% set name = "rdkit" %}
-{% set version = "2022.03.2" %}
+{% set version = "2022.03.3" %}
 {% set filename = "Release_%s.tar.gz" % version.replace(".", "_") %}
 
 package:
@@ -9,13 +9,13 @@ package:
 source:
   fn: {{ filename }}
   url: https://github.com/rdkit/rdkit/archive/{{ filename }}
-  sha256: e06ac1ea39a3200d27aef4d77745bba27fadfcac22bb115ffa204707487e9ae1
+  sha256: e2832077e258bfe906c9c0dc1664d2ba4fc0acf98bfe073c6383cb1d051b6ef0
 
 build:
-  number: 1
+  number: 0
   skip: true  # [aarch64]
   missing_dso_whitelist:
-    - "*/RDKit*dll"  # [win]
+    - '*/RDKit*dll'  # [win]
 
 requirements:
   build:
