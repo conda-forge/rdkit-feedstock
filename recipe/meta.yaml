@@ -12,7 +12,7 @@ source:
   sha256: e2832077e258bfe906c9c0dc1664d2ba4fc0acf98bfe073c6383cb1d051b6ef0
 
 build:
-  number: 0
+  number: 1
   skip: true  # [aarch64]
   missing_dso_whitelist:
     - '*/RDKit*dll'  # [win]
@@ -51,6 +51,7 @@ requirements:
 test:
   commands:
     - python -c "import rdkit; assert rdkit.__version__ == '{{ version }}'"
+    - if not exist %LIBRARY_INC%\\rdkit\\Catalogs\\Catalog.h exit 1   # [win]
   imports:
     - rdkit
     - rdkit.Avalon
@@ -67,21 +68,13 @@ test:
     - rdkit.SimDivFilters
     - rdkit.VLib
     - rdkit.VLib.NodeLib
-
+    
 outputs:
-  - name: rdkit
-  - name: rdkit-dev
-    script: install_rdkit_dev.bat  # [win]
-    requirements:
-      run:
-        - rdkit
-    test:
-      commands:
-        - if not exist %LIBRARY_INC%\\rdkit\\Catalogs\\Catalog.h exit 1   # [win]
-    about:
-      summary: RDKit headers and library used in rdkit package
-      license: BSD-3-Clause
-      license_file: license.txt
+    - name: rdkit
+    - name: rdkit-dev
+      requirements:
+        run:
+            - rdkit
 
 about:
   home: http://rdkit.org
