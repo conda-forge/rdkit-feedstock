@@ -1,5 +1,5 @@
 boost:
-- 1.74.0
+- 1.78.0
 cairo:
 - '1.16'
 channel_sources:
@@ -7,7 +7,7 @@ channel_sources:
 channel_targets:
 - conda-forge main
 cxx_compiler:
-- vs2017
+- vs2019
 freetype:
 - '2'
 numpy:

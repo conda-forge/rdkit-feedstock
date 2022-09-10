@@ -1,7 +1,7 @@
 MACOSX_DEPLOYMENT_TARGET:
 - '11.0'
 boost:
-- 1.74.0
+- 1.78.0
 cairo:
 - '1.16'
 channel_sources:
@@ -11,7 +11,7 @@ channel_targets:
 cxx_compiler:
 - clangxx
 cxx_compiler_version:
-- '13'
+- '14'
 freetype:
 - '2'
 macos_machine:
