@@ -1,7 +1,7 @@
 boost:
 - 1.74.0
 cairo:
-- '1.16'
+- '1'
 cdt_name:
 - cos6
 channel_sources:
@@ -21,10 +21,6 @@ numpy:
 pin_run_as_build:
   boost:
     max_pin: x.x.x
-  cairo:
-    max_pin: x.x
-  freetype:
-    max_pin: x
   python:
     min_pin: x.x
     max_pin: x.x

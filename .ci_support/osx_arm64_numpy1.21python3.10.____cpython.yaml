@@ -3,7 +3,7 @@ MACOSX_DEPLOYMENT_TARGET:
 boost:
 - 1.74.0
 cairo:
-- '1.16'
+- '1'
 channel_sources:
 - conda-forge
 channel_targets:
@@ -11,7 +11,7 @@ channel_targets:
 cxx_compiler:
 - clangxx
 cxx_compiler_version:
-- '13'
+- '14'
 freetype:
 - '2'
 macos_machine:
@@ -21,10 +21,6 @@ numpy:
 pin_run_as_build:
   boost:
     max_pin: x.x.x
-  cairo:
-    max_pin: x.x
-  freetype:
-    max_pin: x
   python:
     min_pin: x.x
     max_pin: x.x
