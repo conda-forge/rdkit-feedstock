@@ -28,7 +28,7 @@ index 5915fabad..c71e15465 100644
 +if(RDK_BUILD_CPP_TESTS)
  add_library(rdkitCatch catch_main.cpp)
  target_link_libraries(rdkitCatch PUBLIC rdkit_base)
- target_include_directories(rdkitCatch PUBLIC ${CATCH_INCLUDE_DIR})
+ target_include_directories(rdkitCatch PUBLIC \${CATCH_INCLUDE_DIR})
 +endif(RDK_BUILD_CPP_TESTS)
  
  
