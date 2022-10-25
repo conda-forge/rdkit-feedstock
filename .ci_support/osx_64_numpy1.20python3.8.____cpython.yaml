@@ -1,7 +1,7 @@
 MACOSX_DEPLOYMENT_TARGET:
 - '10.9'
 boost:
-- 1.74.0
+- 1.78.0
 cairo:
 - '1'
 channel_sources:
