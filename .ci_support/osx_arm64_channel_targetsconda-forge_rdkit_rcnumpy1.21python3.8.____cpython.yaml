@@ -7,7 +7,7 @@ cairo:
 channel_sources:
 - conda-forge
 channel_targets:
-- conda-forge main
+- conda-forge rdkit_rc
 cxx_compiler:
 - clangxx
 cxx_compiler_version:
@@ -17,7 +17,7 @@ freetype:
 macos_machine:
 - arm64-apple-darwin20.0.0
 numpy:
-- '1.20'
+- '1.21'
 pin_run_as_build:
   boost:
     max_pin: x.x.x

@@ -1,0 +1,33 @@
+MACOSX_DEPLOYMENT_TARGET:
+- '11.0'
+boost:
+- 1.78.0
+cairo:
+- '1'
+channel_sources:
+- conda-forge
+channel_targets:
+- conda-forge rdkit_rc
+cxx_compiler:
+- clangxx
+cxx_compiler_version:
+- '14'
+freetype:
+- '2'
+macos_machine:
+- arm64-apple-darwin20.0.0
+numpy:
+- '1.23'
+pin_run_as_build:
+  boost:
+    max_pin: x.x.x
+  python:
+    min_pin: x.x
+    max_pin: x.x
+python:
+- 3.11.* *_cpython
+target_platform:
+- osx-arm64
+zip_keys:
+- - python
+  - numpy
