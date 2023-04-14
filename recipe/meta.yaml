@@ -1,5 +1,5 @@
 {% set name = "rdkit" %}
-{% set version = "2022.09.1" %}
+{% set version = "2022.09.5" %}
 {% set filename = "Release_%s.tar.gz" % version.replace(".", "_") %}
 
 package:
@@ -12,7 +12,7 @@ source:
   sha256: "PLACEHOLDER_REPLACE_ME_IN_PR"
 
 build:
-  number: 1
+  number: 0
   skip: true  # [aarch64]
   missing_dso_whitelist:
     - '*/RDKit*dll'  # [win]
@@ -93,6 +93,7 @@ about:
 
 extra:
   recipe-maintainers:
+    - greglandrum
     - pstjohn
     - mcs07
     - jaimergp
