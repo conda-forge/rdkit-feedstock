@@ -8,46 +8,26 @@ jobs:
     vmImage: ubuntu-latest
   strategy:
     matrix:
-      linux_64_channel_targetsconda-forge_rdkit-dev_rcnumpy1.21python3.10.____cpython:
-        CONFIG: linux_64_channel_targetsconda-forge_rdkit-dev_rcnumpy1.21python3.10.____cpython
+      linux_64_numpy1.21python3.10.____cpython:
+        CONFIG: linux_64_numpy1.21python3.10.____cpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-        SHORT_CONFIG: linux_64_channel_targetsconda-forge_h2c9a65d81a
-      linux_64_channel_targetsconda-forge_rdkit-dev_rcnumpy1.21python3.8.____cpython:
-        CONFIG: linux_64_channel_targetsconda-forge_rdkit-dev_rcnumpy1.21python3.8.____cpython
+        SHORT_CONFIG: linux_64_numpy1.21python3.10.____cpython
+      linux_64_numpy1.21python3.8.____cpython:
+        CONFIG: linux_64_numpy1.21python3.8.____cpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-        SHORT_CONFIG: linux_64_channel_targetsconda-forge_hf146547f61
-      linux_64_channel_targetsconda-forge_rdkit-dev_rcnumpy1.21python3.9.____cpython:
-        CONFIG: linux_64_channel_targetsconda-forge_rdkit-dev_rcnumpy1.21python3.9.____cpython
+        SHORT_CONFIG: linux_64_numpy1.21python3.8.____cpython
+      linux_64_numpy1.21python3.9.____cpython:
+        CONFIG: linux_64_numpy1.21python3.9.____cpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-        SHORT_CONFIG: linux_64_channel_targetsconda-forge_h7351de5465
-      linux_64_channel_targetsconda-forge_rdkit-dev_rcnumpy1.23python3.11.____cpython:
-        CONFIG: linux_64_channel_targetsconda-forge_rdkit-dev_rcnumpy1.23python3.11.____cpython
+        SHORT_CONFIG: linux_64_numpy1.21python3.9.____cpython
+      linux_64_numpy1.23python3.11.____cpython:
+        CONFIG: linux_64_numpy1.23python3.11.____cpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-        SHORT_CONFIG: linux_64_channel_targetsconda-forge_hf7b9bcb87b
-      linux_64_channel_targetsconda-forge_rdkit_rcnumpy1.21python3.10.____cpython:
-        CONFIG: linux_64_channel_targetsconda-forge_rdkit_rcnumpy1.21python3.10.____cpython
-        UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-        SHORT_CONFIG: linux_64_channel_targetsconda-forge_hb6bd994bdf
-      linux_64_channel_targetsconda-forge_rdkit_rcnumpy1.21python3.8.____cpython:
-        CONFIG: linux_64_channel_targetsconda-forge_rdkit_rcnumpy1.21python3.8.____cpython
-        UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-        SHORT_CONFIG: linux_64_channel_targetsconda-forge_h1b5b6c31f9
-      linux_64_channel_targetsconda-forge_rdkit_rcnumpy1.21python3.9.____cpython:
-        CONFIG: linux_64_channel_targetsconda-forge_rdkit_rcnumpy1.21python3.9.____cpython
-        UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-        SHORT_CONFIG: linux_64_channel_targetsconda-forge_h9ac3811430
-      linux_64_channel_targetsconda-forge_rdkit_rcnumpy1.23python3.11.____cpython:
-        CONFIG: linux_64_channel_targetsconda-forge_rdkit_rcnumpy1.23python3.11.____cpython
-        UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-        SHORT_CONFIG: linux_64_channel_targetsconda-forge_hbb8a152526
+        SHORT_CONFIG: linux_64_numpy1.23python3.11.____cpython
   timeoutInMinutes: 360
 
   steps:

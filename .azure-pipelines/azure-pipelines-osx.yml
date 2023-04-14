@@ -8,70 +8,38 @@ jobs:
     vmImage: macOS-11
   strategy:
     matrix:
-      osx_64_channel_targetsconda-forge_rdkit-dev_rcnumpy1.21python3.10.____cpython:
-        CONFIG: osx_64_channel_targetsconda-forge_rdkit-dev_rcnumpy1.21python3.10.____cpython
+      osx_64_numpy1.21python3.10.____cpython:
+        CONFIG: osx_64_numpy1.21python3.10.____cpython
         UPLOAD_PACKAGES: 'True'
-        SHORT_CONFIG: osx_64_channel_targetsconda-forge_r_h7d0a69bc9c
-      osx_64_channel_targetsconda-forge_rdkit-dev_rcnumpy1.21python3.8.____cpython:
-        CONFIG: osx_64_channel_targetsconda-forge_rdkit-dev_rcnumpy1.21python3.8.____cpython
+        SHORT_CONFIG: osx_64_numpy1.21python3.10.____cpython
+      osx_64_numpy1.21python3.8.____cpython:
+        CONFIG: osx_64_numpy1.21python3.8.____cpython
         UPLOAD_PACKAGES: 'True'
-        SHORT_CONFIG: osx_64_channel_targetsconda-forge_r_h4e14a8aa3c
-      osx_64_channel_targetsconda-forge_rdkit-dev_rcnumpy1.21python3.9.____cpython:
-        CONFIG: osx_64_channel_targetsconda-forge_rdkit-dev_rcnumpy1.21python3.9.____cpython
+        SHORT_CONFIG: osx_64_numpy1.21python3.8.____cpython
+      osx_64_numpy1.21python3.9.____cpython:
+        CONFIG: osx_64_numpy1.21python3.9.____cpython
         UPLOAD_PACKAGES: 'True'
-        SHORT_CONFIG: osx_64_channel_targetsconda-forge_r_hd4dde6ba0d
-      osx_64_channel_targetsconda-forge_rdkit-dev_rcnumpy1.23python3.11.____cpython:
-        CONFIG: osx_64_channel_targetsconda-forge_rdkit-dev_rcnumpy1.23python3.11.____cpython
+        SHORT_CONFIG: osx_64_numpy1.21python3.9.____cpython
+      osx_64_numpy1.23python3.11.____cpython:
+        CONFIG: osx_64_numpy1.23python3.11.____cpython
         UPLOAD_PACKAGES: 'True'
-        SHORT_CONFIG: osx_64_channel_targetsconda-forge_r_hd468433a90
-      osx_64_channel_targetsconda-forge_rdkit_rcnumpy1.21python3.10.____cpython:
-        CONFIG: osx_64_channel_targetsconda-forge_rdkit_rcnumpy1.21python3.10.____cpython
+        SHORT_CONFIG: osx_64_numpy1.23python3.11.____cpython
+      osx_arm64_numpy1.21python3.10.____cpython:
+        CONFIG: osx_arm64_numpy1.21python3.10.____cpython
         UPLOAD_PACKAGES: 'True'
-        SHORT_CONFIG: osx_64_channel_targetsconda-forge_r_h9176ca4681
-      osx_64_channel_targetsconda-forge_rdkit_rcnumpy1.21python3.8.____cpython:
-        CONFIG: osx_64_channel_targetsconda-forge_rdkit_rcnumpy1.21python3.8.____cpython
+        SHORT_CONFIG: osx_arm64_numpy1.21python3.10.____cpython
+      osx_arm64_numpy1.21python3.8.____cpython:
+        CONFIG: osx_arm64_numpy1.21python3.8.____cpython
         UPLOAD_PACKAGES: 'True'
-        SHORT_CONFIG: osx_64_channel_targetsconda-forge_r_h659bf40388
-      osx_64_channel_targetsconda-forge_rdkit_rcnumpy1.21python3.9.____cpython:
-        CONFIG: osx_64_channel_targetsconda-forge_rdkit_rcnumpy1.21python3.9.____cpython
+        SHORT_CONFIG: osx_arm64_numpy1.21python3.8.____cpython
+      osx_arm64_numpy1.21python3.9.____cpython:
+        CONFIG: osx_arm64_numpy1.21python3.9.____cpython
         UPLOAD_PACKAGES: 'True'
-        SHORT_CONFIG: osx_64_channel_targetsconda-forge_r_had7d1a02b0
-      osx_64_channel_targetsconda-forge_rdkit_rcnumpy1.23python3.11.____cpython:
-        CONFIG: osx_64_channel_targetsconda-forge_rdkit_rcnumpy1.23python3.11.____cpython
+        SHORT_CONFIG: osx_arm64_numpy1.21python3.9.____cpython
+      osx_arm64_numpy1.23python3.11.____cpython:
+        CONFIG: osx_arm64_numpy1.23python3.11.____cpython
         UPLOAD_PACKAGES: 'True'
-        SHORT_CONFIG: osx_64_channel_targetsconda-forge_r_h97129224f8
-      osx_arm64_channel_targetsconda-forge_rdkit-dev_rcnumpy1.21python3.10.____cpython:
-        CONFIG: osx_arm64_channel_targetsconda-forge_rdkit-dev_rcnumpy1.21python3.10.____cpython
-        UPLOAD_PACKAGES: 'True'
-        SHORT_CONFIG: osx_arm64_channel_targetsconda-forg_h436176088e
-      osx_arm64_channel_targetsconda-forge_rdkit-dev_rcnumpy1.21python3.8.____cpython:
-        CONFIG: osx_arm64_channel_targetsconda-forge_rdkit-dev_rcnumpy1.21python3.8.____cpython
-        UPLOAD_PACKAGES: 'True'
-        SHORT_CONFIG: osx_arm64_channel_targetsconda-forg_he9ce4d1507
-      osx_arm64_channel_targetsconda-forge_rdkit-dev_rcnumpy1.21python3.9.____cpython:
-        CONFIG: osx_arm64_channel_targetsconda-forge_rdkit-dev_rcnumpy1.21python3.9.____cpython
-        UPLOAD_PACKAGES: 'True'
-        SHORT_CONFIG: osx_arm64_channel_targetsconda-forg_ha788523050
-      osx_arm64_channel_targetsconda-forge_rdkit-dev_rcnumpy1.23python3.11.____cpython:
-        CONFIG: osx_arm64_channel_targetsconda-forge_rdkit-dev_rcnumpy1.23python3.11.____cpython
-        UPLOAD_PACKAGES: 'True'
-        SHORT_CONFIG: osx_arm64_channel_targetsconda-forg_h04bbcd3872
-      osx_arm64_channel_targetsconda-forge_rdkit_rcnumpy1.21python3.10.____cpython:
-        CONFIG: osx_arm64_channel_targetsconda-forge_rdkit_rcnumpy1.21python3.10.____cpython
-        UPLOAD_PACKAGES: 'True'
-        SHORT_CONFIG: osx_arm64_channel_targetsconda-forg_hfab3314a05
-      osx_arm64_channel_targetsconda-forge_rdkit_rcnumpy1.21python3.8.____cpython:
-        CONFIG: osx_arm64_channel_targetsconda-forge_rdkit_rcnumpy1.21python3.8.____cpython
-        UPLOAD_PACKAGES: 'True'
-        SHORT_CONFIG: osx_arm64_channel_targetsconda-forg_hd36eb22d78
-      osx_arm64_channel_targetsconda-forge_rdkit_rcnumpy1.21python3.9.____cpython:
-        CONFIG: osx_arm64_channel_targetsconda-forge_rdkit_rcnumpy1.21python3.9.____cpython
-        UPLOAD_PACKAGES: 'True'
-        SHORT_CONFIG: osx_arm64_channel_targetsconda-forg_he872e29c1b
-      osx_arm64_channel_targetsconda-forge_rdkit_rcnumpy1.23python3.11.____cpython:
-        CONFIG: osx_arm64_channel_targetsconda-forge_rdkit_rcnumpy1.23python3.11.____cpython
-        UPLOAD_PACKAGES: 'True'
-        SHORT_CONFIG: osx_arm64_channel_targetsconda-forg_hf0168835cb
+        SHORT_CONFIG: osx_arm64_numpy1.23python3.11.____cpython
   timeoutInMinutes: 360
 
   steps:

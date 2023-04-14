@@ -8,38 +8,22 @@ jobs:
     vmImage: windows-2022
   strategy:
     matrix:
-      win_64_channel_targetsconda-forge_rdkit-dev_rcnumpy1.21python3.10.____cpython:
-        CONFIG: win_64_channel_targetsconda-forge_rdkit-dev_rcnumpy1.21python3.10.____cpython
+      win_64_numpy1.21python3.10.____cpython:
+        CONFIG: win_64_numpy1.21python3.10.____cpython
         UPLOAD_PACKAGES: 'True'
-        SHORT_CONFIG: win_64_channel_targetsconda-forge_r_hefbd47440e
-      win_64_channel_targetsconda-forge_rdkit-dev_rcnumpy1.21python3.8.____cpython:
-        CONFIG: win_64_channel_targetsconda-forge_rdkit-dev_rcnumpy1.21python3.8.____cpython
+        SHORT_CONFIG: win_64_numpy1.21python3.10.____cpython
+      win_64_numpy1.21python3.8.____cpython:
+        CONFIG: win_64_numpy1.21python3.8.____cpython
         UPLOAD_PACKAGES: 'True'
-        SHORT_CONFIG: win_64_channel_targetsconda-forge_r_h03ba7b1a0b
-      win_64_channel_targetsconda-forge_rdkit-dev_rcnumpy1.21python3.9.____cpython:
-        CONFIG: win_64_channel_targetsconda-forge_rdkit-dev_rcnumpy1.21python3.9.____cpython
+        SHORT_CONFIG: win_64_numpy1.21python3.8.____cpython
+      win_64_numpy1.21python3.9.____cpython:
+        CONFIG: win_64_numpy1.21python3.9.____cpython
         UPLOAD_PACKAGES: 'True'
-        SHORT_CONFIG: win_64_channel_targetsconda-forge_r_hee7173d558
-      win_64_channel_targetsconda-forge_rdkit-dev_rcnumpy1.23python3.11.____cpython:
-        CONFIG: win_64_channel_targetsconda-forge_rdkit-dev_rcnumpy1.23python3.11.____cpython
+        SHORT_CONFIG: win_64_numpy1.21python3.9.____cpython
+      win_64_numpy1.23python3.11.____cpython:
+        CONFIG: win_64_numpy1.23python3.11.____cpython
         UPLOAD_PACKAGES: 'True'
-        SHORT_CONFIG: win_64_channel_targetsconda-forge_r_h9186f0424e
-      win_64_channel_targetsconda-forge_rdkit_rcnumpy1.21python3.10.____cpython:
-        CONFIG: win_64_channel_targetsconda-forge_rdkit_rcnumpy1.21python3.10.____cpython
-        UPLOAD_PACKAGES: 'True'
-        SHORT_CONFIG: win_64_channel_targetsconda-forge_r_h10bf0967ef
-      win_64_channel_targetsconda-forge_rdkit_rcnumpy1.21python3.8.____cpython:
-        CONFIG: win_64_channel_targetsconda-forge_rdkit_rcnumpy1.21python3.8.____cpython
-        UPLOAD_PACKAGES: 'True'
-        SHORT_CONFIG: win_64_channel_targetsconda-forge_r_h023822dedf
-      win_64_channel_targetsconda-forge_rdkit_rcnumpy1.21python3.9.____cpython:
-        CONFIG: win_64_channel_targetsconda-forge_rdkit_rcnumpy1.21python3.9.____cpython
-        UPLOAD_PACKAGES: 'True'
-        SHORT_CONFIG: win_64_channel_targetsconda-forge_r_h84fcc204ec
-      win_64_channel_targetsconda-forge_rdkit_rcnumpy1.23python3.11.____cpython:
-        CONFIG: win_64_channel_targetsconda-forge_rdkit_rcnumpy1.23python3.11.____cpython
-        UPLOAD_PACKAGES: 'True'
-        SHORT_CONFIG: win_64_channel_targetsconda-forge_r_hae10300526
+        SHORT_CONFIG: win_64_numpy1.23python3.11.____cpython
   timeoutInMinutes: 360
   variables:
     CONDA_BLD_PATH: D:\\bld\\
