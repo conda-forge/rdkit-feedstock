@@ -1,3 +1,2 @@
 channel_targets:
   - conda-forge rdkit_rc
-  - conda-forge rdkit-dev_rc
