@@ -1,5 +1,5 @@
 {% set name = "rdkit" %}
-{% set version = "2022.09.1" %}
+{% set version = "2023.03.1b1" %}
 {% set filename = "Release_%s.tar.gz" % version.replace(".", "_") %}
 
 package:
@@ -9,11 +9,11 @@ package:
 source:
   fn: {{ filename }}
   url: https://github.com/rdkit/rdkit/archive/{{ filename }}
-  sha256: "PLACEHOLDER_REPLACE_ME_IN_PR"
+  sha256: "6115fd662fd5a097d013b868273e9513d5edea9e7641e23ac36beda8dd0053ec"
 
 build:
-  number: 1
-  skip: true  # [aarch64]
+  number: 0
+  skip: true  # [aarch64 or osx]
   missing_dso_whitelist:
     - '*/RDKit*dll'  # [win]
 
@@ -93,6 +93,7 @@ about:
 
 extra:
   recipe-maintainers:
+    - greglandrum
     - pstjohn
     - mcs07
     - jaimergp

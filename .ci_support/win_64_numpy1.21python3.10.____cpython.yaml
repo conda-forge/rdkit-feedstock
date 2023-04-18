@@ -5,7 +5,7 @@ cairo:
 channel_sources:
 - conda-forge
 channel_targets:
-- conda-forge main
+- conda-forge rdkit_rc
 cxx_compiler:
 - vs2019
 freetype:
