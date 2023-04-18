@@ -13,7 +13,7 @@ source:
 
 build:
   number: 0
-  skip: true  # [aarch64]
+  skip: true  # [aarch64 or osx]
   missing_dso_whitelist:
     - '*/RDKit*dll'  # [win]
 
