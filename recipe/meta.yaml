@@ -1,5 +1,5 @@
 {% set name = "rdkit" %}
-{% set version = "2023.01.1" %}
+{% set version = "2023.03.1" %}
 {% set filename = "Release_%s.tar.gz" % version.replace(".", "_") %}
 
 package:
