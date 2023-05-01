@@ -15,6 +15,11 @@ if [[ "$target_platform" == linux-ppc64le ]]; then
     EXTRA_CMAKE_FLAGS+=" -D PYTHON_NUMPY_INCLUDE_PATH=${SP_DIR}/numpy/core/include"
 fi
 
+# workaround for clang++ and boost functional
+if [[ "$target_platform" == osx-arm64 ]] || [[ "$target_platform" == osx-64 ]]; then
+    export CXXFLAGS="-D_HAS_AUTO_PTR_ETC=0"
+fi
+
 cmake ${CMAKE_ARGS} \
     -D CMAKE_BUILD_TYPE=Release \
     -D CMAKE_INSTALL_PREFIX="$PREFIX" \
