@@ -13,3 +13,4 @@ provider:
   linux_aarch64: default
   win: azure
 test_on_native_only: true
+conda_build_tool: conda-build+conda-libmamba-solver

@@ -3,6 +3,7 @@ About rdkit-feedstock
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/rdkit-feedstock/blob/main/LICENSE.txt)
 
+
 About rdkit
 -----------
 
@@ -15,6 +16,7 @@ Summary: RDKit is a collection of cheminformatics and machine-learning software 
 Development: https://github.com/rdkit/rdkit
 
 Documentation: http://www.rdkit.org/docs/index.html
+
 About rdkit-dev
 ---------------
 
