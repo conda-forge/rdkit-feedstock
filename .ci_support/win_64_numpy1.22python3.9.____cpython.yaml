@@ -1,5 +1,3 @@
-boost:
-- 1.78.0
 cairo:
 - '1'
 channel_sources:
@@ -10,11 +8,11 @@ cxx_compiler:
 - vs2019
 freetype:
 - '2'
+libboost_python_devel:
+- '1.82'
 numpy:
-- '1.21'
+- '1.22'
 pin_run_as_build:
-  boost:
-    max_pin: x.x.x
   python:
     min_pin: x.x
     max_pin: x.x
