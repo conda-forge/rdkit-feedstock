@@ -2,8 +2,6 @@ MACOSX_DEPLOYMENT_TARGET:
 - '10.9'
 MACOSX_SDK_VERSION:
 - '10.13'
-boost:
-- 1.78.0
 cairo:
 - '1'
 channel_sources:
@@ -16,13 +14,13 @@ cxx_compiler_version:
 - '15'
 freetype:
 - '2'
+libboost_python_devel:
+- '1.82'
 macos_machine:
 - x86_64-apple-darwin13.4.0
 numpy:
 - '1.23'
 pin_run_as_build:
-  boost:
-    max_pin: x.x.x
   python:
     min_pin: x.x
     max_pin: x.x

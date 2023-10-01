@@ -12,7 +12,7 @@ source:
   sha256: bdbf9a2e6988526bfeb8c56ce3cdfe2998d60ac289078e2215374288185e8c8d
 
 build:
-  number: 0
+  number: 1
   skip: true  # [aarch64]
   missing_dso_whitelist:
     - '*/RDKit*dll'  # [win]
@@ -28,7 +28,7 @@ requirements:
     - make  # [unix]
     - pkg-config
   host:
-    - boost
+    - libboost-python-devel
     - cairo
     - eigen
     - freetype
@@ -37,7 +37,6 @@ requirements:
     - pillow
     - pandas
   run:
-    - boost
     - cairo
     - python
     - pillow
