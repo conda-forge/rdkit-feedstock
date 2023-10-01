@@ -37,7 +37,6 @@ requirements:
     - pillow
     - pandas
   run:
-    - libboost-python-devel
     - cairo
     - python
     - pillow
