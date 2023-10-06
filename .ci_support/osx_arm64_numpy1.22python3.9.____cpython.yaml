@@ -5,11 +5,11 @@ cairo:
 channel_sources:
 - conda-forge
 channel_targets:
-- conda-forge main
+- conda-forge rdkit_rc
 cxx_compiler:
 - clangxx
 cxx_compiler_version:
-- '15'
+- '16'
 freetype:
 - '2'
 libboost_python_devel:
