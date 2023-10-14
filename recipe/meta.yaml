@@ -12,7 +12,7 @@ source:
   sha256: bdbf9a2e6988526bfeb8c56ce3cdfe2998d60ac289078e2215374288185e8c8d
 
 build:
-  number: 1
+  number: 2
   skip: true  # [aarch64]
   missing_dso_whitelist:
     - '*/RDKit*dll'  # [win]
