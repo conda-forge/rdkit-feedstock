@@ -1,5 +1,5 @@
 {% set name = "rdkit" %}
-{% set version = "2023.03.3" %}
+{% set version = "2023.09.1" %}
 {% set filename = "Release_%s.tar.gz" % version.replace(".", "_") %}
 
 package:
@@ -9,10 +9,10 @@ package:
 source:
   fn: {{ filename }}
   url: https://github.com/rdkit/rdkit/archive/{{ filename }}
-  sha256: bdbf9a2e6988526bfeb8c56ce3cdfe2998d60ac289078e2215374288185e8c8d
+  sha256: e0ff8e330c98b93ac8277a59b2369d9a38027afadb4f03bb34c6924d445f08d5
 
 build:
-  number: 2
+  number: 0
   skip: true  # [aarch64]
   missing_dso_whitelist:
     - '*/RDKit*dll'  # [win]
@@ -27,7 +27,7 @@ requirements:
     - jom  # [win]
     - make  # [unix]
     - pkg-config
-  host:
+  host: 
     - libboost-python-devel
     - cairo
     - eigen

@@ -17,7 +17,7 @@ fi
 
 # workaround for clang++ and boost functional
 if [[ "$target_platform" == osx-arm64 ]] || [[ "$target_platform" == osx-64 ]]; then
-    export CXXFLAGS="-D_HAS_AUTO_PTR_ETC=0 $CXXFLAGS"
+    export CXXFLAGS="-D_LIBCPP_DISABLE_AVAILABILITY -D_HAS_AUTO_PTR_ETC=0 $CXXFLAGS"
 fi
 
 cmake ${CMAKE_ARGS} \
