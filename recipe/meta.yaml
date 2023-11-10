@@ -1,5 +1,5 @@
 {% set name = "rdkit" %}
-{% set version = "2023.09.1" %}
+{% set version = "2023.09.2" %}
 {% set filename = "Release_%s.tar.gz" % version.replace(".", "_") %}
 
 package:
@@ -9,7 +9,7 @@ package:
 source:
   fn: {{ filename }}
   url: https://github.com/rdkit/rdkit/archive/{{ filename }}
-  sha256: e0ff8e330c98b93ac8277a59b2369d9a38027afadb4f03bb34c6924d445f08d5
+  sha256: d6ed9e0cdf231550fa850070be7ea53154d46ec6cf32a9b5fd5fec2d34a60c6b
 
 build:
   number: 0
@@ -27,7 +27,7 @@ requirements:
     - jom  # [win]
     - make  # [unix]
     - pkg-config
-  host: 
+  host:
     - libboost-python-devel
     - cairo
     - eigen
