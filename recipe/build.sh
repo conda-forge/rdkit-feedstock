@@ -58,4 +58,4 @@ make install
 sed -i -e "s/.*version.*/version = \"${PKG_VERSION}\"/g" pyproject.toml
 
 # Install the Python library
-pip install --no-deps .
+${PYTHON} -m pip install --no-deps --prefix ${PREFIX} .

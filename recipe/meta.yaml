@@ -30,6 +30,7 @@ requirements:
     - jom  # [win]
     - make  # [unix]
     - pkg-config
+    - pip
   host:
     - libboost-python-devel
     - cairo
