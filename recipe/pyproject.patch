@@ -1,8 +1,5 @@
-diff --git a/pyproject.toml b/pyproject.toml
-new file mode 100644
-index 000000000..9ceb53236
 --- /dev/null
-+++ b/pyproject.toml
++++ pyproject.toml
 @@ -0,0 +1,53 @@
 +# This pyproject.toml file is used to build the conda package only.
 +
