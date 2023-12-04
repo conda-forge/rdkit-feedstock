@@ -48,3 +48,14 @@ make install
 ## 2. Uncomment lines below
 # export RDBASE="$SRC_DIR"
 # ctest --output-on-failure
+
+# NOTE(hadim): below we run `pip install ...` in order
+# to correctly add the `-dist-info` directory in the package
+# so python can correctly detect whether rdkit is installed
+# when it's coming from a conda package.
+
+# Set version as toml doesn't support environment vars.
+sed -i -e "s/.*version.*/version = \"${PKG_VERSION}\"/g" pyproject.toml
+
+# Install the Python library
+pip install --no-deps .

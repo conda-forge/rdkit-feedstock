@@ -1,0 +1,59 @@
+diff --git a/pyproject.toml b/pyproject.toml
+new file mode 100644
+index 000000000..9ceb53236
+--- /dev/null
++++ b/pyproject.toml
+@@ -0,0 +1,53 @@
++# This pyproject.toml file is used to build the conda package only.
++
++[build-system]
++requires = ["setuptools"]
++build-backend = "setuptools.build_meta"
++
++[project]
++name = "rdkit"
++description = "A collection of chemoinformatics and machine-learning software written in C++ and Python"
++authors = [{ name = "Greg Landrum", email = "greg.landrum@gmail.com" }]
++readme = "README.md"
++version = "0.0.0"
++requires-python = ">=3.8"
++license = { text = "BSD-3-Clause" }
++classifiers = [
++    "Development Status :: 5 - Production/Stable",
++    "Intended Audience :: Developers",
++    "Intended Audience :: Healthcare Industry",
++    "Intended Audience :: Science/Research",
++    "Topic :: Scientific/Engineering :: Artificial Intelligence",
++    "Topic :: Scientific/Engineering :: Bio-Informatics",
++    "Topic :: Scientific/Engineering :: Information Analysis",
++    "Topic :: Scientific/Engineering :: Medical Science Apps.",
++    "Natural Language :: English",
++    "Operating System :: OS Independent",
++    "Programming Language :: Python",
++    "Programming Language :: Python :: 3",
++    "Programming Language :: Python :: 3.8",
++    "Programming Language :: Python :: 3.9",
++    "Programming Language :: Python :: 3.10",
++    "Programming Language :: Python :: 3.11",
++    "Programming Language :: Python :: 3.12",
++]
++
++# NOTE(hadim): likely not needed for the conda package
++dependencies = [
++    "numpy",
++    "Pillow",
++    "pandas",
++]
++
++[project.urls]
++"RDKit" = "http://rdkit.org/"
++"RDKit on Github" = "https://github.com/rdkit/rdkit"
++
++[tool.setuptools]
++include-package-data = true
++
++[tool.setuptools.packages.find]
++where = ["."]
++include = ["rdkit", "rdkit.*"]
++exclude = []
++namespaces = false
