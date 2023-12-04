@@ -7,9 +7,11 @@ package:
   version: {{ version }}
 
 source:
-  fn: {{ filename }}
-  url: https://github.com/rdkit/rdkit/archive/{{ filename }}
-  sha256: d6ed9e0cdf231550fa850070be7ea53154d46ec6cf32a9b5fd5fec2d34a60c6b
+  # fn: {{ filename }}
+  # url: https://github.com/rdkit/rdkit/archive/{{ filename }}
+  # sha256: d6ed9e0cdf231550fa850070be7ea53154d46ec6cf32a9b5fd5fec2d34a60c6b
+  git_url: https://github.com/hadim/rdkit
+  git_tag: pypi
 
 build:
   number: 0
