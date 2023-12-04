@@ -30,7 +30,6 @@ requirements:
     - jom  # [win]
     - make  # [unix]
     - pkg-config
-    - pip
   host:
     - libboost-python-devel
     - cairo
@@ -40,6 +39,7 @@ requirements:
     - numpy
     - pillow
     - pandas
+    - pip
   run:
     - cairo
     - python
