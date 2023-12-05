@@ -9,7 +9,7 @@
 +
 +[project]
 +name = "rdkit"
-+description = "A collection of chemoinformatics and machine-learning software written in C++ and Python"
++description = "A collection of cheminformatics and machine-learning software written in C++ and Python"
 +authors = [{ name = "Greg Landrum", email = "greg.landrum@gmail.com" }]
 +readme = "README.md"
 +version = "0.0.0"
