@@ -1,6 +1,6 @@
 --- /dev/null
-+++ pyproject.toml
-@@ -0,0 +1,53 @@
++++ b/pyproject.toml
+@@ -0,0 +1,41 @@
 +# This pyproject.toml file is used to build the conda package only.
 +
 +[build-system]
@@ -28,18 +28,6 @@
 +    "Operating System :: OS Independent",
 +    "Programming Language :: Python",
 +    "Programming Language :: Python :: 3",
-+    "Programming Language :: Python :: 3.8",
-+    "Programming Language :: Python :: 3.9",
-+    "Programming Language :: Python :: 3.10",
-+    "Programming Language :: Python :: 3.11",
-+    "Programming Language :: Python :: 3.12",
-+]
-+
-+# NOTE(hadim): likely not needed for the conda package
-+dependencies = [
-+    "numpy",
-+    "Pillow",
-+    "pandas",
 +]
 +
 +[project.urls]
