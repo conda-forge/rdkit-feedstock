@@ -1,5 +1,5 @@
 --- /dev/null
-+++ b/pyproject.toml
++++ pyproject.toml
 @@ -0,0 +1,41 @@
 +# This pyproject.toml file is used to build the conda package only.
 +
