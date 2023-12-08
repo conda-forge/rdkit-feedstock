@@ -41,7 +41,7 @@ cmake ${CMAKE_ARGS} \
     ${EXTRA_CMAKE_FLAGS} \
     .
 
-make -j32  #$CPU_COUNT
+make -j$CPU_COUNT
 make install
 
 ## How to run unit tests:
@@ -60,4 +60,4 @@ echo "Settting SETUPTOOLS_SCM_PRETEND_VERSION=$PKG_VERSION"
 export SETUPTOOLS_SCM_PRETEND_VERSION="$PKG_VERSION"
 
 # Install the Python library
-${PYTHON} -m pip install --no-deps --prefix ${PREFIX} .
+${PYTHON} -m pip install --no-deps -vv --no-build-isolation --prefix ${PREFIX} .

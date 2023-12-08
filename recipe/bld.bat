@@ -40,4 +40,4 @@ copy bin\*.dll %LIBRARY_BIN%
 set SETUPTOOLS_SCM_PRETEND_VERSION=%PKG_VERSION%
 
 @REM Install the Python library
-%PYTHON% -m pip install --no-deps --prefix %PREFIX% .
+%PYTHON% -m pip install --no-deps -vv --no-build-isolation --prefix %PREFIX% .
