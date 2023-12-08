@@ -42,6 +42,6 @@
 +
 +[tool.setuptools.packages.find]
 +where = ["."]
-+include = ["rdkit", "rdkit.*"]
++include = ["rdkit", "rdkit.*", "rdkit-stubs", "rdkit-stubs.*"]
 +exclude = []
 +namespaces = false

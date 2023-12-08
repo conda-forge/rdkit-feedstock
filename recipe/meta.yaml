@@ -42,6 +42,8 @@ requirements:
     - pip
     - setuptools
     - setuptools_scm >=8
+    # For rdkit-tubs
+    - pybind11-stubgen
   run:
     - cairo
     - python
