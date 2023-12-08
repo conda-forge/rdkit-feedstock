@@ -41,7 +41,7 @@ cmake ${CMAKE_ARGS} \
     ${EXTRA_CMAKE_FLAGS} \
     .
 
-make -j32 #$CPU_COUNT
+make -j$CPU_COUNT
 make install
 
 ## How to run unit tests:
