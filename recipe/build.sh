@@ -41,7 +41,7 @@ cmake ${CMAKE_ARGS} \
     ${EXTRA_CMAKE_FLAGS} \
     .
 
-make -j$CPU_COUNT
+make -j32  #$CPU_COUNT
 make install
 
 ## How to run unit tests:
@@ -51,12 +51,13 @@ make install
 # ctest --output-on-failure
 
 # NOTE(hadim): below we run `pip install ...` in order
-# to correctly add the `-dist-info` directory in the package
+# to correctly add the `.dist-info` directory in the package
 # so python can correctly detect whether rdkit is installed
 # when it's coming from a conda package.
 
-# Set version as toml doesn't support environment vars.
-sed -i -e "s/.*version.*/version = \"${PKG_VERSION}\"/g" pyproject.toml
+# Set the version for setuptools_scm
+echo "Settting SETUPTOOLS_SCM_PRETEND_VERSION=$PKG_VERSION"
+export SETUPTOOLS_SCM_PRETEND_VERSION="$PKG_VERSION"
 
 # Install the Python library
 ${PYTHON} -m pip install --no-deps --prefix ${PREFIX} .
