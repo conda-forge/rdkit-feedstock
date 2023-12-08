@@ -54,6 +54,8 @@ requirements:
 test:
   commands:
     - python -c "import rdkit; assert rdkit.__version__ == '{{ version }}'"
+    # NOTE: by using `importlib.metadata`, we make sure the Python dist-info/ folder exists. Otherwise it will fails.
+    - python -c "from importlib.metadata import metadata; m = dict(metadata('numpy')); assert m['Version'] == '{{ version }}'"
   imports:
     - rdkit
     - rdkit.Avalon
