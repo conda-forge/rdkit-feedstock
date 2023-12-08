@@ -41,7 +41,7 @@ requirements:
     - pandas
     - pip
     - setuptools
-    - setuptools_scm
+    - setuptools_scm >=8
   run:
     - cairo
     - python
