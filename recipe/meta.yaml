@@ -11,8 +11,11 @@ source:
   url: https://github.com/rdkit/rdkit/archive/{{ filename }}
   sha256: 8e8bb732ca2dc9481940bbf5dfa1127f0f014f80b73a1faa3c56761acb899748
 
+  patches:
+    - pyproject.patch
+
 build:
-  number: 0
+  number: 1
   skip: true  # [aarch64]
   missing_dso_whitelist:
     - '*/RDKit*dll'  # [win]
@@ -36,6 +39,11 @@ requirements:
     - numpy
     - pillow
     - pandas
+    - pip
+    - setuptools
+    - setuptools_scm >=8
+    # For rdkit-tubs
+    - pybind11-stubgen
   run:
     - cairo
     - python
