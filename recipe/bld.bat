@@ -14,7 +14,6 @@ cmake ^
     -D RDK_BUILD_FREESASA_SUPPORT=ON ^
     -D RDK_BUILD_YAEHMOP_SUPPORT=ON ^
     -D RDK_BUILD_XYZ2MOL_SUPPORT=ON ^
-    -D RDK_BUILD_PYTHON_STUBS=ON ^
     -D RDK_INSTALL_STATIC_LIBS=OFF ^
     -D RDK_INSTALL_DLLS_MSVC=ON ^
     -D RDK_INSTALL_DEV_COMPONENT=OFF ^
@@ -30,6 +29,10 @@ if errorlevel 1 exit 1
 
 REM copy .dll files to LIBRARY_BIN
 copy bin\*.dll %LIBRARY_BIN%
+
+@REM NOTE(ptosco): build and install rdkit-stubs
+cmake --build . --config Release --target stubs
+if errorlevel 1 exit 1
 
 @REM NOTE(hadim): below we run `pip install ...` in order
 @REM to correctly add the `.dist-info` directory in the package
