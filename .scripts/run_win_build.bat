@@ -51,6 +51,10 @@ if NOT [%flow_run_id%] == [] (
     set "EXTRA_CB_OPTIONS=%EXTRA_CB_OPTIONS% --extra-meta flow_run_id=%flow_run_id% remote_url=%remote_url% sha=%sha%"
 )
 
+if NOT [%flow_run_id%] == [] (
+    set "EXTRA_CB_OPTIONS=%EXTRA_CB_OPTIONS% --extra-meta flow_run_id=%flow_run_id% remote_url=%remote_url% sha=%sha%"
+)
+
 call :end_group
 
 :: Build the recipe
