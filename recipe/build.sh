@@ -34,7 +34,6 @@ cmake ${CMAKE_ARGS} \
     -D RDK_BUILD_FREESASA_SUPPORT=ON \
     -D RDK_BUILD_YAEHMOP_SUPPORT=ON \
     -D RDK_BUILD_XYZ2MOL_SUPPORT=ON \
-    -D RDK_BUILD_PYTHON_STUBS=ON \
     -D RDK_INSTALL_INTREE=OFF \
     -D RDK_INSTALL_STATIC_LIBS=OFF \
     -D RDK_OPTIMIZE_POPCNT=${POPCNT_OPTIMIZATION} \
@@ -43,6 +42,8 @@ cmake ${CMAKE_ARGS} \
 
 make -j$CPU_COUNT
 make install
+# NOTE(ptosco): build and install rdkit-stubs
+cmake --build . --config Release --target stubs
 
 ## How to run unit tests:
 ## 1. Set RDK_BUILD_CPP_TESTS to ON
