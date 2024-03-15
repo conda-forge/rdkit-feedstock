@@ -12,4 +12,4 @@ github:
 provider:
   linux_aarch64: default
   win: azure
-test_on_native_only: true
+test: native_and_emulated
