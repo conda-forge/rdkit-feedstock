@@ -1,3 +1,5 @@
+c_stdlib:
+- vs
 cairo:
 - '1'
 channel_sources:
@@ -9,7 +11,7 @@ cxx_compiler:
 freetype:
 - '2'
 libboost_python_devel:
-- '1.82'
+- '1.84'
 numpy:
 - '1.26'
 pin_run_as_build:
