@@ -15,7 +15,7 @@ source:
     - pyproject.patch
 
 build:
-  number: 1
+  number: 2
   skip: true  # [aarch64]
   missing_dso_whitelist:
     - '*/RDKit*dll'  # [win]
@@ -26,11 +26,13 @@ requirements:
     - cross-python_{{ target_platform }}     # [build_platform != target_platform]
     - numpy                                  # [build_platform != target_platform]
     - {{ compiler('cxx') }}
+    - {{ stdlib("c") }}
     - cmake
     - jom  # [win]
     - make  # [unix]
     - pkg-config
   host:
+    - libboost-devel
     - libboost-python-devel
     - cairo
     - eigen
@@ -81,6 +83,8 @@ outputs:
   - name: rdkit-dev
     script: install_rdkit_dev.bat  # [win]
     requirements:
+      build:
+        - {{ stdlib("c") }}
       run:
         - rdkit
     test:
