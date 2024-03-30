@@ -18,6 +18,8 @@ cxx_compiler_version:
 - '16'
 freetype:
 - '2'
+libboost_devel:
+- '1.84'
 libboost_python_devel:
 - '1.84'
 macos_machine:
@@ -33,7 +35,5 @@ python:
 target_platform:
 - osx-64
 zip_keys:
-- - c_stdlib_version
-  - MACOSX_DEPLOYMENT_TARGET
 - - python
   - numpy
