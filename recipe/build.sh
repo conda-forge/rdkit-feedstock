@@ -20,6 +20,26 @@ if [[ "$target_platform" == osx-arm64 ]] || [[ "$target_platform" == osx-64 ]]; 
     export CXXFLAGS="-D_LIBCPP_DISABLE_AVAILABILITY -D_HAS_AUTO_PTR_ETC=0 $CXXFLAGS"
 fi
 
+# this can be removed when 2024.03.3 is released
+cat << 'EOF' > patch.txt
+diff --git a/External/CoordGen/CMakeLists.txt b/External/CoordGen/CMakeLists.txt
+index 52a072e99..cb78c31e6 100644
+--- a/External/CoordGen/CMakeLists.txt
++++ b/External/CoordGen/CMakeLists.txt
+@@ -87,7 +87,9 @@ if(RDK_BUILD_COORDGEN_SUPPORT)
+     rdkit_library(coordgen ${CGSOURCES} SHARED)
+ if(CMAKE_C_COMPILER_ID STREQUAL "Clang")
+     target_compile_options(coordgen PUBLIC -Wno-unused-but-set-variable)
++if(RDK_INSTALL_STATIC_LIBS)
+     target_compile_options(coordgen_static PUBLIC -Wno-unused-but-set-variable)
++endif()
+ endif()
+     install(TARGETS coordgen DESTINATION ${RDKit_LibDir})
+     set(RDK_COORDGEN_LIBS coordgen CACHE STRING "the external libraries" FORCE)
+EOF
+
+patch -p1 < patch.txt
+
 cmake ${CMAKE_ARGS} \
     -D CMAKE_BUILD_TYPE=Release \
     -D CMAKE_INSTALL_PREFIX="$PREFIX" \
