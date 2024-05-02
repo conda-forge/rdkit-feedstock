@@ -21,7 +21,7 @@ if [[ "$target_platform" == osx-arm64 ]] || [[ "$target_platform" == osx-64 ]]; 
 fi
 
 # this can be removed when 2024.03.3 is released
-cat << EOF > patch.txt
+cat << 'EOF' > patch.txt
 diff --git a/External/CoordGen/CMakeLists.txt b/External/CoordGen/CMakeLists.txt
 index 52a072e99..cb78c31e6 100644
 --- a/External/CoordGen/CMakeLists.txt
