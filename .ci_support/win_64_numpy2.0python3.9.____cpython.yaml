@@ -3,7 +3,7 @@ c_stdlib:
 cairo:
 - '1'
 channel_sources:
-- conda-forge
+- conda-forge/label/numpy_rc,conda-forge
 channel_targets:
 - conda-forge main
 cxx_compiler:
@@ -15,7 +15,7 @@ libboost_devel:
 libboost_python_devel:
 - '1.84'
 numpy:
-- '1.22'
+- '2.0'
 pin_run_as_build:
   python:
     min_pin: x.x
