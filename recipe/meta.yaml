@@ -26,7 +26,7 @@ requirements:
     - cross-python_{{ target_platform }}     # [build_platform != target_platform]
     - numpy                                  # [build_platform != target_platform]
     - {{ compiler('cxx') }}
-    - {{ stdlib("c") }}
+    - {{ stdlib('c') }}
     - cmake
     - jom  # [win]
     - make  # [unix]
@@ -44,6 +44,8 @@ requirements:
     - pip
     - setuptools
     - setuptools_scm >=8
+    # For rdkit-stubs.
+    - pybind11-stubgen
     # For rdkit-postgresql.
     - postgresql
 
@@ -51,12 +53,14 @@ outputs:
   - name: librdkit
     script: install.sh  # [unix]
     requirements:
+      host:
+        - python
       run:
         - cairo
     test:
       commands:
         # NOTE(skearnes): Set RDK_BUILD_CPP_TESTS=ON in build.sh to compile tests.
-        - export RDBASE="$SRC_DIR"
+        - export RDBASE="${SRC_DIR}"
         - ctest --output-on-failure
     about:
       summary: RDKit C++ library
@@ -65,11 +69,6 @@ outputs:
   - name: rdkit
     script: install.sh  # [unix]
     requirements:
-      build:
-        - cmake
-      host:
-        # For rdkit-stubs.
-        - pybind11-stubgen
       run:
         - {{ pin_subpackage('librdkit', exact=True) }}
         - python
@@ -110,7 +109,7 @@ outputs:
       build:
         - {{ stdlib("c") }}
       run:
-        - {{ pin_subpackage('rdkit', exact=True) }}
+        - {{ pin_subpackage('librdkit', exact=True) }}
     test:
       commands:
         - if not exist %LIBRARY_INC%\\rdkit\\Catalogs\\Catalog.h exit 1  # [win]
@@ -121,6 +120,8 @@ outputs:
   - name: rdkit-postgresql
     script: install.sh  # [unix]
     requirements:
+      host:
+        - python
       run:
         - {{ pin_subpackage('librdkit', exact=True) }}
         - postgresql
@@ -151,3 +152,4 @@ extra:
     - pstjohn
     - mcs07
     - jaimergp
+    - skearnes
