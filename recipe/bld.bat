@@ -18,6 +18,8 @@ cmake ^
     -D RDK_INSTALL_DLLS_MSVC=ON ^
     -D RDK_INSTALL_DEV_COMPONENT=OFF ^
     -D RDK_INSTALL_INTREE=OFF ^
+    -D RDK_BUILD_PGSQL=ON ^
+    -D RDK_PGSQL_STATIC=OFF ^
     .
 if errorlevel 1 exit 1
 

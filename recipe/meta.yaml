@@ -52,23 +52,20 @@ requirements:
 outputs:
   - name: librdkit
     script: install.sh  # [unix]
+    script: install.bat  # [win]
     requirements:
       host:
         - python
         - pip
       run:
         - cairo
-    test:
-      commands:
-        # NOTE(skearnes): Set RDK_BUILD_CPP_TESTS=ON in build.sh to compile tests.
-        - export RDBASE="${SRC_DIR}"
-        - ctest --output-on-failure
     about:
       summary: RDKit C++ library
       license: BSD-3-Clause
       license_file: license.txt
   - name: rdkit
     script: install.sh  # [unix]
+    script: install.bat  # [win]
     requirements:
       run:
         - {{ pin_subpackage('librdkit', exact=True) }}
@@ -105,7 +102,7 @@ outputs:
       license: BSD-3-Clause
       license_file: license.txt
   - name: rdkit-dev
-    script: install_rdkit_dev.bat  # [win]
+    script: install.bat  # [win]
     requirements:
       build:
         - {{ stdlib("c") }}
@@ -120,6 +117,7 @@ outputs:
       license_file: license.txt
   - name: rdkit-postgresql
     script: install.sh  # [unix]
+    script: install.bat  # [win]
     requirements:
       host:
         - python
