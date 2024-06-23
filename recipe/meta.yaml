@@ -55,6 +55,7 @@ outputs:
     requirements:
       host:
         - python
+        - pip
       run:
         - cairo
     test:
@@ -122,6 +123,7 @@ outputs:
     requirements:
       host:
         - python
+        - pip
       run:
         - {{ pin_subpackage('librdkit', exact=True) }}
         - postgresql
