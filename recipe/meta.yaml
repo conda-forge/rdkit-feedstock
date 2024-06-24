@@ -1,4 +1,7 @@
-{% set name = "rdkit" %}
+# NOTE(skearnes): Using `rdkit` as the package name conflicts with the `rdkit` subpackage and causes problems; see
+# https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#outputs-section and
+# https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#implicit-metapackages.
+{% set name = "rdkit-all" %}
 {% set version = "2024.03.3" %}
 {% set filename = "Release_%s.tar.gz" % version.replace(".", "_") %}
 
@@ -22,61 +25,82 @@ build:
 
 requirements:
   build:
-    - python                                 # [build_platform != target_platform]
-    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
-    - numpy                                  # [build_platform != target_platform]
     - {{ compiler('cxx') }}
     - {{ stdlib('c') }}
+    - cross-python_{{ target_platform }}  # [build_platform != target_platform]
+    - numpy                               # [build_platform != target_platform]
+    - python                              # [build_platform != target_platform]
     - cmake
     - jom  # [win]
     - make  # [unix]
     - pkg-config
   host:
-    - libboost-devel
-    - libboost-python-devel
     - cairo
     - eigen
     - freetype
-    - python
+    - libboost-devel
+    - libboost-python-devel
     - numpy
-    - pillow
     - pandas <2.2
+    - pillow
     - pip
+    - postgresql
+    - python
     - setuptools
     - setuptools_scm >=8
-    # For rdkit-stubs.
-    - pybind11-stubgen
-    # For rdkit-postgresql.
-    - postgresql
 
 outputs:
   - name: librdkit
     script: install.sh  # [unix]
-    script: install.bat  # [win]
     requirements:
-      host:
-        - python
-        - pip
+      build:
+        - cmake
       run:
         - cairo
+        - eigen
+        - freetype
+        - libboost-devel
     about:
       summary: RDKit C++ library
       license: BSD-3-Clause
       license_file: license.txt
   - name: rdkit
     script: install.sh  # [unix]
-    script: install.bat  # [win]
     requirements:
+      build:
+        - {{ compiler('cxx') }}
+        - {{ stdlib('c') }}
+        - cmake
+        - make  # [unix]
+      host:
+        - cairo
+        - eigen
+        - freetype
+        - libboost-devel
+        - libboost-python-devel
+        - matplotlib-base
+        - numpy
+        - pandas <2.2
+        - pillow
+        - pip
+        - postgresql
+        - pybind11-stubgen
+        - pycairo
+        - python
+        - reportlab
+        - setuptools
+        - setuptools_scm >=8
+        - sqlalchemy
       run:
         - {{ pin_subpackage('librdkit', exact=True) }}
-        - python
-        - pillow
-        - pandas
-        - {{ pin_compatible('numpy') }}
-        - pycairo
         - matplotlib-base
-        - sqlalchemy
+        - {{ pin_compatible('numpy') }}
+        - pandas
+        - pillow
+        - pycairo
+        - python
         - reportlab
+        - sqlalchemy
     test:
       commands:
         - python -c "import rdkit; assert rdkit.__version__ == '{{ version }}'"
@@ -117,11 +141,11 @@ outputs:
       license_file: license.txt
   - name: rdkit-postgresql
     script: install.sh  # [unix]
-    script: install.bat  # [win]
     requirements:
+      build:
+        - cmake
       host:
-        - python
-        - pip
+        - postgresql
       run:
         - {{ pin_subpackage('librdkit', exact=True) }}
         - postgresql

@@ -43,24 +43,9 @@ cmake ${CMAKE_ARGS} \
     .
 
 make -j$CPU_COUNT
-make install
-# NOTE(ptosco): build and install rdkit-stubs
-cmake --build . --config Release --target stubs
 
 ## How to run unit tests:
 ## 1. Set RDK_BUILD_CPP_TESTS to ON
 ## 2. Uncomment lines below
 # export RDBASE="$SRC_DIR"
 # ctest --output-on-failure
-
-# NOTE(hadim): below we run `pip install ...` in order
-# to correctly add the `.dist-info` directory in the package
-# so python can correctly detect whether rdkit is installed
-# when it's coming from a conda package.
-
-# Set the version for setuptools_scm
-echo "Setting SETUPTOOLS_SCM_PRETEND_VERSION=$PKG_VERSION"
-export SETUPTOOLS_SCM_PRETEND_VERSION="$PKG_VERSION"
-
-# Install the Python library
-${PYTHON} -m pip install --no-deps -vv --no-build-isolation --prefix ${PREFIX} .
