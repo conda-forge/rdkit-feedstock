@@ -1,12 +1,11 @@
-# NOTE(skearnes): Using `rdkit` as the package name conflicts with the `rdkit` subpackage and causes problems; see
-# https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#outputs-section and
-# https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#implicit-metapackages.
-{% set name = "rdkit-all" %}
 {% set version = "2024.03.3" %}
 {% set filename = "Release_%s.tar.gz" % version.replace(".", "_") %}
 
 package:
-  name: {{ name|lower }}
+  # NOTE(skearnes): Using `rdkit` as the package name conflicts with the `rdkit` subpackage and causes problems; see
+  # https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#outputs-section and
+  # https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#implicit-metapackages.
+  name: rdkit-meta
   version: {{ version }}
 
 source:
@@ -55,15 +54,25 @@ outputs:
     requirements:
       build:
         - cmake
-      run:
+      host:
         - cairo
         - eigen
         - freetype
         - libboost-devel
+        - libboost-python-devel
+      run:
+        - cairo
+        - eigen
+        - freetype
+        # NOTE(skearnes): The `host` dependencies above are only listed so that this pin is correctly resolved. Without
+        # them (or some subset that I haven't narrowed to yet), libboost may be resolved to a higher version than was
+        # used for the build in build.sh.
+        - {{ pin_compatible('libboost') }}
     about:
       summary: RDKit C++ library
       license: BSD-3-Clause
       license_file: license.txt
+
   - name: rdkit
     script: install.sh  # [unix]
     requirements:
@@ -125,6 +134,7 @@ outputs:
       summary: RDKit Python bindings
       license: BSD-3-Clause
       license_file: license.txt
+
   - name: rdkit-dev
     script: install.bat  # [win]
     requirements:
@@ -139,6 +149,7 @@ outputs:
       summary: RDKit headers and library used in rdkit package
       license: BSD-3-Clause
       license_file: license.txt
+
   - name: rdkit-postgresql
     script: install.sh  # [unix]
     requirements:
@@ -151,8 +162,8 @@ outputs:
         - postgresql
     test:
       commands:
-        - mkdir test_db
-        - cd test_db
+        - mkdir test_rdkit_postgresql
+        - cd test_rdkit_postgresql
         - initdb .
         - pg_ctl -D . -l logfile start
         - createdb test
