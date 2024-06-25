@@ -26,6 +26,11 @@ elif [[ $PKG_NAME == "rdkit" ]]; then
 
 elif [[ $PKG_NAME == "rdkit-postgresql" ]]; then
 
+    if [ "$(uname -m)" == "arm64" ]; then
+      # NOTE(skearnes): PostgreSQL doesn't recognize `rdkit.so` on Apple silicon.
+      DIR=$(pg_config --pkglibdir)
+      ln -s "$DIR"/rdkit.so "$DIR"/rdkit
+    fi
     cd ./Code/PgSQL/rdkit
     cmake -P cmake_install.cmake
 

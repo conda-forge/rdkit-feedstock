@@ -167,7 +167,7 @@ outputs:
         - initdb .
         - pg_ctl -D . -l logfile start
         - createdb test
-        - psql -c 'create extension rdkit' test
+        - psql -c 'CREATE EXTENSION rdkit' test
     about:
       summary: RDKit PostgreSQL cartridge
       license: BSD-3-Clause
