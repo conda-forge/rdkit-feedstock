@@ -23,6 +23,8 @@ build:
     - '*/RDKit*dll'  # [win]
 
 requirements:
+  # See https://conda-forge.org/docs/maintainer/knowledge_base/#placing-requirements-in-build-or-host and
+  # https://conda-forge.org/docs/maintainer/knowledge_base/#details-about-cross-compiled-python-packages.
   build:
     - {{ compiler('cxx') }}
     - {{ stdlib('c') }}

@@ -20,6 +20,7 @@ if [ "${target_platform}" == "osx-arm64" ] || [ "${target_platform}" == "osx-64"
     export CXXFLAGS="-D_LIBCPP_DISABLE_AVAILABILITY -D_HAS_AUTO_PTR_ETC=0 $CXXFLAGS"
 fi
 
+pg_config --bindir
 cmake ${CMAKE_ARGS} \
     -D CMAKE_BUILD_TYPE=Release \
     -D CMAKE_INSTALL_PREFIX="${PREFIX}" \
