@@ -39,7 +39,7 @@ cmake ${CMAKE_ARGS} \
     -D RDK_OPTIMIZE_POPCNT="${POPCNT_OPTIMIZATION}" \
     -D RDK_BUILD_PGSQL=ON \
     -D RDK_PGSQL_STATIC=OFF \
-    -D PostgreSQL_ROOT="${PREFIX}" \
+    -D PostgreSQL_CONFIG="$(which pg_config)" \
     ${EXTRA_CMAKE_FLAGS} \
     .
 
