@@ -30,6 +30,7 @@ requirements:
     - {{ stdlib('c') }}
     - cross-python_{{ target_platform }}  # [build_platform != target_platform]
     - numpy                               # [build_platform != target_platform]
+    - postgresql                          # [build_platform != target_platform]
     - python                              # [build_platform != target_platform]
     - cmake
     - jom  # [win]

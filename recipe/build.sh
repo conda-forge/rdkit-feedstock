@@ -41,7 +41,7 @@ time cmake ${CMAKE_ARGS} --trace-expand --trace-source=Code/PgSQL/rdkit/CMakeLis
     -D RDK_OPTIMIZE_POPCNT="${POPCNT_OPTIMIZATION}" \
     -D RDK_BUILD_PGSQL=ON \
     -D RDK_PGSQL_STATIC=OFF \
-    -D PostgreSQL_CONFIG=pg_config \
+    -D PostgreSQL_CONFIG="$(which pg_config)" \
     ${EXTRA_CMAKE_FLAGS} \
     .
 
