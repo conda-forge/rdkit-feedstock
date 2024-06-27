@@ -20,7 +20,7 @@ if [ "${target_platform}" == "osx-arm64" ] || [ "${target_platform}" == "osx-64"
     export CXXFLAGS="-D_LIBCPP_DISABLE_AVAILABILITY -D_HAS_AUTO_PTR_ETC=0 $CXXFLAGS"
 fi
 
-cmake ${CMAKE_ARGS} --trace-expand --trace-source=Code/PgSQL/rdkit/CMakeLists.txt \
+time cmake ${CMAKE_ARGS} --trace-expand --trace-source=Code/PgSQL/rdkit/CMakeLists.txt \
     -D CMAKE_BUILD_TYPE=Release \
     -D CMAKE_INSTALL_PREFIX="${PREFIX}" \
     -D BOOST_ROOT="${PREFIX}" \
@@ -42,7 +42,7 @@ cmake ${CMAKE_ARGS} --trace-expand --trace-source=Code/PgSQL/rdkit/CMakeLists.tx
     ${EXTRA_CMAKE_FLAGS} \
     .
 
-make -j"${CPU_COUNT}"
+time make -j"${CPU_COUNT}"
 
 ## How to run unit tests:
 ## 1. Set RDK_BUILD_CPP_TESTS to ON
