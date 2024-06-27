@@ -20,6 +20,8 @@ if [ "${target_platform}" == "osx-arm64" ] || [ "${target_platform}" == "osx-64"
     export CXXFLAGS="-D_LIBCPP_DISABLE_AVAILABILITY -D_HAS_AUTO_PTR_ETC=0 $CXXFLAGS"
 fi
 
+which pg_config
+pg_config --bindir
 time cmake ${CMAKE_ARGS} --trace-expand --trace-source=Code/PgSQL/rdkit/CMakeLists.txt \
     -D CMAKE_BUILD_TYPE=Release \
     -D CMAKE_INSTALL_PREFIX="${PREFIX}" \
@@ -39,6 +41,7 @@ time cmake ${CMAKE_ARGS} --trace-expand --trace-source=Code/PgSQL/rdkit/CMakeLis
     -D RDK_OPTIMIZE_POPCNT="${POPCNT_OPTIMIZATION}" \
     -D RDK_BUILD_PGSQL=ON \
     -D RDK_PGSQL_STATIC=OFF \
+    -D PostgreSQL_CONFIG=pg_config \
     ${EXTRA_CMAKE_FLAGS} \
     .
 
