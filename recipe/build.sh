@@ -20,7 +20,12 @@ if [ "${target_platform}" == "osx-arm64" ] || [ "${target_platform}" == "osx-64"
     export CXXFLAGS="-D_LIBCPP_DISABLE_AVAILABILITY -D_HAS_AUTO_PTR_ETC=0 $CXXFLAGS"
 fi
 
-export PG_CONFIG="${RECIPE_DIR}/arm64_pg_config"
+PG_CONFIG="$(which pg_config)"
+if [ "${target_platform}" == "osx-arm64" ]; then
+  # See https://github.com/conda-forge/pgvector-feedstock/blob/main/recipe/build.sh.
+  chmod +x "${RECIPE_DIR}/arm64_pg_config"
+  PG_CONFIG="${RECIPE_DIR}/arm64_pg_config"
+fi
 time cmake ${CMAKE_ARGS} --trace-expand --trace-source=Code/PgSQL/rdkit/CMakeLists.txt \
     -D CMAKE_BUILD_TYPE=Release \
     -D CMAKE_INSTALL_PREFIX="${PREFIX}" \
