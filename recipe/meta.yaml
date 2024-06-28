@@ -56,6 +56,9 @@ outputs:
     script: install.sh  # [unix]
     requirements:
       build:
+        - cross-python_{{ target_platform }}  # [build_platform != target_platform]
+        - numpy  # [build_platform != target_platform]
+        - python  # [build_platform != target_platform]
         - cmake
       host:
         - cairo
@@ -63,6 +66,14 @@ outputs:
         - freetype
         - libboost-devel
         - libboost-python-devel
+        - matplotlib-base
+        - numpy
+        - pandas <2.2
+        - pillow
+        - pycairo
+        - python
+        - reportlab
+        - sqlalchemy
       run:
         - cairo
         - eigen
