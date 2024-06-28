@@ -29,9 +29,9 @@ requirements:
     - {{ compiler('cxx') }}
     - {{ stdlib('c') }}
     - cross-python_{{ target_platform }}  # [build_platform != target_platform]
-    - numpy                               # [build_platform != target_platform]
-    - postgresql                          # [build_platform != target_platform]
-    - python                              # [build_platform != target_platform]
+    - numpy  # [build_platform != target_platform]
+    - postgresql  # [build_platform != target_platform]
+    - python  # [build_platform != target_platform]
     - cmake
     - jom  # [win]
     - make  # [unix]
@@ -82,8 +82,13 @@ outputs:
       build:
         - {{ compiler('cxx') }}
         - {{ stdlib('c') }}
+        - cross-python_{{ target_platform }}  # [build_platform != target_platform]
+        - numpy  # [build_platform != target_platform]
+        - python  # [build_platform != target_platform]
         - cmake
+        - jom  # [win]
         - make  # [unix]
+        - pkg-config
       host:
         - cairo
         - eigen
@@ -157,6 +162,7 @@ outputs:
     script: install.sh  # [unix]
     requirements:
       build:
+        - postgresql  # [build_platform != target_platform]
         - cmake
       host:
         - postgresql
