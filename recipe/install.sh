@@ -18,7 +18,6 @@ elif [ "${PKG_NAME}" == "rdkit" ]; then
     # so python can correctly detect whether rdkit is installed when it's coming from a conda package.
 
     # Set the version for setuptools_scm.
-    echo "Setting SETUPTOOLS_SCM_PRETEND_VERSION=${PKG_VERSION}"
     export SETUPTOOLS_SCM_PRETEND_VERSION="${PKG_VERSION}"
 
     # Install the Python library.

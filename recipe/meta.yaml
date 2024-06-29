@@ -54,6 +54,7 @@ requirements:
 outputs:
   - name: librdkit
     script: install.sh  # [unix]
+    script: install.bat  # [win]
     requirements:
       build:
         - cross-python_{{ target_platform }}  # [build_platform != target_platform]
@@ -89,6 +90,7 @@ outputs:
 
   - name: rdkit
     script: install.sh  # [unix]
+    script: install.bat  # [win]
     requirements:
       build:
         - {{ compiler('cxx') }}
@@ -171,6 +173,7 @@ outputs:
 
   - name: rdkit-postgresql
     script: install.sh  # [unix]
+    script: install.bat  # [win]
     requirements:
       build:
         - postgresql  # [build_platform != target_platform]
