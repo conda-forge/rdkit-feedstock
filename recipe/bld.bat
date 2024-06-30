@@ -25,24 +25,3 @@ if errorlevel 1 exit 1
 
 cmake --build . --config Release
 if errorlevel 1 exit 1
-
-cmake --build . --config Release --target install
-if errorlevel 1 exit 1
-
-REM copy .dll files to LIBRARY_BIN
-copy bin\*.dll %LIBRARY_BIN%
-
-@REM NOTE(ptosco): build and install rdkit-stubs
-cmake --build . --config Release --target stubs
-if errorlevel 1 exit 1
-
-@REM NOTE(hadim): below we run `pip install ...` in order
-@REM to correctly add the `.dist-info` directory in the package
-@REM so python can correctly detect whether rdkit is installed
-@REM when it's coming from a conda package.
-
-@REM Set the version for setuptools_scm
-set SETUPTOOLS_SCM_PRETEND_VERSION=%PKG_VERSION%
-
-@REM Install the Python library
-%PYTHON% -m pip install --no-deps -vv --no-build-isolation --prefix %PREFIX% .
