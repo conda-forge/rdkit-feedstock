@@ -1,7 +1,7 @@
 if %PKG_NAME%=="librdkit" (
     set components=Unspecified base data dev docs extras runtime
-    (for %%component in (%components%) do (
-        cmake -D CMAKE_INSTALL_COMPONENT="%%component" -P cmake_install.cmake)
+    for %%C in (%components%) do (
+        cmake -D CMAKE_INSTALL_COMPONENT=%%C -P cmake_install.cmake
         if errorlevel 1 exit 1
     )
     copy bin\*.dll %LIBRARY_BIN%
