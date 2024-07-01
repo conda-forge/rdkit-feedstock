@@ -1,9 +1,10 @@
 echo PKG_NAME is %PKG_NAME%
 
 if %PKG_NAME%==librdkit (
-    echo "Installing librdkit"
+    echo Installing librdkit
     set components=Unspecified base data dev docs extras runtime
     for %%C in (%components%) do (
+        echo Installing librdkit component %%C
         cmake -D CMAKE_INSTALL_COMPONENT=%%C -P cmake_install.cmake
         if errorlevel 1 exit 1
     )
@@ -11,10 +12,9 @@ if %PKG_NAME%==librdkit (
 )
 
 if %PKG_NAME%==rdkit (
-    echo "Installing rdkit"
+    echo Installing rdkit
     cmake -D CMAKE_INSTALL_COMPONENT=python -P cmake_install.cmake
     if errorlevel 1 exit 1
-    copy bin\*.dll %LIBRARY_BIN%
     cmake --build . --config Release --target stubs
     if errorlevel 1 exit 1
 
@@ -29,18 +29,14 @@ if %PKG_NAME%==rdkit (
 )
 
 if %PKG_NAME%==rdkit-dev (
-    echo "Installing rdkit-dev"
-    echo "Copying libs and headers"
+    echo Installing rdkit-dev
+    echo Copying libs and headers
 
     if not exist "%LIBRARY_LIB%" mkdir %LIBRARY_LIB%
     if not exist "%LIBRARY_INC%" mkdir %LIBRARY_INC%
 
     REM copy .lib files to LIBRARY_LIB
     copy lib\*.lib %LIBRARY_LIB%
-
-    REM copy .dll files to LIBRARY_BIN
-    if not exist "%LIBRARY_BIN%" mkdir %LIBRARY_BIN%
-    copy bin\*.dll %LIBRARY_BIN%
 
     REM copy .h files to LIBRARY_INC
     mkdir %LIBRARY_INC%\rdkit
@@ -56,7 +52,7 @@ if %PKG_NAME%==rdkit-dev (
 )
 
 if %PKG_NAME%==rdkit-postgresql (
-    echo "Installing rdkit-postgresql"
+    echo Installing rdkit-postgresql
     cd Code\PgSQL\rdkit
     cmake -P cmake_install.cmake
     if errorlevel 1 exit 1
