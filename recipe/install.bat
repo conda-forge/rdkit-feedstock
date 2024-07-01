@@ -1,4 +1,6 @@
-if %PKG_NAME%=="librdkit" (
+echo PKG_NAME is %PKG_NAME%
+
+if %PKG_NAME%==librdkit (
     echo "Installing librdkit"
     set components=Unspecified base data dev docs extras runtime
     for %%C in (%components%) do (
@@ -8,7 +10,7 @@ if %PKG_NAME%=="librdkit" (
     copy bin\*.dll %LIBRARY_BIN%
 )
 
-if %PKG_NAME%=="rdkit" (
+if %PKG_NAME%==rdkit (
     echo "Installing rdkit"
     cmake -D CMAKE_INSTALL_COMPONENT=python -P cmake_install.cmake
     if errorlevel 1 exit 1
@@ -26,7 +28,7 @@ if %PKG_NAME%=="rdkit" (
     %PYTHON% -m pip install --no-deps -vv --no-build-isolation --prefix %PREFIX% .
 )
 
-if %PKG_NAME%=="rdkit-dev" (
+if %PKG_NAME%==rdkit-dev (
     echo "Installing rdkit-dev"
     echo "Copying libs and headers"
 
@@ -53,7 +55,7 @@ if %PKG_NAME%=="rdkit-dev" (
     xcopy /y External\RingFamilies\RingDecomposerLib\src\RingDecomposerLib\RingDecomposerLib.h %LIBRARY_INC%\rdkit
 )
 
-if %PKG_NAME%=="rdkit-postgresql" (
+if %PKG_NAME%==rdkit-postgresql (
     echo "Installing rdkit-postgresql"
     cd Code\PgSQL\rdkit
     cmake -P cmake_install.cmake
