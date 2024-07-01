@@ -2,6 +2,7 @@ echo PKG_NAME is %PKG_NAME%
 
 if %PKG_NAME%==librdkit (
     echo Installing librdkit
+
     set components=Unspecified base data dev docs extras runtime
     for %%C in (%components%) do (
         echo Installing librdkit component %%C
@@ -13,6 +14,7 @@ if %PKG_NAME%==librdkit (
 
 if %PKG_NAME%==rdkit (
     echo Installing rdkit
+
     cmake -D CMAKE_INSTALL_COMPONENT=python -P cmake_install.cmake
     if errorlevel 1 exit 1
     cmake --build . --config Release --target stubs
@@ -53,6 +55,9 @@ if %PKG_NAME%==rdkit-dev (
 
 if %PKG_NAME%==rdkit-postgresql (
     echo Installing rdkit-postgresql
+
+    if not exist "%LIBRARY_LIB%" mkdir %LIBRARY_LIB%
+
     cd Code\PgSQL\rdkit
     cmake -P cmake_install.cmake
     if errorlevel 1 exit 1
