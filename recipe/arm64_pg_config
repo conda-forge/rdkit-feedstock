@@ -1,0 +1,74 @@
+#!/bin/sh
+
+#
+# Minimal pg_config implementation as replacement for the native pg_config application
+#
+# Copied from: https://github.com/conda-forge/pgvector-feedstock/blob/main/recipe/arm64_pg_config.
+#
+
+
+case "$1" in
+  --includedir)
+	echo "$BUILD_PREFIX/include"
+	;;
+  --pkgincludedir)
+	echo "$BUILD_PREFIX/include"
+	;;
+  --includedir-server)
+	echo "$BUILD_PREFIX/include/server"
+	;;
+  --libdir)
+	echo "$PREFIX/lib"
+	;;
+  --pgxs)
+	echo "$PREFIX/lib/pgxs/src/makefiles/pgxs.mk"
+	;;
+  --cflags)
+	echo "@TARGET_CFLAGS@"
+	;;
+  --cflags_sl)
+	# defined at src/template/linux
+	echo "-fPIC"
+	;;
+  --cc)
+	echo "@TARGET_CC@"
+	;;
+  --pkglibdir)
+	echo "$PREFIX/lib"
+	;;
+  --bindir)
+	echo "$PREFIX/bin"
+	;;
+  --sharedir)
+	echo "$PREFIX/share"
+	;;
+  --localedir)
+	echo "/usr/share/locale"
+	;;
+  --docdir)
+	echo "/usr/share/doc/postgresql"
+	;;
+  --mandir)
+	echo "/usr/share/man"
+	;;
+  *)
+	echo "Usage: $0 {OPTION}"
+	echo
+	echo "Options:"
+	echo
+	echo "	--includedir		show location of C header files of the client interfaces"
+	echo "	--pkgincludedir		show location of other C header files"
+	echo "	--includedir-server	show location of C header files for the server"
+	echo "	--libdir		show location of object code libraries"
+	echo "	--version		show the PostgreSQL version"
+	echo "	--configure		show options given to configure script"
+	echo "	--pgxs			show location of extension makefile"
+	echo "	--cflags		show CFLAGS value used when PostgreSQL was built"
+	echo "	--cc			show CC value used when PostgreSQL was built"
+	echo "	--pkglibdir		show location of dynamically loadable modules"
+	echo "	--bindir		show location of user executables"
+	echo "	--sharedir		show location of architecture-independent support files"
+	echo "	--localedir		show location of locale support files"
+	echo "	--docdir		show location of documentation files"
+	echo "	--mandir		show location of manual pages"
+esac
