@@ -56,9 +56,11 @@ if %PKG_NAME%==rdkit-dev (
 if %PKG_NAME%==rdkit-postgresql (
     echo Installing rdkit-postgresql
 
-    if not exist "%LIBRARY_LIB%" mkdir %LIBRARY_LIB%
-
     cd Code\PgSQL\rdkit
     cmake -P cmake_install.cmake
     if errorlevel 1 exit 1
+
+    REM NOTE(skearnes): The path to rdkit.dll in pgsql_install.bat is wrong. This line should support the generator
+    REM "NMake Makefiles JOM": https://github.com/rdkit/rdkit/blob/master/Code/PgSQL/rdkit/CMakeLists.txt#L238.
+    xcopy /y rdkit.dll %LIBRARY_LIB%
 )

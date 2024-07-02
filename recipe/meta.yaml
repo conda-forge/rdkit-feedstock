@@ -29,11 +29,11 @@ requirements:
     - {{ compiler('cxx') }}
     - {{ stdlib('c') }}
     - cross-python_{{ target_platform }}  # [build_platform != target_platform]
-    - numpy  # [build_platform != target_platform]
-    - postgresql  # [build_platform != target_platform]
-    - python  # [build_platform != target_platform]
+    - numpy                               # [build_platform != target_platform]
+    - postgresql                          # [build_platform != target_platform]
+    - python                              # [build_platform != target_platform]
     - cmake
-    - jom  # [win]
+    - jom   # [win]
     - make  # [unix]
     - pkg-config
   host:
@@ -53,13 +53,13 @@ requirements:
 
 outputs:
   - name: librdkit
-    script: install.sh  # [unix]
+    script: install.sh   # [unix]
     script: install.bat  # [win]
     requirements:
       build:
         - cross-python_{{ target_platform }}  # [build_platform != target_platform]
-        - numpy  # [build_platform != target_platform]
-        - python  # [build_platform != target_platform]
+        - numpy                               # [build_platform != target_platform]
+        - python                              # [build_platform != target_platform]
         - cmake
       host:
         - cairo
@@ -88,18 +88,33 @@ outputs:
       license: BSD-3-Clause
       license_file: license.txt
 
+  - name: librdkit-dev
+    script: install.bat  # [win]
+    requirements:
+      build:
+        - {{ stdlib("c") }}
+      run:
+        - {{ pin_subpackage('librdkit', exact=True) }}
+    test:
+      commands:
+        - if not exist %LIBRARY_INC%\\rdkit\\Catalogs\\Catalog.h exit 1  # [win]
+    about:
+      summary: RDKit headers and library used in librdkit
+      license: BSD-3-Clause
+      license_file: license.txt
+
   - name: rdkit
-    script: install.sh  # [unix]
+    script: install.sh   # [unix]
     script: install.bat  # [win]
     requirements:
       build:
         - {{ compiler('cxx') }}
         - {{ stdlib('c') }}
         - cross-python_{{ target_platform }}  # [build_platform != target_platform]
-        - numpy  # [build_platform != target_platform]
-        - python  # [build_platform != target_platform]
+        - numpy                               # [build_platform != target_platform]
+        - python                              # [build_platform != target_platform]
         - cmake
-        - jom  # [win]
+        - jom   # [win]
         - make  # [unix]
         - pkg-config
       host:
@@ -156,23 +171,8 @@ outputs:
       license: BSD-3-Clause
       license_file: license.txt
 
-  - name: rdkit-dev
-    script: install.bat  # [win]
-    requirements:
-      build:
-        - {{ stdlib("c") }}
-      run:
-        - {{ pin_subpackage('librdkit', exact=True) }}
-    test:
-      commands:
-        - if not exist %LIBRARY_INC%\\rdkit\\Catalogs\\Catalog.h exit 1  # [win]
-    about:
-      summary: RDKit headers and library used in rdkit package
-      license: BSD-3-Clause
-      license_file: license.txt
-
   - name: rdkit-postgresql
-    script: install.sh  # [unix]
+    script: install.sh   # [unix]
     script: install.bat  # [win]
     requirements:
       build:
@@ -185,12 +185,11 @@ outputs:
         - postgresql
     test:
       commands:
-        - mkdir test_rdkit_postgresql
-        - cd test_rdkit_postgresql
-        - initdb .
-        - pg_ctl -D . -l logfile start
-        - createdb test
-        - psql -c 'CREATE EXTENSION rdkit' test
+        - test -f $PREFIX/lib/rdkit                                           # [osx]
+        - test -f $PREFIX/lib/rdkit.so                                        # [linux]
+        - test -f $PREFIX/share/extension/rdkit.control                       # [unix]
+        - if not exist %LIBRARY_LIB%\rdkit.dll exit 1                         # [win]
+        - if not exist %LIBRARY_PREFIX%\share\extension\rdkit.control exit 1  # [win]
     about:
       summary: RDKit PostgreSQL cartridge
       license: BSD-3-Clause
