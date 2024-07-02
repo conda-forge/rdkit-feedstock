@@ -12,26 +12,8 @@ if %PKG_NAME%==librdkit (
     copy bin\*.dll %LIBRARY_BIN%
 )
 
-if %PKG_NAME%==rdkit (
-    echo Installing rdkit
-
-    cmake -D CMAKE_INSTALL_COMPONENT=python -P cmake_install.cmake
-    if errorlevel 1 exit 1
-    cmake --build . --config Release --target stubs
-    if errorlevel 1 exit 1
-
-    @REM NOTE(hadim): Below we run `pip install ...` in order to correctly add the `.dist-info` directory in the package
-    @REM so python can correctly detect whether rdkit is installed when it's coming from a conda package.
-
-    @REM Set the version for setuptools_scm.
-    set SETUPTOOLS_SCM_PRETEND_VERSION=%PKG_VERSION%
-
-    @REM Install the Python library.
-    %PYTHON% -m pip install --no-deps -vv --no-build-isolation --prefix %PREFIX% .
-)
-
-if %PKG_NAME%==rdkit-dev (
-    echo Installing rdkit-dev
+if %PKG_NAME%==librdkit-dev (
+    echo Installing librdkit-dev
     echo Copying libs and headers
 
     if not exist "%LIBRARY_LIB%" mkdir %LIBRARY_LIB%
@@ -51,6 +33,24 @@ if %PKG_NAME%==rdkit-dev (
     xcopy /y External\CoordGen\*.h %LIBRARY_INC%\rdkit\GraphMol
     xcopy /y External\YAeHMOP\*.h %LIBRARY_INC%\rdkit\GraphMol
     xcopy /y External\RingFamilies\RingDecomposerLib\src\RingDecomposerLib\RingDecomposerLib.h %LIBRARY_INC%\rdkit
+)
+
+if %PKG_NAME%==rdkit (
+    echo Installing rdkit
+
+    cmake -D CMAKE_INSTALL_COMPONENT=python -P cmake_install.cmake
+    if errorlevel 1 exit 1
+    cmake --build . --config Release --target stubs
+    if errorlevel 1 exit 1
+
+    @REM NOTE(hadim): Below we run `pip install ...` in order to correctly add the `.dist-info` directory in the package
+    @REM so python can correctly detect whether rdkit is installed when it's coming from a conda package.
+
+    @REM Set the version for setuptools_scm.
+    set SETUPTOOLS_SCM_PRETEND_VERSION=%PKG_VERSION%
+
+    @REM Install the Python library.
+    %PYTHON% -m pip install --no-deps -vv --no-build-isolation --prefix %PREFIX% .
 )
 
 if %PKG_NAME%==rdkit-postgresql (
