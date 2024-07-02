@@ -185,11 +185,15 @@ outputs:
         - postgresql
     test:
       commands:
-        - test -f $PREFIX/lib/rdkit                                           # [osx]
-        - test -f $PREFIX/lib/rdkit.so                                        # [linux]
-        - test -f $PREFIX/share/extension/rdkit.control                       # [unix]
-        - if not exist %LIBRARY_LIB%\rdkit.dll exit 1                         # [win]
-        - if not exist %LIBRARY_PREFIX%\share\extension\rdkit.control exit 1  # [win]
+        - initdb -D test_db
+        - if errorlevel 1 exit 1  # [win]
+        - pg_ctl -D test_db -l test.log start
+        - if errorlevel 1 exit 1  # [win]
+        - createdb test
+        - if errorlevel 1 exit 1  # [win]
+        - psql -c 'CREATE EXTENSION rdkit' test
+        - if errorlevel 1 exit 1  # [win]
+        - pg_ctl -D test_db stop
     about:
       summary: RDKit PostgreSQL cartridge
       license: BSD-3-Clause
