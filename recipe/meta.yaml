@@ -185,14 +185,17 @@ outputs:
         - postgresql
     test:
       commands:
+        # Inspired by https://github.com/conda-forge/pgvector-feedstock/blob/main/recipe/bld.bat.
         - initdb -D test_db
-        - if errorlevel 1 exit 1  # [win]
+        - if errorlevel 1 exit 1                           # [win]
         - pg_ctl -D test_db -l test.log start
-        - if errorlevel 1 exit 1  # [win]
+        - if errorlevel 1 exit 1                           # [win]
+        - createuser --username=%USERNAME% -w -s postgres  # [win]
+        - if errorlevel 1 exit 1                           # [win]
         - createdb test
-        - if errorlevel 1 exit 1  # [win]
+        - if errorlevel 1 exit 1                           # [win]
         - psql -c 'CREATE EXTENSION rdkit' test
-        - if errorlevel 1 exit 1  # [win]
+        - if errorlevel 1 exit 1                           # [win]
         - pg_ctl -D test_db stop
     about:
       summary: RDKit PostgreSQL cartridge
