@@ -194,7 +194,7 @@ outputs:
         - if errorlevel 1 exit 1                           # [win]
         - createdb test
         - if errorlevel 1 exit 1                           # [win]
-        - psql -c 'CREATE EXTENSION rdkit' test
+        - psql -c "CREATE EXTENSION rdkit" test
         - if errorlevel 1 exit 1                           # [win]
         - pg_ctl -D test_db stop
     about:
