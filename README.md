@@ -1,11 +1,11 @@
-About rdkit-feedstock
-=====================
+About rdkit-meta-feedstock
+==========================
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/rdkit-feedstock/blob/main/LICENSE.txt)
 
 
-About rdkit
------------
+About rdkit-meta
+----------------
 
 Home: http://rdkit.org
 
@@ -17,14 +17,41 @@ Development: https://github.com/rdkit/rdkit
 
 Documentation: http://www.rdkit.org/docs/index.html
 
-About rdkit-dev
----------------
+About librdkit
+--------------
 
 
 
 Package license: BSD-3-Clause
 
-Summary: RDKit headers and library used in rdkit package
+Summary: RDKit C++ library
+
+About librdkit-dev
+------------------
+
+
+
+Package license: BSD-3-Clause
+
+Summary: RDKit headers and library used in librdkit
+
+About rdkit
+-----------
+
+
+
+Package license: BSD-3-Clause
+
+Summary: RDKit Python bindings
+
+About rdkit-postgresql
+----------------------
+
+
+
+Package license: BSD-3-Clause
+
+Summary: RDKit PostgreSQL cartridge
 
 Current build status
 ====================
@@ -196,54 +223,56 @@ Current release info
 
 | Name | Downloads | Version | Platforms |
 | --- | --- | --- | --- |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-librdkit-green.svg)](https://anaconda.org/conda-forge/librdkit) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/librdkit.svg)](https://anaconda.org/conda-forge/librdkit) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/librdkit.svg)](https://anaconda.org/conda-forge/librdkit) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/librdkit.svg)](https://anaconda.org/conda-forge/librdkit) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-librdkit--dev-green.svg)](https://anaconda.org/conda-forge/librdkit-dev) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/librdkit-dev.svg)](https://anaconda.org/conda-forge/librdkit-dev) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/librdkit-dev.svg)](https://anaconda.org/conda-forge/librdkit-dev) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/librdkit-dev.svg)](https://anaconda.org/conda-forge/librdkit-dev) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-rdkit-green.svg)](https://anaconda.org/conda-forge/rdkit) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/rdkit.svg)](https://anaconda.org/conda-forge/rdkit) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/rdkit.svg)](https://anaconda.org/conda-forge/rdkit) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/rdkit.svg)](https://anaconda.org/conda-forge/rdkit) |
-| [![Conda Recipe](https://img.shields.io/badge/recipe-rdkit--dev-green.svg)](https://anaconda.org/conda-forge/rdkit-dev) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/rdkit-dev.svg)](https://anaconda.org/conda-forge/rdkit-dev) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/rdkit-dev.svg)](https://anaconda.org/conda-forge/rdkit-dev) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/rdkit-dev.svg)](https://anaconda.org/conda-forge/rdkit-dev) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-rdkit--postgresql-green.svg)](https://anaconda.org/conda-forge/rdkit-postgresql) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/rdkit-postgresql.svg)](https://anaconda.org/conda-forge/rdkit-postgresql) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/rdkit-postgresql.svg)](https://anaconda.org/conda-forge/rdkit-postgresql) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/rdkit-postgresql.svg)](https://anaconda.org/conda-forge/rdkit-postgresql) |
 
-Installing rdkit
-================
+Installing rdkit-meta
+=====================
 
-Installing `rdkit` from the `conda-forge` channel can be achieved by adding `conda-forge` to your channels with:
+Installing `rdkit-meta` from the `conda-forge` channel can be achieved by adding `conda-forge` to your channels with:
 
 ```
 conda config --add channels conda-forge
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge` channel has been enabled, `rdkit, rdkit-dev` can be installed with `conda`:
+Once the `conda-forge` channel has been enabled, `librdkit, librdkit-dev, rdkit, rdkit-postgresql` can be installed with `conda`:
 
 ```
-conda install rdkit rdkit-dev
-```
-
-or with `mamba`:
-
-```
-mamba install rdkit rdkit-dev
-```
-
-It is possible to list all of the versions of `rdkit` available on your platform with `conda`:
-
-```
-conda search rdkit --channel conda-forge
+conda install librdkit librdkit-dev rdkit rdkit-postgresql
 ```
 
 or with `mamba`:
 
 ```
-mamba search rdkit --channel conda-forge
+mamba install librdkit librdkit-dev rdkit rdkit-postgresql
+```
+
+It is possible to list all of the versions of `librdkit` available on your platform with `conda`:
+
+```
+conda search librdkit --channel conda-forge
+```
+
+or with `mamba`:
+
+```
+mamba search librdkit --channel conda-forge
 ```
 
 Alternatively, `mamba repoquery` may provide more information:
 
 ```
 # Search all versions available on your platform:
-mamba repoquery search rdkit --channel conda-forge
+mamba repoquery search librdkit --channel conda-forge
 
-# List packages depending on `rdkit`:
-mamba repoquery whoneeds rdkit --channel conda-forge
+# List packages depending on `librdkit`:
+mamba repoquery whoneeds librdkit --channel conda-forge
 
-# List dependencies of `rdkit`:
-mamba repoquery depends rdkit --channel conda-forge
+# List dependencies of `librdkit`:
+mamba repoquery depends librdkit --channel conda-forge
 ```
 
 
@@ -288,17 +317,17 @@ Terminology
                   produce the finished article (built conda distributions)
 
 
-Updating rdkit-feedstock
-========================
+Updating rdkit-meta-feedstock
+=============================
 
-If you would like to improve the rdkit recipe or build a new
+If you would like to improve the rdkit-meta recipe or build a new
 package version, please fork this repository and submit a PR. Upon submission,
 your changes will be run on the appropriate platforms to give the reviewer an
 opportunity to confirm that the changes result in a successful build. Once
 merged, the recipe will be re-built and uploaded automatically to the
 `conda-forge` channel, whereupon the built conda packages will be available for
 everybody to install and use from the `conda-forge` channel.
-Note that all branches in the conda-forge/rdkit-feedstock are
+Note that all branches in the conda-forge/rdkit-meta-feedstock are
 immediately built and any created packages are uploaded, so PRs should be based
 on branches in forks and branches in the main repository should only be used to
 build distinct package versions.
@@ -317,4 +346,5 @@ Feedstock Maintainers
 * [@jaimergp](https://github.com/jaimergp/)
 * [@mcs07](https://github.com/mcs07/)
 * [@pstjohn](https://github.com/pstjohn/)
+* [@skearnes](https://github.com/skearnes/)
 
