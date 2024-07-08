@@ -18,7 +18,7 @@ source:
 
 build:
   number: 1
-  skip: true  # [aarch64]
+  skip: True  # [aarch64]
   missing_dso_whitelist:
     - '*/RDKit*dll'  # [win]
 
@@ -82,9 +82,9 @@ outputs:
         - cairo
         - eigen
         - freetype
-        # NOTE(skearnes): The `host` dependencies above are only listed so that this pin is correctly resolved. Without
-        # them (or some subset that I haven't narrowed to yet), libboost may be resolved to a higher minor version than
-        # was used for the build in build.sh.
+        # NOTE(skearnes): The host dependencies above are only listed so that this pin is correctly resolved. Without
+        # them (or some subset that I haven't narrowed to yet), libboost may be resolved to a higher version than was
+        # used for the build in build.sh.
         - {{ pin_compatible('libboost') }}
     test:
       commands:
@@ -100,7 +100,7 @@ outputs:
   - name: librdkit-dev
     script: install.bat  # [win]
     build:
-      skip: true  # [not win]
+      skip: True  # [not win]
     requirements:
       build:
         - {{ stdlib("c") }}
