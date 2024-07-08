@@ -64,10 +64,27 @@ outputs:
         - numpy                               # [build_platform != target_platform]
         - python                              # [build_platform != target_platform]
         - cmake
+      host:
+        - cairo
+        - eigen
+        - freetype
+        - libboost-devel
+        - libboost-python-devel
+        - matplotlib-base
+        - numpy
+        - pandas <2.2
+        - pillow
+        - pycairo
+        - python
+        - reportlab
+        - sqlalchemy
       run:
         - cairo
         - eigen
         - freetype
+        # NOTE(skearnes): The `host` dependencies above are only listed so that this pin is correctly resolved. Without
+        # them (or some subset that I haven't narrowed to yet), libboost may be resolved to a higher minor version than
+        # was used for the build in build.sh.
         - {{ pin_compatible('libboost') }}
     test:
       commands:
