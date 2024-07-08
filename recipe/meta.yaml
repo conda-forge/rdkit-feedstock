@@ -1,4 +1,5 @@
 {% set version = "2024.03.4" %}
+{% set boost_version = "1.85" %}
 {% set filename = "Release_%s.tar.gz" % version.replace(".", "_") %}
 
 package:
@@ -40,8 +41,8 @@ requirements:
     - cairo
     - eigen
     - freetype
-    - libboost-devel
-    - libboost-python-devel
+    - libboost-devel ={{ boost_version }}
+    - libboost-python-devel ={{ boost_version }}
     - numpy
     - pandas <2.2
     - pillow
@@ -64,28 +65,11 @@ outputs:
         - numpy                               # [build_platform != target_platform]
         - python                              # [build_platform != target_platform]
         - cmake
-      host:
-        - cairo
-        - eigen
-        - freetype
-        - libboost-devel
-        - libboost-python-devel
-        - matplotlib-base
-        - numpy
-        - pandas <2.2
-        - pillow
-        - pycairo
-        - python
-        - reportlab
-        - sqlalchemy
       run:
         - cairo
         - eigen
         - freetype
-        # NOTE(skearnes): The host dependencies above are only listed so that this pin is correctly resolved. Without
-        # them (or some subset that I haven't narrowed to yet), libboost may be resolved to a higher version than was
-        # used for the build in build.sh.
-        - {{ pin_compatible('libboost') }}
+        - libboost ={{ boost_version }}
     test:
       commands:
         - test -f $PREFIX/include/rdkit/GraphMol/GraphMol.h  # [unix]
@@ -108,7 +92,7 @@ outputs:
         - {{ pin_subpackage('librdkit', exact=True) }}
     test:
       commands:
-        - if not exist %LIBRARY_INC%\rdkit\GraphMol\GraphMol.h exit 1
+        - if not exist %LIBRARY_INC%\rdkit\GraphMol\GraphMol.h exit 1  # [win]
     about:
       summary: RDKit headers and library used in librdkit (Windows only)
       license: BSD-3-Clause
@@ -132,8 +116,8 @@ outputs:
         - cairo
         - eigen
         - freetype
-        - libboost-devel
-        - libboost-python-devel
+        - libboost-devel ={{ boost_version }}
+        - libboost-python-devel ={{ boost_version }}
         - matplotlib-base
         - numpy
         - pandas <2.2
