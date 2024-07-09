@@ -65,11 +65,11 @@ outputs:
         - numpy                               # [build_platform != target_platform]
         - python                              # [build_platform != target_platform]
         - cmake
+        - libboost-devel ={{ boost_version }}
       run:
         - cairo
         - eigen
         - freetype
-        - libboost ={{ boost_version }}
     test:
       commands:
         - test -f $PREFIX/include/rdkit/GraphMol/GraphMol.h  # [unix]
