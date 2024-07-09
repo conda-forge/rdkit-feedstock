@@ -75,7 +75,7 @@ outputs:
         - test -f $PREFIX/include/rdkit/GraphMol/GraphMol.h  # [unix]
         - test -f $PREFIX/lib/libRDKitGraphMol.so            # [linux]
         - test -f $PREFIX/lib/libRDKitGraphMol.dylib         # [osx]
-        - if not exist %LIBRARY_BIN%\\libRDKitGraphMol.dll    # [win]
+        - if not exist %LIBRARY_BIN%\libRDKitGraphMol.dll    # [win]
     about:
       summary: RDKit C++ library
       license: BSD-3-Clause
