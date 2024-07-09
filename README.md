@@ -1,11 +1,11 @@
-About rdkit-meta-feedstock
-==========================
+About rdkit-feedstock
+=====================
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/rdkit-feedstock/blob/main/LICENSE.txt)
 
 
-About rdkit-meta
-----------------
+About rdkit
+-----------
 
 Home: http://rdkit.org
 
@@ -26,15 +26,6 @@ Package license: BSD-3-Clause
 
 Summary: RDKit C++ library
 
-About librdkit-dev
-------------------
-
-
-
-Package license: BSD-3-Clause
-
-Summary: RDKit headers and library used in librdkit
-
 About rdkit
 -----------
 
@@ -52,6 +43,15 @@ About rdkit-postgresql
 Package license: BSD-3-Clause
 
 Summary: RDKit PostgreSQL cartridge
+
+About librdkit-dev
+------------------
+
+
+
+Package license: BSD-3-Clause
+
+Summary: RDKit headers and library used in librdkit (Windows only)
 
 Current build status
 ====================
@@ -228,10 +228,10 @@ Current release info
 | [![Conda Recipe](https://img.shields.io/badge/recipe-rdkit-green.svg)](https://anaconda.org/conda-forge/rdkit) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/rdkit.svg)](https://anaconda.org/conda-forge/rdkit) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/rdkit.svg)](https://anaconda.org/conda-forge/rdkit) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/rdkit.svg)](https://anaconda.org/conda-forge/rdkit) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-rdkit--postgresql-green.svg)](https://anaconda.org/conda-forge/rdkit-postgresql) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/rdkit-postgresql.svg)](https://anaconda.org/conda-forge/rdkit-postgresql) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/rdkit-postgresql.svg)](https://anaconda.org/conda-forge/rdkit-postgresql) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/rdkit-postgresql.svg)](https://anaconda.org/conda-forge/rdkit-postgresql) |
 
-Installing rdkit-meta
-=====================
+Installing rdkit
+================
 
-Installing `rdkit-meta` from the `conda-forge` channel can be achieved by adding `conda-forge` to your channels with:
+Installing `rdkit` from the `conda-forge` channel can be achieved by adding `conda-forge` to your channels with:
 
 ```
 conda config --add channels conda-forge
@@ -317,17 +317,17 @@ Terminology
                   produce the finished article (built conda distributions)
 
 
-Updating rdkit-meta-feedstock
-=============================
+Updating rdkit-feedstock
+========================
 
-If you would like to improve the rdkit-meta recipe or build a new
+If you would like to improve the rdkit recipe or build a new
 package version, please fork this repository and submit a PR. Upon submission,
 your changes will be run on the appropriate platforms to give the reviewer an
 opportunity to confirm that the changes result in a successful build. Once
 merged, the recipe will be re-built and uploaded automatically to the
 `conda-forge` channel, whereupon the built conda packages will be available for
 everybody to install and use from the `conda-forge` channel.
-Note that all branches in the conda-forge/rdkit-meta-feedstock are
+Note that all branches in the conda-forge/rdkit-feedstock are
 immediately built and any created packages are uploaded, so PRs should be based
 on branches in forks and branches in the main repository should only be used to
 build distinct package versions.
