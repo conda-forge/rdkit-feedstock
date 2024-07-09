@@ -72,10 +72,10 @@ outputs:
         - freetype
     test:
       commands:
-        - test -f $PREFIX/include/rdkit/GraphMol/GraphMol.h  # [unix]
-        - test -f $PREFIX/lib/libRDKitGraphMol.so            # [linux]
-        - test -f $PREFIX/lib/libRDKitGraphMol.dylib         # [osx]
-        - if not exist %LIBRARY_BIN%\RDKitGraphMol.dll       # [win]
+        - test -f $PREFIX/include/rdkit/GraphMol/GraphMol.h    # [unix]
+        - test -f $PREFIX/lib/libRDKitGraphMol.so              # [linux]
+        - test -f $PREFIX/lib/libRDKitGraphMol.dylib           # [osx]
+        - if not exist %LIBRARY_BIN%\RDKitGraphMol.dll exit 1  # [win]
     about:
       summary: RDKit C++ library
       license: BSD-3-Clause
