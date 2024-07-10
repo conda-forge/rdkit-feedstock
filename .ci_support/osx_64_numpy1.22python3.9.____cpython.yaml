@@ -18,6 +18,10 @@ cxx_compiler_version:
 - '16'
 freetype:
 - '2'
+libboost_devel:
+- '1.84'
+libboost_python_devel:
+- '1.84'
 macos_machine:
 - x86_64-apple-darwin13.4.0
 numpy:
