@@ -1,5 +1,4 @@
 {% set version = "2024.03.4" %}
-{% set boost_version = "1.85" %}
 {% set filename = "Release_%s.tar.gz" % version.replace(".", "_") %}
 
 package:
@@ -41,8 +40,8 @@ requirements:
     - cairo
     - eigen
     - freetype
-    - libboost-devel ={{ boost_version }}
-    - libboost-python-devel ={{ boost_version }}
+    - libboost-devel
+    - libboost-python-devel
     - numpy
     - pandas <2.2
     - pillow
@@ -65,7 +64,7 @@ outputs:
         - numpy                               # [build_platform != target_platform]
         - python                              # [build_platform != target_platform]
         - cmake
-        - libboost-devel ={{ boost_version }}
+        - libboost-devel
       run:
         - cairo
         - eigen
@@ -116,8 +115,8 @@ outputs:
         - cairo
         - eigen
         - freetype
-        - libboost-devel ={{ boost_version }}
-        - libboost-python-devel ={{ boost_version }}
+        - libboost-devel
+        - libboost-python-devel
         - matplotlib-base
         - numpy
         - pandas <2.2
