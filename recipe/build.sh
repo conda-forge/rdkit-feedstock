@@ -15,11 +15,6 @@ if [ "${target_platform}" == "linux-ppc64le" ]; then
     EXTRA_CMAKE_FLAGS+=" -D PYTHON_NUMPY_INCLUDE_PATH=${SP_DIR}/numpy/core/include"
 fi
 
-# workaround for clang++ and boost functional
-if [ "${target_platform}" == "osx-arm64" ] || [ "${target_platform}" == "osx-64" ]; then
-    export CXXFLAGS="-D_LIBCPP_DISABLE_AVAILABILITY -D_HAS_AUTO_PTR_ETC=0 $CXXFLAGS"
-fi
-
 PG_CONFIG="$(which pg_config)"
 if [ "${target_platform}" == "osx-arm64" ]; then
   # See https://github.com/conda-forge/pgvector-feedstock/blob/main/recipe/build.sh.

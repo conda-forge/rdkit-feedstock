@@ -60,10 +60,8 @@ outputs:
         - {{ pin_subpackage('librdkit', exact=True) }}
     requirements:
       build:
-        - cross-python_{{ target_platform }}  # [build_platform != target_platform]
-        - numpy                               # [build_platform != target_platform]
-        - python                              # [build_platform != target_platform]
         - cmake
+      host:
         - libboost-devel
       run:
         - cairo
@@ -85,8 +83,6 @@ outputs:
     build:
       skip: True  # [not win]
     requirements:
-      build:
-        - {{ stdlib("c") }}
       run:
         - {{ pin_subpackage('librdkit', exact=True) }}
     test:
