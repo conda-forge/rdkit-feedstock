@@ -15,7 +15,7 @@ source:
     - pyproject.patch
 
 build:
-  number: 0
+  number: 1 
   skip: true  # [aarch64]
   missing_dso_whitelist:
     - '*/RDKit*dll'  # [win]
