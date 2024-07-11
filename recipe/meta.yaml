@@ -43,7 +43,7 @@ requirements:
     - libboost-devel
     - libboost-python-devel
     - numpy
-    - pandas <2.2
+    - pandas
     - pillow
     - pip
     - postgresql
@@ -60,6 +60,7 @@ outputs:
         - {{ pin_subpackage('librdkit', exact=True) }}
     requirements:
       build:
+        - {{ stdlib("c") }}
         - cmake
       host:
         - libboost-devel
@@ -115,7 +116,7 @@ outputs:
         - libboost-python-devel
         - matplotlib-base
         - numpy
-        - pandas <2.2
+        - pandas
         - pillow
         - pip
         - postgresql
