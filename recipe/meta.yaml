@@ -40,7 +40,7 @@ requirements:
     - python
     - numpy
     - pillow
-    - pandas <=2.2
+    - pandas <2.3
     - pip
     - setuptools
     - setuptools_scm >=8
