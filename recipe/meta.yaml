@@ -40,7 +40,7 @@ requirements:
     - python
     - numpy
     - pillow
-    - pandas <2.2
+    - pandas <=2.2
     - pip
     - setuptools
     - setuptools_scm >=8
@@ -51,7 +51,6 @@ requirements:
     - python
     - pillow
     - pandas
-    - {{ pin_compatible('numpy') }}
     - pycairo
     - matplotlib-base
     - sqlalchemy
