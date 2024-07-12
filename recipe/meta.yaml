@@ -131,7 +131,7 @@ outputs:
         - sqlalchemy
       run:
         - {{ pin_subpackage('librdkit', exact=True) }}
-        - librdkit
+        - librdkit  # https://github.com/conda-forge/rdkit-feedstock/pull/158#issuecomment-2225136696.
         - matplotlib-base
         - numpy
         - pandas
@@ -177,7 +177,7 @@ outputs:
         - postgresql
       run:
         - {{ pin_subpackage('librdkit', exact=True) }}
-        - librdkit
+        - librdkit  # https://github.com/conda-forge/rdkit-feedstock/pull/158#issuecomment-2225136696.
         - postgresql
     test:
       commands:
