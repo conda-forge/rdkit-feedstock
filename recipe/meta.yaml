@@ -70,7 +70,6 @@ outputs:
         - freetype
     test:
       commands:
-        - test -f $PREFIX/include/rdkit/GraphMol/GraphMol.h    # [unix]
         - test -f $PREFIX/lib/libRDKitGraphMol.so              # [linux]
         - test -f $PREFIX/lib/libRDKitGraphMol.dylib           # [osx]
         - if not exist %LIBRARY_BIN%\RDKitGraphMol.dll exit 1  # [win]
@@ -80,17 +79,17 @@ outputs:
       license_file: license.txt
 
   - name: librdkit-dev
+    script: install.sh   # [unix]
     script: install.bat  # [win]
-    build:
-      skip: True  # [not win]
     requirements:
       run:
         - {{ pin_subpackage('librdkit', exact=True) }}
     test:
       commands:
+        - test -f $PREFIX/include/rdkit/GraphMol/GraphMol.h               # [unix]
         - if not exist %LIBRARY_INC%\\rdkit\\GraphMol\\GraphMol.h exit 1  # [win]
     about:
-      summary: RDKit headers and library used in librdkit (Windows only)
+      summary: RDKit headers and library used in librdkit
       license: BSD-3-Clause
       license_file: license.txt
 
@@ -129,6 +128,7 @@ outputs:
         - sqlalchemy
       run:
         - {{ pin_subpackage('librdkit', exact=True) }}
+        - librdkit
         - matplotlib-base
         - numpy
         - pandas
@@ -173,6 +173,7 @@ outputs:
         - postgresql
       run:
         - {{ pin_subpackage('librdkit', exact=True) }}
+        - librdkit
         - postgresql
     test:
       commands:

@@ -4,10 +4,14 @@ set -euxo pipefail
 
 if [ "${PKG_NAME}" == "librdkit" ]; then
 
-    # NOTE(skearnes): List is from `make list_install_components`, excluding "python" and "pgsql".
-    for COMPONENT in Unspecified base data dev docs extras runtime; do
+    # NOTE(skearnes): List is from `make list_install_components`, excluding "dev", "docs", "python", and "pgsql".
+    for COMPONENT in Unspecified base data extras runtime; do
       cmake -D CMAKE_INSTALL_COMPONENT="${COMPONENT}" -P cmake_install.cmake
     done
+
+elif [ "${PKG_NAME}" == "librdkit-dev" ]; then
+
+    cmake -D CMAKE_INSTALL_COMPONENT=dev -P cmake_install.cmake
 
 elif [ "${PKG_NAME}" == "rdkit" ]; then
 
@@ -21,7 +25,8 @@ elif [ "${PKG_NAME}" == "rdkit" ]; then
     export SETUPTOOLS_SCM_PRETEND_VERSION="${PKG_VERSION}"
 
     # Install the Python library.
-    ${PYTHON} -m pip install --no-deps -vv --no-build-isolation --prefix "${PREFIX}" .
+    export PYTHONDONTWRITEBYTECODE=1
+    ${PYTHON} -m pip install --no-deps --no-index --ignore-installed --no-build-isolation -vv --prefix "${PREFIX}" .
 
 elif [ "${PKG_NAME}" == "rdkit-postgresql" ]; then
 
