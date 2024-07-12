@@ -82,6 +82,9 @@ outputs:
     script: install.sh   # [unix]
     script: install.bat  # [win]
     requirements:
+      build:
+        - {{ stdlib("c") }}
+        - cmake
       run:
         - {{ pin_subpackage('librdkit', exact=True) }}
     test:
@@ -167,6 +170,7 @@ outputs:
     script: install.bat  # [win]
     requirements:
       build:
+        - {{ stdlib("c") }}
         - postgresql  # [build_platform != target_platform]
         - cmake
       host:
