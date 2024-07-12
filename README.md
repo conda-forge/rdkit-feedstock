@@ -26,6 +26,15 @@ Package license: BSD-3-Clause
 
 Summary: RDKit C++ library
 
+About librdkit-dev
+------------------
+
+
+
+Package license: BSD-3-Clause
+
+Summary: RDKit headers and library used in librdkit
+
 About rdkit
 -----------
 
@@ -43,15 +52,6 @@ About rdkit-postgresql
 Package license: BSD-3-Clause
 
 Summary: RDKit PostgreSQL cartridge
-
-About librdkit-dev
-------------------
-
-
-
-Package license: BSD-3-Clause
-
-Summary: RDKit headers and library used in librdkit (Windows only)
 
 Current build status
 ====================
