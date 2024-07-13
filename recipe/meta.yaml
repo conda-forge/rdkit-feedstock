@@ -15,7 +15,7 @@ source:
     - pyproject.patch
 
 build:
-  number: 0
+  number: 1
   skip: true  # [aarch64]
   missing_dso_whitelist:
     - '*/RDKit*dll'  # [win]
@@ -40,7 +40,7 @@ requirements:
     - python
     - numpy
     - pillow
-    - pandas <2.2
+    - pandas <2.3
     - pip
     - setuptools
     - setuptools_scm >=8
@@ -51,7 +51,6 @@ requirements:
     - python
     - pillow
     - pandas
-    - {{ pin_compatible('numpy') }}
     - pycairo
     - matplotlib-base
     - sqlalchemy
