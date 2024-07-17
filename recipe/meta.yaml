@@ -26,7 +26,8 @@ requirements:
     - cross-python_{{ target_platform }}     # [build_platform != target_platform]
     - numpy                                  # [build_platform != target_platform]
     - {{ compiler('cxx') }}
-    - {{ stdlib("c") }}
+    - {{ stdlib("c") }} [not osx]
+    - {{ stdlib("clang") }} [osx]
     - cmake
     - jom  # [win]
     - make  # [unix]
@@ -46,6 +47,7 @@ requirements:
     - setuptools_scm >=8
     # For rdkit-stubs
     - pybind11-stubgen
+    - pytest
   run:
     - cairo
     - python
@@ -83,7 +85,8 @@ outputs:
     script: install_rdkit_dev.bat  # [win]
     requirements:
       build:
-        - {{ stdlib("c") }}
+        - {{ stdlib("c") }} [not osx]
+        - {{ stdlib("clang") }} [osx]
       run:
         - rdkit
     test:
