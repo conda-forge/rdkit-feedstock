@@ -175,6 +175,8 @@ outputs:
         - postgresql  # [build_platform != target_platform]
         - cmake
       host:
+        - cairo
+        - freetype
         - libboost-devel
         - {{ pin_subpackage('librdkit', exact=True) }}
         - postgresql
