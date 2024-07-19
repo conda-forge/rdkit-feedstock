@@ -64,11 +64,10 @@ outputs:
         - {{ compiler("cxx") }}
         - cmake
       host:
+        - cairo
+        - freetype
         - libboost-devel
       run:
-        - cairo
-        - eigen
-        - freetype
     test:
       commands:
         - test -f $PREFIX/lib/libRDKitGraphMol.so              # [linux]
