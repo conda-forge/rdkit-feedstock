@@ -1,4 +1,4 @@
-{% set version = "2024.03.4" %}
+{% set version = "2024.03.5" %}
 {% set filename = "Release_%s.tar.gz" % version.replace(".", "_") %}
 
 package:
@@ -11,13 +11,13 @@ package:
 source:
   fn: {{ filename }}
   url: https://github.com/rdkit/rdkit/archive/{{ filename }}
-  sha256: cbb39098f720748efd50bde9c26df2166dc89197dbdedf9664d0debaf14319ef
+  sha256: b0870aec4dca12da5ee1100a769eaf4c71c3a6f99339f8aa72d30affc068a632
 
   patches:
     - pyproject.patch
 
 build:
-  number: 2
+  number: 1
   skip: true  # [aarch64]
   missing_dso_whitelist:
     - '*/RDKit*dll'  # [win]
