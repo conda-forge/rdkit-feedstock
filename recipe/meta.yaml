@@ -61,6 +61,7 @@ outputs:
     requirements:
       build:
         - {{ stdlib("c") }}
+        - {{ compiler("cxx") }}
         - cmake
       host:
         - libboost-devel
@@ -170,6 +171,7 @@ outputs:
     script: install.bat  # [win]
     requirements:
       build:
+        - {{ compiler('cxx') }}
         - {{ stdlib("c") }}
         - postgresql  # [build_platform != target_platform]
         - cmake
