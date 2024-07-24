@@ -1,9 +1,11 @@
-{% set name = "rdkit" %}
 {% set version = "2024.03.5" %}
 {% set filename = "Release_%s.tar.gz" % version.replace(".", "_") %}
 
 package:
-  name: {{ name|lower }}
+  # NOTE(skearnes): Using `rdkit` as the package name conflicts with the `rdkit` subpackage and causes problems; see
+  # https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#outputs-section and
+  # https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#implicit-metapackages.
+  name: rdkit-meta
   version: {{ version }}
 
 source:
@@ -15,82 +17,188 @@ source:
     - pyproject.patch
 
 build:
-  number: 0
+  number: 1
   skip: true  # [aarch64]
   missing_dso_whitelist:
     - '*/RDKit*dll'  # [win]
 
 requirements:
+  # See https://conda-forge.org/docs/maintainer/knowledge_base/#placing-requirements-in-build-or-host and
+  # https://conda-forge.org/docs/maintainer/knowledge_base/#details-about-cross-compiled-python-packages.
   build:
-    - python                                 # [build_platform != target_platform]
-    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
-    - numpy                                  # [build_platform != target_platform]
     - {{ compiler('cxx') }}
-    - {{ stdlib("c") }}
+    - {{ stdlib('c') }}
+    - cross-python_{{ target_platform }}  # [build_platform != target_platform]
+    - numpy                               # [build_platform != target_platform]
+    - postgresql                          # [build_platform != target_platform]
+    - python                              # [build_platform != target_platform]
     - cmake
-    - jom  # [win]
+    - jom   # [win]
     - make  # [unix]
     - pkg-config
   host:
-    - libboost-devel
-    - libboost-python-devel
     - cairo
     - eigen
     - freetype
-    - python
+    - libboost-devel
+    - libboost-python-devel
     - numpy
+    - pandas
     - pillow
-    - pandas <2.3
     - pip
+    - postgresql
+    - python
     - setuptools
     - setuptools_scm >=8
-    # For rdkit-stubs
-    - pybind11-stubgen
-  run:
-    - cairo
-    - python
-    - pillow
-    - pandas
-    - pycairo
-    - matplotlib-base
-    - sqlalchemy
-    - reportlab
-
-test:
-  commands:
-    - python -c "import rdkit; assert rdkit.__version__ == '{{ version }}'"
-  imports:
-    - rdkit
-    - rdkit.Avalon
-    - rdkit.Chem
-    - rdkit.Chem.AllChem
-    - rdkit.Chem.rdFreeSASA
-    - rdkit.DataManip
-    - rdkit.Dbase
-    - rdkit.DistanceGeometry
-    - rdkit.ForceField
-    - rdkit.Geometry
-    - rdkit.ML
-    - rdkit.Numerics
-    - rdkit.SimDivFilters
-    - rdkit.VLib
-    - rdkit.VLib.NodeLib
-    - rdkit.Chem.PandasTools
 
 outputs:
-  - name: rdkit
-  - name: rdkit-dev
-    script: install_rdkit_dev.bat  # [win]
+  - name: librdkit
+    script: install.sh   # [unix]
+    script: install.bat  # [win]
+    build:
+      run_exports:
+        - {{ pin_subpackage('librdkit', exact=True) }}
     requirements:
       build:
         - {{ stdlib("c") }}
+        - {{ compiler("cxx") }}
+        - cmake
+      host:
+        - cairo
+        - freetype
+        - libboost-devel
       run:
-        - rdkit
     test:
       commands:
-        - if not exist %LIBRARY_INC%\\rdkit\\Catalogs\\Catalog.h exit 1   # [win]
+        - test -f $PREFIX/lib/libRDKitGraphMol.so              # [linux]
+        - test -f $PREFIX/lib/libRDKitGraphMol.dylib           # [osx]
+        - if not exist %LIBRARY_BIN%\RDKitGraphMol.dll exit 1  # [win]
     about:
-      summary: RDKit headers and library used in rdkit package
+      summary: RDKit C++ library
+      license: BSD-3-Clause
+      license_file: license.txt
+
+  - name: librdkit-dev
+    script: install.sh   # [unix]
+    script: install.bat  # [win]
+    requirements:
+      build:
+        - {{ stdlib("c") }}
+        - cmake
+      run:
+        - {{ pin_subpackage('librdkit', exact=True) }}
+    test:
+      commands:
+        - test -f $PREFIX/include/rdkit/GraphMol/GraphMol.h               # [unix]
+        - if not exist %LIBRARY_INC%\\rdkit\\GraphMol\\GraphMol.h exit 1  # [win]
+    about:
+      summary: RDKit headers and library used in librdkit
+      license: BSD-3-Clause
+      license_file: license.txt
+
+  - name: rdkit
+    script: install.sh   # [unix]
+    script: install.bat  # [win]
+    requirements:
+      build:
+        - {{ compiler('cxx') }}
+        - {{ stdlib('c') }}
+        - cross-python_{{ target_platform }}  # [build_platform != target_platform]
+        - numpy                               # [build_platform != target_platform]
+        - python                              # [build_platform != target_platform]
+        - cmake
+        - jom   # [win]
+        - make  # [unix]
+        - pkg-config
+      host:
+        - cairo
+        - eigen
+        - freetype
+        - libboost-devel
+        - libboost-python-devel
+        - {{ pin_subpackage('librdkit', exact=True) }}
+        - matplotlib-base
+        - numpy
+        - pandas
+        - pillow
+        - pip
+        - postgresql
+        - pybind11-stubgen
+        - pycairo
+        - python
+        - reportlab
+        - setuptools
+        - setuptools_scm >=8
+        - sqlalchemy
+      run:
+        - {{ pin_subpackage('librdkit', exact=True) }}
+        - matplotlib-base
+        - numpy
+        - pandas
+        - pillow
+        - pycairo
+        - python
+        - reportlab
+        - sqlalchemy
+    test:
+      commands:
+        - python -c "import rdkit; assert rdkit.__version__ == '{{ version }}'"
+      imports:
+        - rdkit
+        - rdkit.Avalon
+        - rdkit.Chem
+        - rdkit.Chem.AllChem
+        - rdkit.Chem.rdFreeSASA
+        - rdkit.DataManip
+        - rdkit.Dbase
+        - rdkit.DistanceGeometry
+        - rdkit.ForceField
+        - rdkit.Geometry
+        - rdkit.ML
+        - rdkit.Numerics
+        - rdkit.SimDivFilters
+        - rdkit.VLib
+        - rdkit.VLib.NodeLib
+        - rdkit.Chem.PandasTools
+    about:
+      summary: RDKit Python bindings
+      license: BSD-3-Clause
+      license_file: license.txt
+
+  - name: rdkit-postgresql
+    script: install.sh   # [unix]
+    script: install.bat  # [win]
+    requirements:
+      build:
+        - {{ compiler('cxx') }}
+        - {{ stdlib("c") }}
+        - postgresql  # [build_platform != target_platform]
+        - cmake
+      host:
+        - cairo
+        - freetype
+        - libboost-devel
+        - {{ pin_subpackage('librdkit', exact=True) }}
+        - postgresql
+      run:
+        - {{ pin_subpackage('librdkit', exact=True) }}
+        - postgresql
+    test:
+      commands:
+        # Inspired by https://github.com/conda-forge/pgvector-feedstock/blob/main/recipe/bld.bat.
+        - initdb -D test_db
+        - if errorlevel 1 exit 1                           # [win]
+        - pg_ctl -D test_db -l test.log start
+        - if errorlevel 1 exit 1                           # [win]
+        - createuser --username=%USERNAME% -w -s postgres  # [win]
+        - if errorlevel 1 exit 1                           # [win]
+        - createdb test
+        - if errorlevel 1 exit 1                           # [win]
+        - psql -c "CREATE EXTENSION rdkit" test
+        - if errorlevel 1 exit 1                           # [win]
+        - pg_ctl -D test_db stop
+    about:
+      summary: RDKit PostgreSQL cartridge
       license: BSD-3-Clause
       license_file: license.txt
 
@@ -103,8 +211,10 @@ about:
   dev_url: https://github.com/rdkit/rdkit
 
 extra:
+  feedstock-name: rdkit
   recipe-maintainers:
     - greglandrum
     - pstjohn
     - mcs07
     - jaimergp
+    - skearnes
