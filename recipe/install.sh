@@ -33,10 +33,4 @@ elif [ "${PKG_NAME}" == "rdkit-postgresql" ]; then
     cd ./Code/PgSQL/rdkit
     cmake -P cmake_install.cmake
 
-    if [ "${target_platform}" == "osx-arm64" ] || [ "${target_platform}" == "osx-64" ]; then
-      # NOTE(skearnes): PostgreSQL doesn't recognize `rdkit.so` on OSX.
-      DIR="$(pg_config --pkglibdir)"
-      mv "${DIR}"/rdkit.so "${DIR}"/rdkit.dylib
-    fi
-
 fi
