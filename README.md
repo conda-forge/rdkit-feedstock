@@ -60,7 +60,7 @@ About rdkit-dev
 
 Package license: BSD-3-Clause
 
-Summary: Alias for librdkit-dev + rdkit
+Summary: Alias package for librdkit-dev + rdkit
 
 Current build status
 ====================
