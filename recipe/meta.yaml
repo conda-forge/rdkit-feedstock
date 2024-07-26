@@ -166,6 +166,38 @@ outputs:
       license: BSD-3-Clause
       license_file: license.txt
 
+  - name: rdkit-dev
+    requirements:
+      run:
+        - {{ pin_subpackage('librdkit-dev', exact=True) }}
+        - {{ pin_subpackage('rdkit', exact=True) }}
+    test:
+      commands:
+        - test -f $PREFIX/include/rdkit/GraphMol/GraphMol.h               # [unix]
+        - if not exist %LIBRARY_INC%\\rdkit\\GraphMol\\GraphMol.h exit 1  # [win]
+        - python -c "import rdkit; assert rdkit.__version__ == '{{ version }}'"
+      imports:
+        - rdkit
+        - rdkit.Avalon
+        - rdkit.Chem
+        - rdkit.Chem.AllChem
+        - rdkit.Chem.rdFreeSASA
+        - rdkit.DataManip
+        - rdkit.Dbase
+        - rdkit.DistanceGeometry
+        - rdkit.ForceField
+        - rdkit.Geometry
+        - rdkit.ML
+        - rdkit.Numerics
+        - rdkit.SimDivFilters
+        - rdkit.VLib
+        - rdkit.VLib.NodeLib
+        - rdkit.Chem.PandasTools
+    about:
+      summary: Alias for librdkit-dev + rdkit
+      license: BSD-3-Clause
+      license_file: license.txt
+
   - name: rdkit-postgresql
     script: install.sh   # [unix]
     script: install.bat  # [win]
