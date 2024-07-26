@@ -194,7 +194,7 @@ outputs:
         - rdkit.VLib.NodeLib
         - rdkit.Chem.PandasTools
     about:
-      summary: Alias for librdkit-dev + rdkit
+      summary: Alias package for librdkit-dev + rdkit
       license: BSD-3-Clause
       license_file: license.txt
 
