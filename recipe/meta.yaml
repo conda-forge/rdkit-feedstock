@@ -15,9 +15,10 @@ source:
 
   patches:
     - pyproject.patch
+    - rdkit-postgresql-osx.patch
 
 build:
-  number: 1
+  number: 2
   skip: true  # [aarch64]
   missing_dso_whitelist:
     - '*/RDKit*dll'  # [win]
@@ -162,6 +163,38 @@ outputs:
         - rdkit.Chem.PandasTools
     about:
       summary: RDKit Python bindings
+      license: BSD-3-Clause
+      license_file: license.txt
+
+  - name: rdkit-dev
+    requirements:
+      run:
+        - {{ pin_subpackage('librdkit-dev', exact=True) }}
+        - {{ pin_subpackage('rdkit', exact=True) }}
+    test:
+      commands:
+        - test -f $PREFIX/include/rdkit/GraphMol/GraphMol.h               # [unix]
+        - if not exist %LIBRARY_INC%\\rdkit\\GraphMol\\GraphMol.h exit 1  # [win]
+        - python -c "import rdkit; assert rdkit.__version__ == '{{ version }}'"
+      imports:
+        - rdkit
+        - rdkit.Avalon
+        - rdkit.Chem
+        - rdkit.Chem.AllChem
+        - rdkit.Chem.rdFreeSASA
+        - rdkit.DataManip
+        - rdkit.Dbase
+        - rdkit.DistanceGeometry
+        - rdkit.ForceField
+        - rdkit.Geometry
+        - rdkit.ML
+        - rdkit.Numerics
+        - rdkit.SimDivFilters
+        - rdkit.VLib
+        - rdkit.VLib.NodeLib
+        - rdkit.Chem.PandasTools
+    about:
+      summary: Alias package for librdkit-dev + rdkit
       license: BSD-3-Clause
       license_file: license.txt
 

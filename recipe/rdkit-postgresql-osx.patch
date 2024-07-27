@@ -1,0 +1,26 @@
+From a8041f6139a1c2d37d87a96b87bb5a155616d87a Mon Sep 17 00:00:00 2001
+From: Steven Kearnes <skearnes@gmail.com>
+Date: Wed, 24 Jul 2024 20:44:12 -0400
+Subject: [PATCH] patch
+
+---
+ Code/PgSQL/rdkit/CMakeLists.txt | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/Code/PgSQL/rdkit/CMakeLists.txt b/Code/PgSQL/rdkit/CMakeLists.txt
+index 5a66ac4dd..c5125119a 100644
+--- a/Code/PgSQL/rdkit/CMakeLists.txt
++++ b/Code/PgSQL/rdkit/CMakeLists.txt
+@@ -1,7 +1,7 @@
+ if(APPLE)
+   set (EXTENSION_PREFIX "")
+-  set (EXTENSION_SUFFIX ".so")
+-  set (EXTENSION_DEST_SUFFIX ".so")
++  set (EXTENSION_SUFFIX ".dylib")
++  set (EXTENSION_DEST_SUFFIX ".dylib")
+ elseif(WIN32)
+   set(REGEX_SEPARATOR "\\\\")
+   if(MSVC)
+-- 
+2.39.3 (Apple Git-146)
+
