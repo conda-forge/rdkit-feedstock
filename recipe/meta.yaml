@@ -61,20 +61,22 @@ outputs:
         - {{ pin_subpackage('librdkit', exact=True) }}
     requirements:
       build:
-        - {{ stdlib("c") }}
         - {{ compiler("cxx") }}
+        - {{ stdlib("c") }}
+        - cross-python_{{ target_platform }}  # [build_platform != target_platform]
+        - python                              # [build_platform != target_platform]
         - cmake
       host:
         - cairo
         - freetype
         - libboost-devel
+        - python
       run:
     test:
       commands:
         - test -f $PREFIX/lib/libRDKitGraphMol.so              # [linux]
         - test -f $PREFIX/lib/libRDKitGraphMol.dylib           # [osx]
         - if not exist %LIBRARY_BIN%\RDKitGraphMol.dll exit 1  # [win]
-        - if not exist %LIBRARY_LIB%\RDKitGraphMol.dll exit 1  # [win]
         - if exist %LIBRARY_LIB%\rdkit.dll exit 1              # [win]
     about:
       summary: RDKit C++ library
