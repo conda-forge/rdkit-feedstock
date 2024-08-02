@@ -70,8 +70,8 @@ outputs:
         - cairo
         - freetype
         - libboost-devel
+        - libboost-python-devel
         - python
-      run:
     test:
       commands:
         - test -f $PREFIX/lib/libRDKitGraphMol.so              # [linux]
