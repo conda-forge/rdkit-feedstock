@@ -68,6 +68,7 @@ outputs:
       host:
         - cairo
         - freetype
+        - libboost-devel
     test:
       commands:
         - test -f $PREFIX/lib/libRDKitGraphMol.so              # [linux]
