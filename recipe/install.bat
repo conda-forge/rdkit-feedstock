@@ -11,8 +11,6 @@ if %PKG_NAME%==librdkit (
         if errorlevel 1 exit 1
     )
     copy bin\*.dll %LIBRARY_BIN%
-    REM Delete postgresql library.
-    del %LIBRARY_LIB%\rdkit.dll
 )
 
 if %PKG_NAME%==librdkit-dev (
