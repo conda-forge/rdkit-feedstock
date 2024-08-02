@@ -18,7 +18,7 @@ source:
     - rdkit-postgresql-osx.patch
 
 build:
-  number: 2
+  number: 3
   skip: true  # [aarch64]
   missing_dso_whitelist:
     - '*/RDKit*dll'  # [win]
@@ -74,6 +74,8 @@ outputs:
         - test -f $PREFIX/lib/libRDKitGraphMol.so              # [linux]
         - test -f $PREFIX/lib/libRDKitGraphMol.dylib           # [osx]
         - if not exist %LIBRARY_BIN%\RDKitGraphMol.dll exit 1  # [win]
+        - if not exist %LIBRARY_LIB%\RDKitGraphMol.dll exit 1  # [win]
+        - if exist %LIBRARY_LIB%\rdkit.dll exit 1              # [win]
     about:
       summary: RDKit C++ library
       license: BSD-3-Clause
