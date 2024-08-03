@@ -55,9 +55,6 @@ outputs:
     script: install.sh   # [unix]
     script: install.bat  # [win]
     build:
-      missing_dso_whitelist:
-        # NOTE(skearnes): RDBoost requires python, but we don't want to depend on that here.
-        - '*/RDKitRDBoost.dll'  # [win]
       run_exports:
         - {{ pin_subpackage('librdkit', exact=True) }}
     requirements:
