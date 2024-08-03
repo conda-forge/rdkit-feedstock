@@ -112,12 +112,12 @@ outputs:
         - make  # [unix]
         - pkg-config
       host:
+        - {{ pin_subpackage('librdkit', exact=True) }}
         - cairo
         - eigen
         - freetype
         - libboost-devel
         - libboost-python-devel
-        - {{ pin_subpackage('librdkit', exact=True) }}
         - matplotlib-base
         - numpy
         - pandas
@@ -208,10 +208,10 @@ outputs:
         - postgresql  # [build_platform != target_platform]
         - cmake
       host:
+        - {{ pin_subpackage('librdkit', exact=True) }}
         - cairo
         - freetype
         - libboost-devel
-        - {{ pin_subpackage('librdkit', exact=True) }}
         - postgresql
       run:
         - {{ pin_subpackage('librdkit', exact=True) }}
