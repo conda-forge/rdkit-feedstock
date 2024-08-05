@@ -10,7 +10,10 @@ if %PKG_NAME%==librdkit (
         cmake -D CMAKE_INSTALL_COMPONENT=%%C -P cmake_install.cmake
         if errorlevel 1 exit 1
     )
+
     copy bin\*.dll %LIBRARY_BIN%
+    REM Remove python-only libraries.
+    del %LIBRARY_BIN%\RDKitRDBoost.dll
 )
 
 if %PKG_NAME%==librdkit-dev (
@@ -40,6 +43,9 @@ if %PKG_NAME%==librdkit-dev (
 
 if %PKG_NAME%==rdkit (
     echo Installing rdkit
+
+    REM Copy python-only libraries.
+    copy bin\RDKitRDBoost.dll %LIBRARY_BIN%
 
     cmake -D CMAKE_INSTALL_COMPONENT=python -P cmake_install.cmake
     if errorlevel 1 exit 1

@@ -18,10 +18,8 @@ source:
     - rdkit-postgresql-osx.patch
 
 build:
-  number: 2
+  number: 3
   skip: true  # [aarch64]
-  missing_dso_whitelist:
-    - '*/RDKit*dll'  # [win]
 
 requirements:
   # See https://conda-forge.org/docs/maintainer/knowledge_base/#placing-requirements-in-build-or-host and
@@ -61,14 +59,13 @@ outputs:
         - {{ pin_subpackage('librdkit', exact=True) }}
     requirements:
       build:
-        - {{ stdlib("c") }}
         - {{ compiler("cxx") }}
+        - {{ stdlib("c") }}
         - cmake
       host:
         - cairo
         - freetype
         - libboost-devel
-      run:
     test:
       commands:
         - test -f $PREFIX/lib/libRDKitGraphMol.so              # [linux]
@@ -112,12 +109,12 @@ outputs:
         - make  # [unix]
         - pkg-config
       host:
+        - {{ pin_subpackage('librdkit', exact=True) }}
         - cairo
         - eigen
         - freetype
         - libboost-devel
         - libboost-python-devel
-        - {{ pin_subpackage('librdkit', exact=True) }}
         - matplotlib-base
         - numpy
         - pandas
@@ -208,10 +205,10 @@ outputs:
         - postgresql  # [build_platform != target_platform]
         - cmake
       host:
+        - {{ pin_subpackage('librdkit', exact=True) }}
         - cairo
         - freetype
         - libboost-devel
-        - {{ pin_subpackage('librdkit', exact=True) }}
         - postgresql
       run:
         - {{ pin_subpackage('librdkit', exact=True) }}
