@@ -19,9 +19,9 @@ docker_image:
 freetype:
 - '2'
 libboost_devel:
-- '1.84'
+- '1.86'
 libboost_python_devel:
-- '1.84'
+- '1.86'
 numpy:
 - '2.0'
 pin_run_as_build:
