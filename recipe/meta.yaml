@@ -18,7 +18,7 @@ source:
     - rdkit-postgresql-osx.patch
 
 build:
-  number: 3
+  number: 4
   skip: true  # [aarch64]
 
 requirements:
@@ -61,11 +61,18 @@ outputs:
       build:
         - {{ compiler("cxx") }}
         - {{ stdlib("c") }}
+        - cross-python_{{ target_platform }}  # [build_platform != target_platform]
         - cmake
+        - numpy                               # [build_platform != target_platform]
+        - python                              # [build_platform != target_platform]
       host:
         - cairo
         - freetype
         - libboost-devel
+        - libboost-python-devel
+      run_constrained:
+        - python
+        - numpy
     test:
       commands:
         - test -f $PREFIX/lib/libRDKitGraphMol.so              # [linux]
