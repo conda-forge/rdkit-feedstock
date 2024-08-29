@@ -61,6 +61,7 @@ outputs:
       build:
         - {{ compiler("cxx") }}
         - {{ stdlib("c") }}
+        - cross-python_{{ target_platform }}  # [build_platform != target_platform]
         - cmake
         - numpy                               # [build_platform != target_platform]
         - python                              # [build_platform != target_platform]
@@ -69,6 +70,7 @@ outputs:
         - freetype
         - libboost-devel
         - libboost-python-devel
+      run_constrained:
         - python
         - numpy
     test:
