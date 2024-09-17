@@ -1,7 +1,10 @@
+echo Python is %PYTHON% I hope that is ok
 cmake ^
     -G "NMake Makefiles JOM" ^
     -D CMAKE_BUILD_TYPE=Release ^
     -D CMAKE_INSTALL_PREFIX="%LIBRARY_PREFIX%" ^
+    -D PYTHON_EXECUTABLE="%PYTHON%" ^
+    -D PYTHON_INSTDIR="%SP_DIR%" ^
     -D RDK_BUILD_AVALON_SUPPORT=ON ^
     -D RDK_BUILD_CAIRO_SUPPORT=ON ^
     -D RDK_BUILD_CPP_TESTS=OFF ^
