@@ -23,7 +23,6 @@ if [ "${target_platform}" == "osx-arm64" ]; then
 fi
 time cmake ${CMAKE_ARGS} \
     -D Boost_NO_SYSTEM_PATHS=ON \
-    -D Boost_NO_BOOST_CMAKE=ON \
     -D BOOST_ROOT="${PREFIX}" \
     -D CMAKE_BUILD_TYPE=Release \
     -D CMAKE_INSTALL_PREFIX="${PREFIX}" \

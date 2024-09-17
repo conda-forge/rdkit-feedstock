@@ -1,7 +1,6 @@
 cmake ^
     -G "NMake Makefiles JOM" ^
     -D Boost_NO_SYSTEM_PATHS=ON ^
-    -D Boost_NO_BOOST_CMAKE=ON ^
     -D BOOST_ROOT="%LIBRARY_PREFIX%" ^
     -D CMAKE_BUILD_TYPE=Release ^
     -D CMAKE_INSTALL_PREFIX="%LIBRARY_PREFIX%" ^
