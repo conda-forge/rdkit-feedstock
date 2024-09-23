@@ -1,9 +1,8 @@
-cmake ^
+cmake --trace-expand ^
     -G "NMake Makefiles JOM" ^
     -D CMAKE_BUILD_TYPE=Release ^
     -D CMAKE_INSTALL_PREFIX="%LIBRARY_PREFIX%" ^
     -D Python3_EXECUTABLE="%PYTHON%" ^
-    -D Python3_ROOT_DIR="%PREFIX%" ^
     -D RDK_BUILD_AVALON_SUPPORT=ON ^
     -D RDK_BUILD_CAIRO_SUPPORT=ON ^
     -D RDK_BUILD_CPP_TESTS=OFF ^
