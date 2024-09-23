@@ -1,0 +1,15 @@
+This can be removed with the 2024.09.1 release
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 09e3047d9..a38655da2 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -303,7 +303,7 @@ if(RDK_BUILD_PYTHON_WRAPPERS)
+   )
+
+   if(WIN32 OR "${Py_ENABLE_SHARED}" STREQUAL "1")
+-    target_link_libraries(rdkit_py_base INTERFACE ${Python3_LIBRARY} )
++    target_link_libraries(rdkit_py_base INTERFACE ${Python3_LIBRARIES} )
+   endif()
+
+

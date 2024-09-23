@@ -16,6 +16,8 @@ source:
   patches:
     - pyproject.patch
     - rdkit-postgresql-osx.patch
+    # this last one can be removed with the 2024.09.1 release
+    - cmake-pythonlibs.patch
 
 build:
   number: 0
