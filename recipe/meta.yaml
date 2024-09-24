@@ -1,4 +1,4 @@
-{% set version = "2024.03.5" %}
+{% set version = "2024.03.6" %}
 {% set filename = "Release_%s.tar.gz" % version.replace(".", "_") %}
 
 package:
@@ -11,14 +11,16 @@ package:
 source:
   fn: {{ filename }}
   url: https://github.com/rdkit/rdkit/archive/{{ filename }}
-  sha256: b0870aec4dca12da5ee1100a769eaf4c71c3a6f99339f8aa72d30affc068a632
+  sha256: 5002ff97e59d9c08f4faa1c6a2e276a695f6874dfc93e28cbbd62dab4f0b40d7
 
   patches:
     - pyproject.patch
     - rdkit-postgresql-osx.patch
+    # this last one can be removed with the 2024.09.1 release
+    - cmake-pythonlibs.patch
 
 build:
-  number: 3
+  number: 0
   skip: true  # [aarch64]
 
 requirements:
@@ -52,7 +54,7 @@ requirements:
 
 outputs:
   - name: librdkit
-    script: install.sh   # [unix]
+    script: install.sh  # [unix]
     script: install.bat  # [win]
     build:
       run_exports:
@@ -77,7 +79,7 @@ outputs:
       license_file: license.txt
 
   - name: librdkit-dev
-    script: install.sh   # [unix]
+    script: install.sh  # [unix]
     script: install.bat  # [win]
     requirements:
       build:
@@ -95,7 +97,7 @@ outputs:
       license_file: license.txt
 
   - name: rdkit
-    script: install.sh   # [unix]
+    script: install.sh  # [unix]
     script: install.bat  # [win]
     requirements:
       build:
@@ -196,7 +198,7 @@ outputs:
       license_file: license.txt
 
   - name: rdkit-postgresql
-    script: install.sh   # [unix]
+    script: install.sh  # [unix]
     script: install.bat  # [win]
     requirements:
       build:
