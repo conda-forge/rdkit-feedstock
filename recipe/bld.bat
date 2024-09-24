@@ -1,4 +1,4 @@
-cmake --trace-expand ^
+cmake ^
     -G "NMake Makefiles JOM" ^
     -D CMAKE_BUILD_TYPE=Release ^
     -D CMAKE_INSTALL_PREFIX="%LIBRARY_PREFIX%" ^
