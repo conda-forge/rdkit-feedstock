@@ -20,7 +20,7 @@ source:
     - cmake-pythonlibs.patch
 
 build:
-  number: 1
+  number: 2
   skip: true  # [aarch64]
 
 requirements:
