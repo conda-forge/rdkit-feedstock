@@ -1,4 +1,4 @@
-{% set version = "2024.03.6" %}
+{% set version = "2024.09.1" %}
 {% set filename = "Release_%s.tar.gz" % version.replace(".", "_") %}
 
 package:
@@ -11,16 +11,14 @@ package:
 source:
   fn: {{ filename }}
   url: https://github.com/rdkit/rdkit/archive/{{ filename }}
-  sha256: 5002ff97e59d9c08f4faa1c6a2e276a695f6874dfc93e28cbbd62dab4f0b40d7
+  sha256: 034c00d6e9de323506834da03400761ed8c3721095114369d06805409747a60f
 
   patches:
     - pyproject.patch
     - rdkit-postgresql-osx.patch
-    # this last one can be removed with the 2024.09.1 release
-    - cmake-pythonlibs.patch
 
 build:
-  number: 1
+  number: 0
   skip: true  # [aarch64]
 
 requirements:
