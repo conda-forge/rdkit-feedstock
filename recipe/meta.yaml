@@ -18,7 +18,7 @@ source:
     - rdkit-postgresql-osx.patch
 
 build:
-  number: 0
+  number: 1
   skip: true  # [aarch64]
 
 requirements:
