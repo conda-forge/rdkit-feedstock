@@ -12,7 +12,8 @@ fi
 # Numpy cannot be found in ppc64le for some reason... some extra help will do ;)
 EXTRA_CMAKE_FLAGS=""
 if [ "${target_platform}" == "linux-ppc64le" ]; then
-    EXTRA_CMAKE_FLAGS+=" -D PYTHON_NUMPY_INCLUDE_PATH=${SP_DIR}/numpy/core/include"
+    EXTRA_CMAKE_FLAGS+=" -D PYTHON_NUMPY_INCLUDE_PATH=${SP_DIR}/numpy/_core/include"
+    EXTRA_CMAKE_FLAGS+=" -D Python_NumPy_INCLUDE_DIR=${SP_DIR}/numpy/_core/include"
 fi
 
 PG_CONFIG="$(which pg_config)"
@@ -27,6 +28,7 @@ time cmake ${CMAKE_ARGS} \
     -D CMAKE_BUILD_TYPE=Release \
     -D CMAKE_INSTALL_PREFIX="${PREFIX}" \
     -D PostgreSQL_CONFIG="${PG_CONFIG}" \
+    -D PYTHON_EXECUTABLE="${PYTHON}" \
     -D Python_EXECUTABLE="${PYTHON}" \
     -D RDK_BUILD_AVALON_SUPPORT=ON \
     -D RDK_BUILD_CAIRO_SUPPORT=ON \
