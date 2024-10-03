@@ -31,7 +31,7 @@ requirements:
     - numpy                               # [build_platform != target_platform]
     - postgresql                          # [build_platform != target_platform]
     - python                              # [build_platform != target_platform]
-    - cmake 3.29
+    - cmake
     - jom   # [win]
     - make  # [unix]
     - pkg-config
@@ -61,7 +61,7 @@ outputs:
       build:
         - {{ compiler("cxx") }}
         - {{ stdlib("c") }}
-        - cmake 3.29
+        - cmake
       host:
         - cairo
         - freetype
@@ -82,7 +82,7 @@ outputs:
     requirements:
       build:
         - {{ stdlib("c") }}
-        - cmake 3.29
+        - cmake
       run:
         - {{ pin_subpackage('librdkit', exact=True) }}
     test:
@@ -104,7 +104,7 @@ outputs:
         - cross-python_{{ target_platform }}  # [build_platform != target_platform]
         - numpy                               # [build_platform != target_platform]
         - python                              # [build_platform != target_platform]
-        - cmake 3.29
+        - cmake
         - jom   # [win]
         - make  # [unix]
         - pkg-config
@@ -203,7 +203,7 @@ outputs:
         - {{ compiler('cxx') }}
         - {{ stdlib("c") }}
         - postgresql  # [build_platform != target_platform]
-        - cmake 3.29
+        - cmake
       host:
         - {{ pin_subpackage('librdkit', exact=True) }}
         - cairo
