@@ -19,7 +19,7 @@ source:
 
 build:
   number: 1
-  skip: true  # [aarch64]
+  #skip: true  # [aarch64]
 
 requirements:
   # See https://conda-forge.org/docs/maintainer/knowledge_base/#placing-requirements-in-build-or-host and
