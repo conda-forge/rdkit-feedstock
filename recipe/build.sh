@@ -9,7 +9,7 @@ if [ "${target_platform}" == "linux-ppc64le" ] || [ "${target_platform}" == "lin
     POPCNT_OPTIMIZATION="OFF"
 fi
 
-EXTRA_CMAKE_FLAGS=" -D Python3_NumPy_INCLUDE_DIR=$(python -c 'import numpy as np; print(np.get_include())'"
+EXTRA_CMAKE_FLAGS=" -D Python3_NumPy_INCLUDE_DIR=$(python -c 'import numpy as np; print(np.get_include())')"
 
 
 PG_CONFIG="$(which pg_config)"
