@@ -9,10 +9,8 @@ if [ "${target_platform}" == "linux-ppc64le" ] || [ "${target_platform}" == "lin
     POPCNT_OPTIMIZATION="OFF"
 fi
 
-EXTRA_CMAKE_FLAGS=""
-if [[ "${target_platform}" == "linux-ppc64le" || "${target_platform}" == "linux-aarch64" ]]; then
-    EXTRA_CMAKE_FLAGS+=" -D Python3_NumPy_INCLUDE_DIR=$(python -c 'import numpy as np; print(np.get_include())'"
-fi
+EXTRA_CMAKE_FLAGS=" -D Python3_NumPy_INCLUDE_DIR=$(python -c 'import numpy as np; print(np.get_include())'"
+
 
 PG_CONFIG="$(which pg_config)"
 if [[ "${target_platform}" == "osx-arm64" || "${target_platform}" == "linux-ppc64le" || "${target_platform}" == "linux-aarch64" ]]; then
