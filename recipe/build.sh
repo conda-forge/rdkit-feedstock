@@ -13,7 +13,7 @@ fi
 # "core" for np v1; "_core" for v2.
 EXTRA_CMAKE_FLAGS=""
 if [[ "${target_platform}" == "linux-ppc64le" || "${target_platform}" == "linux-aarch64" ]]; then
-    EXTRA_CMAKE_FLAGS+=" -D Python3_NumPy_INCLUDE_DIR=${SP_DIR}/numpy/_core/include"
+    EXTRA_CMAKE_FLAGS+=" -D Python3_NumPy_INCLUDE_DIR=$(python -c 'import numpy as np; print(np.get_include())'"
 fi
 
 PG_CONFIG="$(which pg_config)"
