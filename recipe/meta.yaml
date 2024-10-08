@@ -141,6 +141,14 @@ outputs:
     test:
       commands:
         - python -c "import rdkit; assert rdkit.__version__ == '{{ version }}'"
+        # Test the availability of Contrib.
+        - >
+          python -c "
+            import os; 
+            import sys; 
+            sys.path.append(os.path.join(os.environ['CONDA_PREFIX'],'share','RDKit','Contrib')); 
+            from SA_Score import sascorer;
+          "
       imports:
         - rdkit
         - rdkit.Avalon
