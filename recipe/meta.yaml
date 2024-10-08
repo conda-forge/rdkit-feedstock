@@ -18,8 +18,7 @@ source:
     - rdkit-postgresql-osx.patch
 
 build:
-  number: 1
-  skip: true  # [aarch64]
+  number: 2
 
 requirements:
   # See https://conda-forge.org/docs/maintainer/knowledge_base/#placing-requirements-in-build-or-host and
@@ -196,6 +195,8 @@ outputs:
       license_file: license.txt
 
   - name: rdkit-postgresql
+    build:
+      skip: true  # [aarch64 or ppc64le]
     script: install.sh  # [unix]
     script: install.bat  # [win]
     requirements:

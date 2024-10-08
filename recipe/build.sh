@@ -9,14 +9,11 @@ if [ "${target_platform}" == "linux-ppc64le" ] || [ "${target_platform}" == "lin
     POPCNT_OPTIMIZATION="OFF"
 fi
 
-# Numpy cannot be found in ppc64le for some reason... some extra help will do ;)
-EXTRA_CMAKE_FLAGS=""
-if [ "${target_platform}" == "linux-ppc64le" ]; then
-    EXTRA_CMAKE_FLAGS+=" -D PYTHON_NUMPY_INCLUDE_PATH=${SP_DIR}/numpy/core/include"
-fi
+EXTRA_CMAKE_FLAGS=" -D Python3_NumPy_INCLUDE_DIR=$(python -c 'import numpy as np; print(np.get_include())')"
+
 
 PG_CONFIG="$(which pg_config)"
-if [ "${target_platform}" == "osx-arm64" ]; then
+if [[ "${target_platform}" == "osx-arm64" || "${target_platform}" == "linux-ppc64le" || "${target_platform}" == "linux-aarch64" ]]; then
   # See https://github.com/conda-forge/pgvector-feedstock/blob/main/recipe/build.sh.
   chmod +x "${RECIPE_DIR}/arm64_pg_config"
   PG_CONFIG="${RECIPE_DIR}/arm64_pg_config"
@@ -27,7 +24,7 @@ time cmake ${CMAKE_ARGS} \
     -D CMAKE_BUILD_TYPE=Release \
     -D CMAKE_INSTALL_PREFIX="${PREFIX}" \
     -D PostgreSQL_CONFIG="${PG_CONFIG}" \
-    -D PYTHON_EXECUTABLE="${PYTHON}" \
+    -D Python3_EXECUTABLE="${PYTHON}" \
     -D RDK_BUILD_AVALON_SUPPORT=ON \
     -D RDK_BUILD_CAIRO_SUPPORT=ON \
     -D RDK_BUILD_CPP_TESTS=OFF \
