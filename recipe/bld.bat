@@ -21,5 +21,5 @@ cmake ^
     .
 if errorlevel 1 exit 1
 
-cmake --build . --config Release
+cmake --build . --config Release -j %CPU_COUNT%
 if errorlevel 1 exit 1
