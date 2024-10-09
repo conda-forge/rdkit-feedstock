@@ -45,6 +45,7 @@ requirements:
     - pillow
     - pip
     - postgresql
+    - pthread-stubs
     - python
     - setuptools
     - setuptools_scm >=8
