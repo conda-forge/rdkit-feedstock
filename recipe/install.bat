@@ -48,7 +48,7 @@ if %PKG_NAME%==rdkit (
     copy bin\RDKitRDBoost.dll %LIBRARY_BIN%
 
     REM Copy Contrib modules.
-    xcopy /y /s Contrib %PREFIX%\share\RDKit\Contrib
+    xcopy /y /s /i Contrib %PREFIX%\share\RDKit\Contrib
 
     cmake -D CMAKE_INSTALL_COMPONENT=python -P cmake_install.cmake
     if errorlevel 1 exit 1
