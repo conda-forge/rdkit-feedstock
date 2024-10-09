@@ -4,8 +4,9 @@ set -euxo pipefail
 
 if [ "${PKG_NAME}" == "librdkit" ]; then
 
-    # NOTE(skearnes): List is from `make list_install_components`, excluding "dev", "docs", "python", and "pgsql".
-    for COMPONENT in Unspecified base data extras runtime; do
+    # NOTE(skearnes): List is from `make list_install_components`,
+    # excluding "dev", "docs", "extras", "python", and "pgsql".
+    for COMPONENT in Unspecified base data runtime; do
       cmake -D CMAKE_INSTALL_COMPONENT="${COMPONENT}" -P cmake_install.cmake
     done
 
@@ -15,7 +16,10 @@ elif [ "${PKG_NAME}" == "librdkit-dev" ]; then
 
 elif [ "${PKG_NAME}" == "rdkit" ]; then
 
-    cmake -D CMAKE_INSTALL_COMPONENT=python -P cmake_install.cmake
+    # NOTE(skearnes): The "extras" component covers the Contrib and Projects directories.
+    for COMPONENT in extras python; do
+      cmake -D CMAKE_INSTALL_COMPONENT="${COMPONENT}" -P cmake_install.cmake
+    done
     cmake --build . --config Release --target stubs
 
     # NOTE(hadim): Below we run `pip install ...` in order to correctly add the `.dist-info` directory in the package
