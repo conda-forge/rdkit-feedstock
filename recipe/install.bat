@@ -47,6 +47,9 @@ if %PKG_NAME%==rdkit (
     REM Copy python-only libraries.
     copy bin\RDKitRDBoost.dll %LIBRARY_BIN%
 
+    REM Copy Contrib modules.
+    xcopy /y /s Contrib %PREFIX%\share\RDKit\Contrib
+
     cmake -D CMAKE_INSTALL_COMPONENT=python -P cmake_install.cmake
     if errorlevel 1 exit 1
     cmake --build . --config Release --target stubs
