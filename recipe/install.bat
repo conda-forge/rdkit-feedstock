@@ -4,10 +4,9 @@ if %PKG_NAME%==librdkit (
     echo Installing librdkit
 
     REM NOTE(skearnes): List is from `make list_install_components`, excluding "dev", "docs", "python", and "pgsql".
-    set components=Unspecified base data extras runtime
-    for %%C in (%components%) do (
-        echo Installing librdkit component %%C
-        cmake -D CMAKE_INSTALL_COMPONENT=%%C -P cmake_install.cmake
+    for %%x in (Unspecified base data extras runtime) do (
+        echo Installing librdkit component %%x
+        cmake -D CMAKE_INSTALL_COMPONENT=%%x -P cmake_install.cmake
         if errorlevel 1 exit 1
     )
 
@@ -46,9 +45,6 @@ if %PKG_NAME%==rdkit (
 
     REM Copy python-only libraries.
     copy bin\RDKitRDBoost.dll %LIBRARY_BIN%
-
-    REM Copy Contrib modules.
-    xcopy /y /s /i Contrib %PREFIX%\share\RDKit\Contrib
 
     cmake -D CMAKE_INSTALL_COMPONENT=python -P cmake_install.cmake
     if errorlevel 1 exit 1
