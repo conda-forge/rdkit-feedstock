@@ -41,6 +41,9 @@ if %PKG_NAME%==librdkit-dev (
 if %PKG_NAME%==rdkit (
     echo Installing rdkit
 
+    REM Copy python-only libraries.
+    copy bin\RDKitRDBoost.dll %LIBRARY_BIN%
+
     REM NOTE(skearnes): The "extras" component covers the Contrib and Projects directories.
     for %%x in (extras python) do (
         echo Installing rdkit component %%x
