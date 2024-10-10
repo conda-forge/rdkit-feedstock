@@ -18,7 +18,7 @@ source:
     - rdkit-postgresql-osx.patch
 
 build:
-  number: 2
+  number: 3
 
 requirements:
   # See https://conda-forge.org/docs/maintainer/knowledge_base/#placing-requirements-in-build-or-host and
@@ -140,6 +140,9 @@ outputs:
     test:
       commands:
         - python -c "import rdkit; assert rdkit.__version__ == '{{ version }}'"
+        # Test the availability of Contrib.
+        - python -c "import os; import sys; sys.path.append(os.path.join(os.environ['CONDA_PREFIX'], 'share', 'RDKit', 'Contrib')); from SA_Score import sascorer"  # [unix]
+        - python -c "import os; import sys; sys.path.append(os.path.join(os.environ['CONDA_PREFIX'], 'Library', 'share', 'RDKit', 'Contrib')); from SA_Score import sascorer"  # [win]
       imports:
         - rdkit
         - rdkit.Avalon

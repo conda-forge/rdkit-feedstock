@@ -3,11 +3,11 @@ echo PKG_NAME is %PKG_NAME%
 if %PKG_NAME%==librdkit (
     echo Installing librdkit
 
-    REM NOTE(skearnes): List is from `make list_install_components`, excluding "dev", "docs", "python", and "pgsql".
-    set components=Unspecified base data extras runtime
-    for %%C in (%components%) do (
-        echo Installing librdkit component %%C
-        cmake -D CMAKE_INSTALL_COMPONENT=%%C -P cmake_install.cmake
+    REM NOTE(skearnes): List is from `make list_install_components`,
+    REM excluding "dev", "docs", "extras", "python", and "pgsql".
+    for %%x in (Unspecified base data runtime) do (
+        echo Installing librdkit component %%x
+        cmake -D CMAKE_INSTALL_COMPONENT=%%x -P cmake_install.cmake
         if errorlevel 1 exit 1
     )
 
@@ -24,9 +24,6 @@ if %PKG_NAME%==librdkit-dev (
     if not exist "%LIBRARY_INC%" mkdir %LIBRARY_INC%
 
     cmake -D CMAKE_INSTALL_COMPONENT=dev -P cmake_install.cmake
-
-    REM copy .lib files to LIBRARY_LIB
-    copy lib\*.lib %LIBRARY_LIB%
 
     REM copy .h files to LIBRARY_INC
     mkdir %LIBRARY_INC%\rdkit
@@ -47,8 +44,12 @@ if %PKG_NAME%==rdkit (
     REM Copy python-only libraries.
     copy bin\RDKitRDBoost.dll %LIBRARY_BIN%
 
-    cmake -D CMAKE_INSTALL_COMPONENT=python -P cmake_install.cmake
-    if errorlevel 1 exit 1
+    REM NOTE(skearnes): The "extras" component covers the Contrib and Projects directories.
+    for %%x in (extras python) do (
+        echo Installing rdkit component %%x
+        cmake -D CMAKE_INSTALL_COMPONENT=%%x -P cmake_install.cmake
+        if errorlevel 1 exit 1
+    )
     cmake --build . --config Release --target stubs
     if errorlevel 1 exit 1
 
