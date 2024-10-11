@@ -71,8 +71,8 @@ outputs:
         - libboost-devel
         - libboost-python-devel
       run_constrained:
-        - {{ pin_compatible('python', max_pin='x.x') }}
         - {{ pin_compatible('numpy', max_pin='x.x') }}
+        - {{ pin_compatible('python', max_pin='x.x') }}
     test:
       commands:
         - test -f $PREFIX/lib/libRDKitGraphMol.so              # [linux]
