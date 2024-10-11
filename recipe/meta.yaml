@@ -18,7 +18,7 @@ source:
     - rdkit-postgresql-osx.patch
 
 build:
-  number: 3
+  number: 4
 
 requirements:
   # See https://conda-forge.org/docs/maintainer/knowledge_base/#placing-requirements-in-build-or-host and
@@ -60,11 +60,19 @@ outputs:
       build:
         - {{ compiler("cxx") }}
         - {{ stdlib("c") }}
+        # TODO(skearnes): The librdkit package should be independent of python.
+        - cross-python_{{ target_platform }}  # [build_platform != target_platform]
+        - numpy                               # [build_platform != target_platform]
+        - python                              # [build_platform != target_platform]
         - cmake
       host:
         - cairo
         - freetype
         - libboost-devel
+        - libboost-python-devel
+      run_constrained:
+        - {{ pin_compatible('numpy', max_pin='x.x') }}
+        - {{ pin_compatible('python', max_pin='x.x') }}
     test:
       commands:
         - test -f $PREFIX/lib/libRDKitGraphMol.so              # [linux]
