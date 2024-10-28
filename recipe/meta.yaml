@@ -14,6 +14,7 @@ source:
   sha256: 034c00d6e9de323506834da03400761ed8c3721095114369d06805409747a60f
 
   patches:
+    - pg_regress.patch
     - pyproject.patch
     - rdkit-postgresql-osx.patch
 
