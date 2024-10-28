@@ -19,7 +19,7 @@ source:
     - rdkit-postgresql-osx.patch
 
 build:
-  number: 3
+  number: 4
 
 requirements:
   # See https://conda-forge.org/docs/maintainer/knowledge_base/#placing-requirements-in-build-or-host and
