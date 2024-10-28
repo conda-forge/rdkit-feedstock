@@ -15,7 +15,7 @@ index cf3a3b637..b1291943a 100644
    CAR(RDKPY_NAME ${RDKPY_DEFAULT_ARGS})
    CDR(RDKPY_SOURCES ${RDKPY_DEFAULT_ARGS})
    if(RDK_BUILD_PYTHON_WRAPPERS)
-+    find_package(Python3 COMPONENTS Development.Module)
++    find_package(Python3 COMPONENTS Interpreter Development.Module)
      Python3_add_library(${RDKPY_NAME} MODULE ${RDKPY_SOURCES})
      set_target_properties(${RDKPY_NAME} PROPERTIES PREFIX "")
  
