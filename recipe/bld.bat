@@ -6,6 +6,7 @@ cmake ^
     -D PYTHON_INSTDIR="%SP_DIR%" ^
     -D RDK_BUILD_AVALON_SUPPORT=ON ^
     -D RDK_BUILD_CAIRO_SUPPORT=ON ^
+    -D RDK_BUILD_CONTRIB=ON ^
     -D RDK_BUILD_CPP_TESTS=OFF ^
     -D RDK_BUILD_FREESASA_SUPPORT=ON ^
     -D RDK_BUILD_INCHI_SUPPORT=ON ^
@@ -20,5 +21,5 @@ cmake ^
     .
 if errorlevel 1 exit 1
 
-cmake --build . --config Release
+cmake --build . --config Release -j %CPU_COUNT%
 if errorlevel 1 exit 1
