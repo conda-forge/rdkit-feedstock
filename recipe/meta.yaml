@@ -16,6 +16,7 @@ source:
   patches:
     - pyproject.patch
     - rdkit-postgresql-osx.patch
+    - RDKitUtils.cmake.patch
 
 build:
   number: 0
