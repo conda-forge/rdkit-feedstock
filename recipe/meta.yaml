@@ -14,12 +14,13 @@ source:
   sha256: 0f35a088da9594e362fb7c9c68d96a18af1cff502ddec334ff1d2baf1a4dd6d3
 
   patches:
+    - pg_regress.patch
     - CMakeLists.txt.patch
     - pyproject.patch
     - rdkit-postgresql-osx.patch
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   # See https://conda-forge.org/docs/maintainer/knowledge_base/#placing-requirements-in-build-or-host and

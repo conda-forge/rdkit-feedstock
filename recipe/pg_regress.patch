@@ -1,0 +1,35 @@
+From efe843f4c0feafabd90cef2c387dd3fda7420dc6 Mon Sep 17 00:00:00 2001
+From: Steven Kearnes <skearnes@gmail.com>
+Date: Mon, 28 Oct 2024 16:06:44 -0400
+Subject: [PATCH] pg_regress
+
+---
+ Code/PgSQL/rdkit/CMakeLists.txt | 12 +++---------
+ 1 file changed, 3 insertions(+), 9 deletions(-)
+
+diff --git a/Code/PgSQL/rdkit/CMakeLists.txt b/Code/PgSQL/rdkit/CMakeLists.txt
+index 1d9429438..e21d41299 100644
+--- a/Code/PgSQL/rdkit/CMakeLists.txt
++++ b/Code/PgSQL/rdkit/CMakeLists.txt
+@@ -153,15 +153,9 @@ if(RDK_BUILD_THREADSAFE_SSS)
+   target_link_libraries(${EXTENSION}${EXTENSION_SUFFIX} ${RDKit_THREAD_LIBS})
+ endif(RDK_BUILD_THREADSAFE_SSS)
+ 
+-if(MSVC)
+-  set(PGREGRESS_BINARY "${PG_BINDIR}/pg_regress")
+-  string(REGEX REPLACE "/" ${REGEX_SEPARATOR} PGREGRESS_BINARY ${PGREGRESS_BINARY})
+-  string(REGEX REPLACE "/" ${REGEX_SEPARATOR} PG_EXTENSIONDIR ${PG_EXTENSIONDIR})
+-else()
+-  run_pg_config (--pgxs PG_MAKEFILE)
+-  get_filename_component(PG_MAKEFILESDIR ${PG_MAKEFILE} PATH)
+-  set(PGREGRESS_BINARY "${PG_MAKEFILESDIR}/../test/regress/pg_regress")
+-endif()
++run_pg_config (--pgxs PG_MAKEFILE)
++get_filename_component(PG_MAKEFILESDIR ${PG_MAKEFILE} PATH)
++set(PGREGRESS_BINARY "${PG_MAKEFILESDIR}/../test/regress/pg_regress")
+ if(WIN32)
+   set(PGREGRESS_BINARY "${PGREGRESS_BINARY}.exe")
+ endif()
+-- 
+2.39.5 (Apple Git-154)
+
