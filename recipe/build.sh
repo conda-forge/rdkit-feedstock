@@ -18,6 +18,13 @@ if [[ "${target_platform}" == "osx-arm64" || "${target_platform}" == "linux-ppc6
   chmod +x "${RECIPE_DIR}/arm64_pg_config"
   PG_CONFIG="${RECIPE_DIR}/arm64_pg_config"
 fi
+
+if [[ "${target_platform}" == "osx-64"  ]]; then
+  # See https://conda-forge.org/docs/maintainer/knowledge_base/#newer-c-features-with-old-sdk
+  CXXFLAGS="${CXXFLAGS} -D_LIBCPP_DISABLE_AVAILABILITY"
+fi
+
+
 time cmake ${CMAKE_ARGS} \
     -D Boost_NO_SYSTEM_PATHS=ON \
     -D BOOST_ROOT="${PREFIX}" \
