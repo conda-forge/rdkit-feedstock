@@ -1,4 +1,4 @@
-{% set version = "2024.09.3" %}
+{% set version = "2024.09.4" %}
 {% set filename = "Release_%s.tar.gz" % version.replace(".", "_") %}
 
 package:
@@ -11,7 +11,7 @@ package:
 source:
   fn: {{ filename }}
   url: https://github.com/rdkit/rdkit/archive/{{ filename }}
-  sha256: 5d6a44be526e26ae80bb225df4bb0344e52c502b7f874ee824cfb2dc01adafeb
+  sha256: a5e8da75aae7e88f3a50d8577f9027c971187492a93a15085f797fe6fef74ad2
 
   patches:
     - pg_regress.patch
@@ -201,7 +201,7 @@ outputs:
 
   - name: rdkit-postgresql
     build:
-      skip: true  # [aarch64 or ppc64le]
+      skip: true  # [aarch64 or ppc64le or osx-64]
     script: install.sh  # [unix]
     script: install.bat  # [win]
     requirements:

@@ -18,6 +18,15 @@ if [[ "${target_platform}" == "osx-arm64" || "${target_platform}" == "linux-ppc6
   chmod +x "${RECIPE_DIR}/arm64_pg_config"
   PG_CONFIG="${RECIPE_DIR}/arm64_pg_config"
 fi
+
+BUILD_PSQL="ON"
+if [[ "${target_platform}" == "osx-64"  ]]; then
+  # See https://conda-forge.org/docs/maintainer/knowledge_base/#newer-c-features-with-old-sdk
+  CXXFLAGS="${CXXFLAGS} -D_LIBCPP_DISABLE_AVAILABILITY"
+  BUILD_PSQL="OFF"
+fi
+
+
 time cmake ${CMAKE_ARGS} \
     -D Boost_NO_SYSTEM_PATHS=ON \
     -D BOOST_ROOT="${PREFIX}" \
@@ -31,7 +40,7 @@ time cmake ${CMAKE_ARGS} \
     -D RDK_BUILD_CPP_TESTS=OFF \
     -D RDK_BUILD_FREESASA_SUPPORT=ON \
     -D RDK_BUILD_INCHI_SUPPORT=ON \
-    -D RDK_BUILD_PGSQL=ON \
+    -D RDK_BUILD_PGSQL="${BUILD_PSQL}" \
     -D RDK_BUILD_XYZ2MOL_SUPPORT=ON \
     -D RDK_BUILD_YAEHMOP_SUPPORT=ON \
     -D RDK_INSTALL_INTREE=OFF \
