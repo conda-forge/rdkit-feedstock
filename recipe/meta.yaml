@@ -11,7 +11,7 @@ package:
 source:
   fn: {{ filename }}
   url: https://github.com/rdkit/rdkit/archive/{{ filename }}
-  sha256: d8d305381a1f0cbabf20757ff43aca1dec37325581184108f445ad2e177258b6
+  sha256: ee55cf72d211c880b8f63e18fca6d9abce2b060987b7d2ce61d2d3b9527003c2
 
   patches:
     - pg_regress.patch
