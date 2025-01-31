@@ -44,15 +44,6 @@ Package license: BSD-3-Clause
 
 Summary: RDKit Python bindings
 
-About rdkit-postgresql
-----------------------
-
-
-
-Package license: BSD-3-Clause
-
-Summary: RDKit PostgreSQL cartridge
-
 About rdkit-dev
 ---------------
 
@@ -306,7 +297,6 @@ Current release info
 | [![Conda Recipe](https://img.shields.io/badge/recipe-librdkit--dev-green.svg)](https://anaconda.org/conda-forge/librdkit-dev) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/librdkit-dev.svg)](https://anaconda.org/conda-forge/librdkit-dev) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/librdkit-dev.svg)](https://anaconda.org/conda-forge/librdkit-dev) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/librdkit-dev.svg)](https://anaconda.org/conda-forge/librdkit-dev) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-rdkit-green.svg)](https://anaconda.org/conda-forge/rdkit) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/rdkit.svg)](https://anaconda.org/conda-forge/rdkit) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/rdkit.svg)](https://anaconda.org/conda-forge/rdkit) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/rdkit.svg)](https://anaconda.org/conda-forge/rdkit) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-rdkit--dev-green.svg)](https://anaconda.org/conda-forge/rdkit-dev) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/rdkit-dev.svg)](https://anaconda.org/conda-forge/rdkit-dev) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/rdkit-dev.svg)](https://anaconda.org/conda-forge/rdkit-dev) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/rdkit-dev.svg)](https://anaconda.org/conda-forge/rdkit-dev) |
-| [![Conda Recipe](https://img.shields.io/badge/recipe-rdkit--postgresql-green.svg)](https://anaconda.org/conda-forge/rdkit-postgresql) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/rdkit-postgresql.svg)](https://anaconda.org/conda-forge/rdkit-postgresql) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/rdkit-postgresql.svg)](https://anaconda.org/conda-forge/rdkit-postgresql) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/rdkit-postgresql.svg)](https://anaconda.org/conda-forge/rdkit-postgresql) |
 
 Installing rdkit
 ================
@@ -318,16 +308,16 @@ conda config --add channels conda-forge
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge` channel has been enabled, `librdkit, librdkit-dev, rdkit, rdkit-dev, rdkit-postgresql` can be installed with `conda`:
+Once the `conda-forge` channel has been enabled, `librdkit, librdkit-dev, rdkit, rdkit-dev` can be installed with `conda`:
 
 ```
-conda install librdkit librdkit-dev rdkit rdkit-dev rdkit-postgresql
+conda install librdkit librdkit-dev rdkit rdkit-dev
 ```
 
 or with `mamba`:
 
 ```
-mamba install librdkit librdkit-dev rdkit rdkit-dev rdkit-postgresql
+mamba install librdkit librdkit-dev rdkit rdkit-dev
 ```
 
 It is possible to list all of the versions of `librdkit` available on your platform with `conda`:
