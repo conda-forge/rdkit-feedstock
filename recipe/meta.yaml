@@ -1,4 +1,4 @@
-{% set version = "2024.09.5" %}
+{% set version = "2024_09_6" %}
 {% set filename = "Release_%s.tar.gz" % version.replace(".", "_") %}
 
 package:
@@ -11,7 +11,7 @@ package:
 source:
   fn: {{ filename }}
   url: https://github.com/rdkit/rdkit/archive/{{ filename }}
-  sha256: ee55cf72d211c880b8f63e18fca6d9abce2b060987b7d2ce61d2d3b9527003c2
+  sha256: 337075aadd51760fe920442c73972c2fef2561645785fac246615fcb03914062
 
   patches:
     - pg_regress.patch
