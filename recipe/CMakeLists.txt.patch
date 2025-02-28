@@ -11,7 +11,7 @@ diff --git a/CMakeLists.txt b/CMakeLists.txt
 index 705e292b2..ddaaf5694 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -303,7 +303,7 @@ if(RDK_BUILD_PYTHON_WRAPPERS)
+@@ -291,13 +291,13 @@ if(RDK_BUILD_PYTHON_WRAPPERS)
  
    #-------
    # pull in python:
