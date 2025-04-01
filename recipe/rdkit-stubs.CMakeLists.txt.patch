@@ -9,7 +9,7 @@ index 667db1aea..3efc33ec8 100644
 +string(REGEX REPLACE "\\\\" "/" Python3_EXECUTABLE_FWDSLASH ${Python3_EXECUTABLE})
  string(CONCAT RUN_GEN_RDKIT_STUBS_PY "message("
    "\"-- Building and Installing rdkit-stubs into the following director${DIR_OR_DIRS}: ${STUB_LOCATIONS}\")\n"
-   "set (SEPARATOR \"=====================================================================\n\")\n"      
+   "set (SEPARATOR \"=====================================================================\n\")\n"
    "set (COMMON_FILENAME ${CMAKE_CURRENT_BINARY_DIR_FWDSLASH}/gen_rdkit_stubs)\n"
    "execute_process("
    "COMMAND "
