@@ -18,6 +18,7 @@ source:
     - CMakeLists.txt.patch
     - pyproject.patch
     - rdkit-postgresql-osx.patch
+    - SynthonSpace.h.patch
 
 build:
   number: 0
