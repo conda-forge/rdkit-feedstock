@@ -1,4 +1,4 @@
-{% set version = "2025_03_2" %}
+{% set version = "2025.03.2" %}
 {% set filename = "Release_%s.tar.gz" % version.replace(".", "_") %}
 
 package:
@@ -18,7 +18,6 @@ source:
     - CMakeLists.txt.patch
     - pyproject.patch
     - rdkit-postgresql-osx.patch
-    - SynthonSpace.h.patch
     - rdkit-stubs.CMakeLists.txt.patch
 
 build:
