@@ -1,4 +1,4 @@
-{% set version = "2025.03.6" %}
+{% set version = "2025.09.1" %}
 {% set filename = "Release_%s.tar.gz" % version.replace(".", "_") %}
 
 package:
@@ -11,7 +11,7 @@ package:
 source:
   fn: {{ filename }}
   url: https://github.com/rdkit/rdkit/archive/{{ filename }}
-  sha256: aa719755ed10d4068a2037c113faa73007a71b551caf69b946c49cbafe04dadd
+  sha256: 7fb3510b69af358009e2d0763c1d9665ac34f4c2cd3314cf5210ee3d5a33d501
 
   patches:
     - pg_regress.patch
@@ -21,7 +21,7 @@ source:
     - rdkit-stubs.CMakeLists.txt.patch
 
 build:
-  number: 1
+  number: 0
 
 requirements:
   # See https://conda-forge.org/docs/maintainer/knowledge_base/#placing-requirements-in-build-or-host and
