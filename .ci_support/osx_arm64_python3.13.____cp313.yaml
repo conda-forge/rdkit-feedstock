@@ -38,3 +38,6 @@ python:
 - 3.13.* *_cp313
 target_platform:
 - osx-arm64
+zip_keys:
+- - python
+  - channel_sources
