@@ -34,6 +34,3 @@ python:
 - 3.12.* *_cpython
 target_platform:
 - linux-ppc64le
-zip_keys:
-- - python
-  - channel_sources
