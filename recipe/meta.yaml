@@ -202,7 +202,7 @@ outputs:
 
   - name: rdkit-postgresql
     build:
-      skip: true  # [aarch64 or ppc64le or osx-64]
+      skip: true # [aarch64 or ppc64le]
     script: install.sh  # [unix]
     script: install.bat  # [win]
     requirements:
