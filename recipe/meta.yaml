@@ -21,7 +21,7 @@ source:
     - rdkit-stubs.CMakeLists.txt.patch
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   # See https://conda-forge.org/docs/maintainer/knowledge_base/#placing-requirements-in-build-or-host and
@@ -202,7 +202,7 @@ outputs:
 
   - name: rdkit-postgresql
     build:
-      skip: true # [aarch64 or ppc64le]
+      skip: true # [osx or aarch64 or ppc64le]
     script: install.sh  # [unix]
     script: install.bat  # [win]
     requirements:
