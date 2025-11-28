@@ -1,4 +1,4 @@
-{% set version = "2025_09_3" %}
+{% set version = "2025.09.3" %}
 {% set filename = "Release_%s.tar.gz" % version.replace(".", "_") %}
 
 package:
