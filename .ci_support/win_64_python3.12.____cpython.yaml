@@ -11,9 +11,9 @@ cxx_compiler:
 freetype:
 - '2'
 libboost_devel:
-- '1.86'
+- '1.88'
 libboost_python_devel:
-- '1.86'
+- '1.88'
 numpy:
 - '2'
 pin_run_as_build:
