@@ -68,6 +68,7 @@ outputs:
         - cairo
         - freetype
         - libboost-devel
+        - eigen-abi-devel
     test:
       commands:
         - test -f $PREFIX/lib/libRDKitGraphMol.so              # [linux]
@@ -87,7 +88,9 @@ outputs:
         - cmake
       run:
         - {{ pin_subpackage('librdkit', exact=True) }}
-    test:
+        - eigen-abi-devel
+      run_exports:
+        - ${{ pin_compatible('eigen-abi', upper_bound='x.x.x.x') }}    test:
       commands:
         - test -f $PREFIX/include/rdkit/GraphMol/GraphMol.h               # [unix]
         - if not exist %LIBRARY_INC%\\rdkit\\GraphMol\\GraphMol.h exit 1  # [win]
