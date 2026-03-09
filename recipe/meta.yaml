@@ -21,7 +21,7 @@ source:
     - rdkit-stubs.CMakeLists.txt.patch
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   # See https://conda-forge.org/docs/maintainer/knowledge_base/#placing-requirements-in-build-or-host and
@@ -68,6 +68,7 @@ outputs:
         - cairo
         - freetype
         - libboost-devel
+        - eigen-abi-devel
     test:
       commands:
         - test -f $PREFIX/lib/libRDKitGraphMol.so              # [linux]
@@ -87,7 +88,9 @@ outputs:
         - cmake
       run:
         - {{ pin_subpackage('librdkit', exact=True) }}
-    test:
+        - eigen-abi-devel
+      run_exports:
+        - ${{ pin_compatible('eigen-abi', upper_bound='x.x.x.x') }}    test:
       commands:
         - test -f $PREFIX/include/rdkit/GraphMol/GraphMol.h               # [unix]
         - if not exist %LIBRARY_INC%\\rdkit\\GraphMol\\GraphMol.h exit 1  # [win]

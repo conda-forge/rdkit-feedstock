@@ -16,6 +16,8 @@ cxx_compiler:
 - clangxx
 cxx_compiler_version:
 - '19'
+eigen_abi_devel:
+- 3.4.0
 freetype:
 - '2'
 libboost_devel:
