@@ -1,5 +1,7 @@
 {% set version = "2026_03_1" %}
 {% set filename = "Release_%s.tar.gz" % version.replace(".", "_") %}
+{% set version = version.replace("_",".") %} # workaround bad conda-forge/rdkit release name interaction
+
 
 package:
   # NOTE(skearnes): Using `rdkit` as the package name conflicts with the `rdkit` subpackage and causes problems; see
