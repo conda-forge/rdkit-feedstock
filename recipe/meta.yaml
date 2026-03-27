@@ -1,5 +1,7 @@
-{% set version = "2025.09.6" %}
+{% set version = "2026_03_1" %}
 {% set filename = "Release_%s.tar.gz" % version.replace(".", "_") %}
+{% set version = version.replace("_",".") %} # workaround bad conda-forge/rdkit release name interaction
+
 
 package:
   # NOTE(skearnes): Using `rdkit` as the package name conflicts with the `rdkit` subpackage and causes problems; see
@@ -11,7 +13,7 @@ package:
 source:
   fn: {{ filename }}
   url: https://github.com/rdkit/rdkit/archive/{{ filename }}
-  sha256: 57b92e8f47d9dbd559bd808d5cf6c48a628bc36118bc35b832a35e2ca8a0c7a1
+  sha256: 715e0d069416fc1643404df0d8ab969636cfd2c85c13e4f7cc55e4118ce10055
 
   patches:
     - pg_regress.patch
@@ -21,7 +23,7 @@ source:
     - rdkit-stubs.CMakeLists.txt.patch
 
 build:
-  number: 1
+  number: 0
 
 requirements:
   # See https://conda-forge.org/docs/maintainer/knowledge_base/#placing-requirements-in-build-or-host and
