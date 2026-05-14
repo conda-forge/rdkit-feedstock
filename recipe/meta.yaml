@@ -19,6 +19,7 @@ source:
     - pg_regress.patch
     - CMakeLists.txt.patch
     - pyproject.patch
+    - rdkit-postgresql-osx-linker-flags.patch
     - rdkit-stubs.CMakeLists.txt.patch
 
 build:
