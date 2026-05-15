@@ -110,7 +110,7 @@ outputs:
     script: install.bat  # [win]
     build:
       run_exports:
-        - {{ pin_subpackage('rdkit', max_pin='x.x') }}
+        - {{ pin_subpackage('rdkit', exact=True) }}
     requirements:
       build:
         - {{ compiler('cxx') }}
