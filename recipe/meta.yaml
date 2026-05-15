@@ -23,7 +23,7 @@ source:
     - rdkit-stubs.CMakeLists.txt.patch
 
 build:
-  number: 2
+  number: 3
 
 requirements:
   # See https://conda-forge.org/docs/maintainer/knowledge_base/#placing-requirements-in-build-or-host and
@@ -108,6 +108,9 @@ outputs:
   - name: rdkit
     script: install.sh  # [unix]
     script: install.bat  # [win]
+    build:
+      run_exports:
+        - {{ pin_subpackage('rdkit', max_pin='x.x') }}
     requirements:
       build:
         - {{ compiler('cxx') }}
