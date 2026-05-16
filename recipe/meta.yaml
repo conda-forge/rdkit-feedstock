@@ -82,10 +82,10 @@ outputs:
         - test -f $PREFIX/lib/libRDKitGraphMol.dylib           # [osx]
         - if not exist %LIBRARY_BIN%\RDKitGraphMol.dll exit 1  # [win]
         # Dev-only artifacts should live in librdkit-dev, not here.
-        - test ! -e $PREFIX/lib/cmake/rdkit/rdkit-config.cmake               # [unix]
-        - test ! -e $PREFIX/include/rdkit/RDGeneral/hash/hash.hpp            # [unix]
-        - if exist %LIBRARY_LIB%\cmake\rdkit\rdkit-config.cmake exit 1       # [win]
-        - if exist %LIBRARY_INC%\rdkit\RDGeneral\hash\hash.hpp exit 1        # [win]
+        - test ! -e $PREFIX/lib/cmake/rdkit/rdkit-config.cmake  # [unix]
+        - test ! -e $PREFIX/include/rdkit/RDGeneral/hash/hash.hpp  # [unix]
+        - if exist %LIBRARY_LIB%\cmake\rdkit\rdkit-config.cmake exit 1  # [win]
+        - if exist %LIBRARY_INC%\rdkit\RDGeneral\hash\hash.hpp exit 1  # [win]
     about:
       summary: RDKit C++ library
       license: BSD-3-Clause
@@ -111,10 +111,10 @@ outputs:
         - test -f $PREFIX/include/rdkit/GraphMol/GraphMol.h               # [unix]
         - if not exist %LIBRARY_INC%\\rdkit\\GraphMol\\GraphMol.h exit 1  # [win]
         # Cmake config and hash headers must live here, not in librdkit.
-        - test -f $PREFIX/lib/cmake/rdkit/rdkit-config.cmake                  # [unix]
-        - test -f $PREFIX/include/rdkit/RDGeneral/hash/hash.hpp               # [unix]
-        - if not exist %LIBRARY_LIB%\\cmake\\rdkit\\rdkit-config.cmake exit 1 # [win]
-        - if not exist %LIBRARY_INC%\\rdkit\\RDGeneral\\hash\\hash.hpp exit 1 # [win]
+        - test -f $PREFIX/lib/cmake/rdkit/rdkit-config.cmake  # [unix]
+        - test -f $PREFIX/include/rdkit/RDGeneral/hash/hash.hpp  # [unix]
+        - if not exist %LIBRARY_LIB%\\cmake\\rdkit\\rdkit-config.cmake exit 1  # [win]
+        - if not exist %LIBRARY_INC%\\rdkit\\RDGeneral\\hash\\hash.hpp exit 1  # [win]
     about:
       summary: RDKit headers and library used in librdkit
       license: BSD-3-Clause
