@@ -21,9 +21,13 @@ source:
     - pyproject.patch
     - rdkit-postgresql-osx-linker-flags.patch
     - rdkit-stubs.CMakeLists.txt.patch
+    # Backport of rdkit/rdkit#9287. Tags dev-only install rules with COMPONENT
+    # dev so the hash headers and cmake config/export files land in
+    # librdkit-dev instead of leaking into librdkit. Drop once #9287 ships.
+    - dev-component-tagging.patch
 
 build:
-  number: 3
+  number: 4
 
 requirements:
   # See https://conda-forge.org/docs/maintainer/knowledge_base/#placing-requirements-in-build-or-host and
