@@ -15,11 +15,7 @@ fi
 # config (see #114). conda-build guarantees these locations on all platforms.
 HOST_NUMPY_INCLUDE_DIR="${PREFIX}/lib/python${PY_VER}/site-packages/numpy/_core/include"
 if [ ! -d "${HOST_NUMPY_INCLUDE_DIR}" ]; then
-    # numpy 1.x layout (pre-rename).
-    HOST_NUMPY_INCLUDE_DIR="${PREFIX}/lib/python${PY_VER}/site-packages/numpy/core/include"
-fi
-if [ ! -d "${HOST_NUMPY_INCLUDE_DIR}" ]; then
-    echo "ERROR: numpy include dir not found under ${PREFIX}/lib/python${PY_VER}/site-packages/numpy/{,_}core/include" >&2
+    echo "ERROR: numpy include dir not found at ${HOST_NUMPY_INCLUDE_DIR}" >&2
     exit 1
 fi
 EXTRA_CMAKE_FLAGS=" -D Python3_NumPy_INCLUDE_DIR=${HOST_NUMPY_INCLUDE_DIR}"
