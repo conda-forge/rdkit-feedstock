@@ -25,6 +25,10 @@ if [[ "${build_platform}" != "${target_platform}" ]]; then
         # numpy 1.x layout (pre-rename).
         HOST_NUMPY_INCLUDE_DIR="${PREFIX}/lib/python${PY_VER}/site-packages/numpy/core/include"
     fi
+    if [ ! -d "${HOST_NUMPY_INCLUDE_DIR}" ]; then
+        echo "ERROR: numpy include dir not found under ${PREFIX}/lib/python${PY_VER}/site-packages/numpy/{,_}core/include" >&2
+        exit 1
+    fi
     EXTRA_CMAKE_FLAGS=" -D Python3_NumPy_INCLUDE_DIR=${HOST_NUMPY_INCLUDE_DIR}"
     EXTRA_CMAKE_FLAGS="${EXTRA_CMAKE_FLAGS} -D Python3_INCLUDE_DIR=${PREFIX}/include/python${PY_VER}"
 else
