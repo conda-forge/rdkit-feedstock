@@ -13,13 +13,16 @@ fi
 # running `python`. On cross-compile (osx-arm64), `python` is the build-env
 # python and would otherwise bake build-env paths into the exported cmake
 # config (see #114). conda-build guarantees these locations on all platforms.
+HOST_PYTHON_INCLUDE_DIR="${PREFIX}/include/python${PY_VER}"
 HOST_NUMPY_INCLUDE_DIR="${PREFIX}/lib/python${PY_VER}/site-packages/numpy/_core/include"
-if [ ! -d "${HOST_NUMPY_INCLUDE_DIR}" ]; then
-    echo "ERROR: numpy include dir not found at ${HOST_NUMPY_INCLUDE_DIR}" >&2
-    exit 1
-fi
+for d in "${HOST_PYTHON_INCLUDE_DIR}" "${HOST_NUMPY_INCLUDE_DIR}"; do
+    if [ ! -d "${d}" ]; then
+        echo "ERROR: include dir not found at ${d}" >&2
+        exit 1
+    fi
+done
 EXTRA_CMAKE_FLAGS=" -D Python3_NumPy_INCLUDE_DIR=${HOST_NUMPY_INCLUDE_DIR}"
-EXTRA_CMAKE_FLAGS="${EXTRA_CMAKE_FLAGS} -D Python3_INCLUDE_DIR=${PREFIX}/include/python${PY_VER}"
+EXTRA_CMAKE_FLAGS="${EXTRA_CMAKE_FLAGS} -D Python3_INCLUDE_DIR=${HOST_PYTHON_INCLUDE_DIR}"
 
 
 PG_CONFIG="$(which pg_config)"
