@@ -9,7 +9,19 @@ if [ "${target_platform}" == "linux-ppc64le" ] || [ "${target_platform}" == "lin
     POPCNT_OPTIMIZATION="OFF"
 fi
 
-EXTRA_CMAKE_FLAGS=" -D Python3_NumPy_INCLUDE_DIR=$(python -c 'import numpy as np; print(np.get_include())')"
+# Resolve python and numpy include dirs directly from PREFIX rather than
+# running `python`. On cross-compile (osx-arm64), `python` is the build-env
+# python and would otherwise bake build-env paths into the exported cmake
+# config (see #114). conda-build guarantees these locations on all platforms.
+HOST_PYTHON_INCLUDE_DIR="${PREFIX}/include/python${PY_VER}"
+HOST_NUMPY_INCLUDE_DIR="${PREFIX}/lib/python${PY_VER}/site-packages/numpy/_core/include"
+for d in "${HOST_PYTHON_INCLUDE_DIR}" "${HOST_NUMPY_INCLUDE_DIR}"; do
+    if [ ! -d "${d}" ]; then
+        echo "ERROR: include dir not found at ${d}" >&2
+        exit 1
+    fi
+done
+EXTRA_CMAKE_FLAGS=" -D Python3_NumPy_INCLUDE_DIR=${HOST_NUMPY_INCLUDE_DIR} -D Python3_INCLUDE_DIR=${HOST_PYTHON_INCLUDE_DIR}"
 
 
 PG_CONFIG="$(which pg_config)"
