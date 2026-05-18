@@ -26,9 +26,14 @@ source:
     # librdkit-dev instead of leaking into librdkit. Drop on the next rdkit
     # version bump that includes rdkit/rdkit#9287.
     - dev-component-tagging.patch
+    # Backport of rdkit/rdkit#9288. Refines the two rdkitpython install rules
+    # to COMPONENT python so the python-version-coupled cmake config files
+    # land with the python wrappers rather than in librdkit-dev. See #227.
+    # Drop on the next rdkit version bump that includes rdkit/rdkit#9288.
+    - rdkitpython-component-python.patch
 
 build:
-  number: 5
+  number: 6
 
 requirements:
   # See https://conda-forge.org/docs/maintainer/knowledge_base/#placing-requirements-in-build-or-host and
@@ -115,6 +120,9 @@ outputs:
         - test -f $PREFIX/include/rdkit/RDGeneral/hash/hash.hpp  # [unix]
         - if not exist %LIBRARY_LIB%\\cmake\\rdkit\\rdkit-config.cmake exit 1  # [win]
         - if not exist %LIBRARY_INC%\\rdkit\\RDGeneral\\hash\\hash.hpp exit 1  # [win]
+        # Python-coupled cmake config must live in the rdkit (python) output, not here.
+        - test ! -e $PREFIX/lib/cmake/rdkitpython/rdkitpython-config.cmake  # [unix]
+        - if exist %LIBRARY_LIB%\\cmake\\rdkitpython\\rdkitpython-config.cmake exit 1  # [win]
     about:
       summary: RDKit headers and library used in librdkit
       license: BSD-3-Clause
@@ -170,6 +178,9 @@ outputs:
         # Test the availability of Contrib.
         - python -c "import os; import sys; sys.path.append(os.path.join(os.environ['CONDA_PREFIX'], 'share', 'RDKit', 'Contrib')); from SA_Score import sascorer"  # [unix]
         - python -c "import os; import sys; sys.path.append(os.path.join(os.environ['CONDA_PREFIX'], 'Library', 'share', 'RDKit', 'Contrib')); from SA_Score import sascorer"  # [win]
+        # Python-coupled cmake config must live here, not in librdkit-dev.
+        - test -f $PREFIX/lib/cmake/rdkitpython/rdkitpython-config.cmake  # [unix]
+        - if not exist %LIBRARY_LIB%\\cmake\\rdkitpython\\rdkitpython-config.cmake exit 1  # [win]
       imports:
         - rdkit
         - rdkit.Avalon
