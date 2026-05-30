@@ -19,13 +19,7 @@ source:
     - pg_regress.patch
     - CMakeLists.txt.patch
     - pyproject.patch
-    - rdkit-postgresql-osx-linker-flags.patch
     - rdkit-stubs.CMakeLists.txt.patch
-    # Backport of rdkit/rdkit#9287. Tags dev-only install rules with COMPONENT
-    # dev so the hash headers and cmake config/export files land in
-    # librdkit-dev instead of leaking into librdkit. Drop on the next rdkit
-    # version bump that includes rdkit/rdkit#9287.
-    - dev-component-tagging.patch
 
 build:
   number: 0
@@ -115,6 +109,9 @@ outputs:
         - test -f $PREFIX/include/rdkit/RDGeneral/hash/hash.hpp  # [unix]
         - if not exist %LIBRARY_LIB%\\cmake\\rdkit\\rdkit-config.cmake exit 1  # [win]
         - if not exist %LIBRARY_INC%\\rdkit\\RDGeneral\\hash\\hash.hpp exit 1  # [win]
+        # Python-coupled cmake config must live in the rdkit (python) output, not here.
+        - test ! -e $PREFIX/lib/cmake/rdkitpython/rdkitpython-config.cmake  # [unix]
+        - if exist %LIBRARY_LIB%\\cmake\\rdkitpython\\rdkitpython-config.cmake exit 1  # [win]
     about:
       summary: RDKit headers and library used in librdkit
       license: BSD-3-Clause
@@ -170,6 +167,9 @@ outputs:
         # Test the availability of Contrib.
         - python -c "import os; import sys; sys.path.append(os.path.join(os.environ['CONDA_PREFIX'], 'share', 'RDKit', 'Contrib')); from SA_Score import sascorer"  # [unix]
         - python -c "import os; import sys; sys.path.append(os.path.join(os.environ['CONDA_PREFIX'], 'Library', 'share', 'RDKit', 'Contrib')); from SA_Score import sascorer"  # [win]
+        # Python-coupled cmake config must live here, not in librdkit-dev.
+        - test -f $PREFIX/lib/cmake/rdkitpython/rdkitpython-config.cmake  # [unix]
+        - if not exist %LIBRARY_LIB%\\cmake\\rdkitpython\\rdkitpython-config.cmake exit 1  # [win]
       imports:
         - rdkit
         - rdkit.Avalon
