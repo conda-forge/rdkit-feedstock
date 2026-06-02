@@ -24,6 +24,8 @@ libboost_devel:
 - '1.90'
 libboost_python_devel:
 - '1.90'
+librdkit:
+- 2026.03.2
 macos_machine:
 - x86_64-apple-darwin13.4.0
 numpy:

@@ -11,32 +11,40 @@ jobs:
       win_64_python3.10.____cpython:
         CONFIG: win_64_python3.10.____cpython
         UPLOAD_PACKAGES: 'True'
+        build_workspace_dir: D:\\bld\\
         store_build_artifacts: true
+        tools_install_dir: D:\Miniforge
         SHORT_CONFIG: win_64_python3.10.____cpython
       win_64_python3.11.____cpython:
         CONFIG: win_64_python3.11.____cpython
         UPLOAD_PACKAGES: 'True'
+        build_workspace_dir: D:\\bld\\
         store_build_artifacts: true
+        tools_install_dir: D:\Miniforge
         SHORT_CONFIG: win_64_python3.11.____cpython
       win_64_python3.12.____cpython:
         CONFIG: win_64_python3.12.____cpython
         UPLOAD_PACKAGES: 'True'
+        build_workspace_dir: D:\\bld\\
         store_build_artifacts: true
+        tools_install_dir: D:\Miniforge
         SHORT_CONFIG: win_64_python3.12.____cpython
       win_64_python3.13.____cp313:
         CONFIG: win_64_python3.13.____cp313
         UPLOAD_PACKAGES: 'True'
+        build_workspace_dir: D:\\bld\\
         store_build_artifacts: true
+        tools_install_dir: D:\Miniforge
         SHORT_CONFIG: win_64_python3.13.____cp313
       win_64_python3.14.____cp314:
         CONFIG: win_64_python3.14.____cp314
         UPLOAD_PACKAGES: 'True'
+        build_workspace_dir: D:\\bld\\
         store_build_artifacts: true
+        tools_install_dir: D:\Miniforge
         SHORT_CONFIG: win_64_python3.14.____cp314
   timeoutInMinutes: 360
   variables:
-    CONDA_BLD_PATH: D:\\bld\\
-    MINIFORGE_HOME: D:\Miniforge
     UPLOAD_TEMP: D:\\tmp
 
   steps:
@@ -45,8 +53,8 @@ jobs:
         call ".scripts\run_win_build.bat"
       displayName: Run Windows build
       env:
-        MINIFORGE_HOME: $(MINIFORGE_HOME)
-        CONDA_BLD_PATH: $(CONDA_BLD_PATH)
+        MINIFORGE_HOME: $(tools_install_dir)
+        CONDA_BLD_PATH: $(build_workspace_dir)
         PYTHONUNBUFFERED: 1
         CONFIG: $(CONFIG)
         CI: azure
@@ -60,12 +68,12 @@ jobs:
         STAGING_BINSTAR_TOKEN: $(STAGING_BINSTAR_TOKEN)
 
     - script: |
-        set MINIFORGE_HOME=$(MINIFORGE_HOME)
+        set MINIFORGE_HOME=$(tools_install_dir)
+        set CONDA_BLD_PATH=$(build_workspace_dir)
         set CI=azure
         set CI_RUN_ID=$(build.BuildNumber).$(system.JobAttempt)
         set FEEDSTOCK_NAME=$(build.Repository.Name)
         set ARTIFACT_STAGING_DIR=$(Build.ArtifactStagingDirectory)
-        set CONDA_BLD_PATH=$(CONDA_BLD_PATH)
         set BLD_ARTIFACT_PREFIX=conda_artifacts
         if "%AGENT_JOBSTATUS%" == "Failed" (
             set ENV_ARTIFACT_PREFIX=conda_envs
