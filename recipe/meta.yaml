@@ -42,6 +42,7 @@ requirements:
     - cairo
     - eigen
     - freetype
+    - expat
     - libboost-devel
     - libboost-python-devel
     - numpy
@@ -68,6 +69,7 @@ outputs:
       host:
         - cairo
         - freetype
+        - expat
         - libboost-devel
         - eigen-abi-devel
     test:
@@ -136,6 +138,7 @@ outputs:
         - cairo
         - eigen
         - freetype
+        - expat
         - libboost-devel
         - libboost-python-devel
         - matplotlib-base
@@ -239,6 +242,7 @@ outputs:
         - {{ pin_subpackage('librdkit', exact=True) }}
         - cairo
         - freetype
+        - expat
         - libboost-devel
         - postgresql
       run:
