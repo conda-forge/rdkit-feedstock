@@ -19,7 +19,6 @@ source:
     - pg_regress.patch
     - CMakeLists.txt.patch
     - pyproject.patch
-    - rdkit-stubs.CMakeLists.txt.patch
 
 build:
   number: 0
