@@ -1,4 +1,4 @@
-{% set version = "2026_03_3" %}
+{% set version = "2026_03_4" %}
 {% set filename = "Release_%s.tar.gz" % version.replace(".", "_") %}
 {% set version = version.replace("_",".") %} # workaround bad conda-forge/rdkit release name interaction
 
@@ -13,13 +13,12 @@ package:
 source:
   fn: {{ filename }}
   url: https://github.com/rdkit/rdkit/archive/{{ filename }}
-  sha256: 21e22e5e6b3a313527256fbde41c757f22d834b19caf2908e3c2dd11061e1fea
+  sha256: a8bff65bdf13dd47a01f707f7759dd59124a8742f8c50952c2ceae9523b4fd2b
 
   patches:
     - pg_regress.patch
     - CMakeLists.txt.patch
     - pyproject.patch
-    - rdkit-stubs.CMakeLists.txt.patch
 
 build:
   number: 0
@@ -42,6 +41,7 @@ requirements:
     - cairo
     - eigen
     - freetype
+    - expat
     - libboost-devel
     - libboost-python-devel
     - numpy
@@ -68,6 +68,7 @@ outputs:
       host:
         - cairo
         - freetype
+        - expat
         - libboost-devel
         - eigen-abi-devel
     test:
@@ -136,6 +137,7 @@ outputs:
         - cairo
         - eigen
         - freetype
+        - expat
         - libboost-devel
         - libboost-python-devel
         - matplotlib-base
@@ -239,6 +241,7 @@ outputs:
         - {{ pin_subpackage('librdkit', exact=True) }}
         - cairo
         - freetype
+        - expat
         - libboost-devel
         - postgresql
       run:
