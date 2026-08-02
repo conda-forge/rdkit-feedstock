@@ -10,6 +10,8 @@ cxx_compiler:
 - vs2022
 eigen_abi_devel:
 - 5.0.1
+expat:
+- '2'
 freetype:
 - '2'
 libboost_devel:

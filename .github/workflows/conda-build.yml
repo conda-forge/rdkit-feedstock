@@ -24,7 +24,7 @@ jobs:
         include:
           - CONFIG: linux_64_python3.10.____cpython
             CONFIG_SHORT: linux_64_python3.10.____cpython
-            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
             STORE_BUILD_ARTIFACTS: True
             UPLOAD_PACKAGES: True
             build_workspace_dir: build_artifacts
@@ -37,7 +37,7 @@ jobs:
             tools_install_dir: ~/miniforge3
           - CONFIG: linux_64_python3.11.____cpython
             CONFIG_SHORT: linux_64_python3.11.____cpython
-            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
             STORE_BUILD_ARTIFACTS: True
             UPLOAD_PACKAGES: True
             build_workspace_dir: build_artifacts
@@ -50,7 +50,7 @@ jobs:
             tools_install_dir: ~/miniforge3
           - CONFIG: linux_64_python3.12.____cpython
             CONFIG_SHORT: linux_64_python3.12.____cpython
-            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
             STORE_BUILD_ARTIFACTS: True
             UPLOAD_PACKAGES: True
             build_workspace_dir: build_artifacts
@@ -63,7 +63,7 @@ jobs:
             tools_install_dir: ~/miniforge3
           - CONFIG: linux_64_python3.13.____cp313
             CONFIG_SHORT: linux_64_python3.13.____cp313
-            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
             STORE_BUILD_ARTIFACTS: True
             UPLOAD_PACKAGES: True
             build_workspace_dir: build_artifacts
@@ -76,7 +76,7 @@ jobs:
             tools_install_dir: ~/miniforge3
           - CONFIG: linux_64_python3.14.____cp314
             CONFIG_SHORT: linux_64_python3.14.____cp314
-            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
             STORE_BUILD_ARTIFACTS: True
             UPLOAD_PACKAGES: True
             build_workspace_dir: build_artifacts
@@ -89,7 +89,7 @@ jobs:
             tools_install_dir: ~/miniforge3
           - CONFIG: linux_aarch64_python3.10.____cpython
             CONFIG_SHORT: linux_aarch64_python3.10.____cpython
-            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
             STORE_BUILD_ARTIFACTS: True
             UPLOAD_PACKAGES: True
             build_workspace_dir: build_artifacts
@@ -102,7 +102,7 @@ jobs:
             tools_install_dir: ~/miniforge3
           - CONFIG: linux_aarch64_python3.11.____cpython
             CONFIG_SHORT: linux_aarch64_python3.11.____cpython
-            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
             STORE_BUILD_ARTIFACTS: True
             UPLOAD_PACKAGES: True
             build_workspace_dir: build_artifacts
@@ -115,7 +115,7 @@ jobs:
             tools_install_dir: ~/miniforge3
           - CONFIG: linux_aarch64_python3.12.____cpython
             CONFIG_SHORT: linux_aarch64_python3.12.____cpython
-            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
             STORE_BUILD_ARTIFACTS: True
             UPLOAD_PACKAGES: True
             build_workspace_dir: build_artifacts
@@ -128,7 +128,7 @@ jobs:
             tools_install_dir: ~/miniforge3
           - CONFIG: linux_aarch64_python3.13.____cp313
             CONFIG_SHORT: linux_aarch64_python3.13.____cp313
-            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
             STORE_BUILD_ARTIFACTS: True
             UPLOAD_PACKAGES: True
             build_workspace_dir: build_artifacts
@@ -141,7 +141,7 @@ jobs:
             tools_install_dir: ~/miniforge3
           - CONFIG: linux_aarch64_python3.14.____cp314
             CONFIG_SHORT: linux_aarch64_python3.14.____cp314
-            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
             STORE_BUILD_ARTIFACTS: True
             UPLOAD_PACKAGES: True
             build_workspace_dir: build_artifacts
@@ -154,7 +154,7 @@ jobs:
             tools_install_dir: ~/miniforge3
           - CONFIG: linux_ppc64le_python3.10.____cpython
             CONFIG_SHORT: linux_ppc64le_python3.10.____cpython
-            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
             STORE_BUILD_ARTIFACTS: True
             UPLOAD_PACKAGES: True
             build_workspace_dir: build_artifacts
@@ -167,7 +167,7 @@ jobs:
             tools_install_dir: ~/miniforge3
           - CONFIG: linux_ppc64le_python3.11.____cpython
             CONFIG_SHORT: linux_ppc64le_python3.11.____cpython
-            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
             STORE_BUILD_ARTIFACTS: True
             UPLOAD_PACKAGES: True
             build_workspace_dir: build_artifacts
@@ -180,7 +180,7 @@ jobs:
             tools_install_dir: ~/miniforge3
           - CONFIG: linux_ppc64le_python3.12.____cpython
             CONFIG_SHORT: linux_ppc64le_python3.12.____cpython
-            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
             STORE_BUILD_ARTIFACTS: True
             UPLOAD_PACKAGES: True
             build_workspace_dir: build_artifacts
@@ -193,7 +193,7 @@ jobs:
             tools_install_dir: ~/miniforge3
           - CONFIG: linux_ppc64le_python3.13.____cp313
             CONFIG_SHORT: linux_ppc64le_python3.13.____cp313
-            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
             STORE_BUILD_ARTIFACTS: True
             UPLOAD_PACKAGES: True
             build_workspace_dir: build_artifacts
@@ -206,7 +206,7 @@ jobs:
             tools_install_dir: ~/miniforge3
           - CONFIG: linux_ppc64le_python3.14.____cp314
             CONFIG_SHORT: linux_ppc64le_python3.14.____cp314
-            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
             STORE_BUILD_ARTIFACTS: True
             UPLOAD_PACKAGES: True
             build_workspace_dir: build_artifacts
