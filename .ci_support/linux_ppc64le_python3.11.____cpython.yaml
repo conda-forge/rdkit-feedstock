@@ -38,3 +38,5 @@ python:
 - 3.11.* *_cpython
 target_platform:
 - linux-ppc64le
+wrapper_flavor:
+- boost

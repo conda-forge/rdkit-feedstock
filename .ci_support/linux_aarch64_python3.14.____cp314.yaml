@@ -38,3 +38,5 @@ python:
 - 3.14.* *_cp314
 target_platform:
 - linux-aarch64
+wrapper_flavor:
+- boost

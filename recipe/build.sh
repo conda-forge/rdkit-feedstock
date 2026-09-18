@@ -47,6 +47,7 @@ time cmake ${CMAKE_ARGS} \
     -D Python_EXECUTABLE="${PYTHON}" \
     -D Python3_EXECUTABLE="${PYTHON}" \
     -D RDK_BUILD_AVALON_SUPPORT=ON \
+    -D RDK_BUILD_BOOST_PYTHON_WRAPPERS=ON \
     -D RDK_BUILD_CAIRO_SUPPORT=ON \
     -D RDK_BUILD_CONTRIB=ON \
     -D RDK_BUILD_CPP_TESTS=OFF \
@@ -61,6 +62,21 @@ time cmake ${CMAKE_ARGS} \
     -D RDK_PGSQL_STATIC=OFF \
     ${EXTRA_CMAKE_FLAGS} \
     .
+
+# The outputs partition the install by cmake component (see install.sh), so a
+# component that no output claims is silently dropped from every package. Upstream
+# gates several components on build options and on the wrapper flavor, so pin the
+# expected set and fail here rather than shipping a package with files missing.
+EXPECTED_COMPONENTS="Unspecified base data dev docs extras pgsql python runtime"
+ACTUAL_COMPONENTS="$(make list_install_components \
+    | sed -n 's/^Available install components are: //p' \
+    | tr -d '"' | tr ' ' '\n' | LC_ALL=C sort -u | tr '\n' ' ' | sed 's/ $//')"
+if [ "${ACTUAL_COMPONENTS}" != "${EXPECTED_COMPONENTS}" ]; then
+    echo "ERROR: cmake install component set drifted; update install.sh to route the new set" >&2
+    echo "  expected: ${EXPECTED_COMPONENTS}" >&2
+    echo "  actual:   ${ACTUAL_COMPONENTS}" >&2
+    exit 1
+fi
 
 time make -j"${CPU_COUNT}"
 

@@ -42,3 +42,5 @@ python:
 - 3.14.* *_cp314
 target_platform:
 - osx-arm64
+wrapper_flavor:
+- boost

@@ -1,0 +1,6 @@
+# Selects which Python wrapper layer the `rdkit` output is built against, and leads
+# its build string so downstreams can pin a flavor through the `rdkit-boost`
+# selector metapackage. Upstream's two wrapper layers are mutually exclusive, so
+# this is one choice per build rather than a set of features.
+wrapper_flavor:
+  - boost

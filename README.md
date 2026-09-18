@@ -44,6 +44,15 @@ Package license: BSD-3-Clause
 
 Summary: RDKit Python bindings
 
+About rdkit-boost
+-----------------
+
+
+
+Package license: BSD-3-Clause
+
+Summary: Selects the Boost.Python build of the RDKit Python bindings
+
 About rdkit-dev
 ---------------
 
@@ -87,13 +96,6 @@ Current build status
         <table>
           <thead><tr><th>Variant</th><th>Status</th></tr></thead>
           <tbody><tr>
-              <td>osx_64_python3.10.____cpython</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=1832&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/rdkit-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_python3.10.____cpython" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
               <td>osx_64_python3.11.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=1832&branchName=main">
@@ -137,6 +139,7 @@ Current release info
 | [![Conda Recipe](https://img.shields.io/badge/recipe-librdkit-green.svg)](https://anaconda.org/conda-forge/librdkit) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/librdkit.svg)](https://anaconda.org/conda-forge/librdkit) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/librdkit.svg)](https://anaconda.org/conda-forge/librdkit) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/librdkit.svg)](https://anaconda.org/conda-forge/librdkit) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-librdkit--dev-green.svg)](https://anaconda.org/conda-forge/librdkit-dev) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/librdkit-dev.svg)](https://anaconda.org/conda-forge/librdkit-dev) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/librdkit-dev.svg)](https://anaconda.org/conda-forge/librdkit-dev) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/librdkit-dev.svg)](https://anaconda.org/conda-forge/librdkit-dev) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-rdkit-green.svg)](https://anaconda.org/conda-forge/rdkit) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/rdkit.svg)](https://anaconda.org/conda-forge/rdkit) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/rdkit.svg)](https://anaconda.org/conda-forge/rdkit) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/rdkit.svg)](https://anaconda.org/conda-forge/rdkit) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-rdkit--boost-green.svg)](https://anaconda.org/conda-forge/rdkit-boost) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/rdkit-boost.svg)](https://anaconda.org/conda-forge/rdkit-boost) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/rdkit-boost.svg)](https://anaconda.org/conda-forge/rdkit-boost) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/rdkit-boost.svg)](https://anaconda.org/conda-forge/rdkit-boost) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-rdkit--dev-green.svg)](https://anaconda.org/conda-forge/rdkit-dev) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/rdkit-dev.svg)](https://anaconda.org/conda-forge/rdkit-dev) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/rdkit-dev.svg)](https://anaconda.org/conda-forge/rdkit-dev) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/rdkit-dev.svg)](https://anaconda.org/conda-forge/rdkit-dev) |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-rdkit--postgresql-green.svg)](https://anaconda.org/conda-forge/rdkit-postgresql) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/rdkit-postgresql.svg)](https://anaconda.org/conda-forge/rdkit-postgresql) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/rdkit-postgresql.svg)](https://anaconda.org/conda-forge/rdkit-postgresql) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/rdkit-postgresql.svg)](https://anaconda.org/conda-forge/rdkit-postgresql) |
 
@@ -157,7 +160,7 @@ How to use
 <summary>With conda</summary>
 
 ```
-conda install librdkit librdkit-dev rdkit rdkit-dev rdkit-postgresql
+conda install librdkit librdkit-dev rdkit rdkit-boost rdkit-dev rdkit-postgresql
 ```
 
 </details>
@@ -166,7 +169,7 @@ conda install librdkit librdkit-dev rdkit rdkit-dev rdkit-postgresql
 <summary>With mamba</summary>
 
 ```
-mamba install librdkit librdkit-dev rdkit rdkit-dev rdkit-postgresql
+mamba install librdkit librdkit-dev rdkit rdkit-boost rdkit-dev rdkit-postgresql
 ```
 
 </details>
@@ -176,9 +179,9 @@ mamba install librdkit librdkit-dev rdkit rdkit-dev rdkit-postgresql
 
 ```
 # for adding to your local project
-pixi add librdkit librdkit-dev rdkit rdkit-dev rdkit-postgresql
+pixi add librdkit librdkit-dev rdkit rdkit-boost rdkit-dev rdkit-postgresql
 # for installing globally
-pixi global install librdkit librdkit-dev rdkit rdkit-dev rdkit-postgresql
+pixi global install librdkit librdkit-dev rdkit rdkit-boost rdkit-dev rdkit-postgresql
 ```
 
 </details>

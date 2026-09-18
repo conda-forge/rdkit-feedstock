@@ -21,7 +21,7 @@ source:
     - pyproject.patch
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   # See https://conda-forge.org/docs/maintainer/knowledge_base/#placing-requirements-in-build-or-host and
@@ -121,6 +121,10 @@ outputs:
   - name: rdkit
     script: install.sh  # [unix]
     script: install.bat  # [win]
+    build:
+      # Downstreams pin a flavor with `rdkit {{ version }} boost_*`; see
+      # conda_build_config.yaml.
+      string: {{ wrapper_flavor }}_py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}
     requirements:
       build:
         - {{ compiler('cxx') }}
@@ -191,6 +195,23 @@ outputs:
         - rdkit.Chem.PandasTools
     about:
       summary: RDKit Python bindings
+      license: BSD-3-Clause
+      license_file: license.txt
+
+  - name: rdkit-boost
+    build:
+      string: {{ wrapper_flavor }}_py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}
+      # Only the boost variant may claim this name; another flavor's build would
+      # otherwise publish an rdkit-boost that resolves to the wrong wrappers.
+      skip: true  # [wrapper_flavor != "boost"]
+    requirements:
+      run:
+        - {{ pin_subpackage('rdkit', exact=True) }}
+    test:
+      imports:
+        - rdkit.Chem
+    about:
+      summary: Selects the Boost.Python build of the RDKit Python bindings
       license: BSD-3-Clause
       license_file: license.txt
 
