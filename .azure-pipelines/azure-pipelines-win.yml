@@ -8,17 +8,6 @@ jobs:
     vmImage: windows-2022
   strategy:
     matrix:
-      win_64_python3.10.____cpython:
-        CONFIG: win_64_python3.10.____cpython
-        UPLOAD_PACKAGES: 'True'
-        build_platform: win-64
-        build_workspace_dir: D:\\bld\\
-        free_disk_space: skip
-        pagefile_size: 0
-        resize_partitions: false
-        store_build_artifacts: true
-        tools_install_dir: D:\Miniforge
-        CONFIG_SHORT: win_64_python3.10.____cpython
       win_64_python3.11.____cpython:
         CONFIG: win_64_python3.11.____cpython
         UPLOAD_PACKAGES: 'True'
@@ -89,14 +78,18 @@ jobs:
 
     - script: |
         set ARTIFACT_STAGING_DIR=$(Build.ArtifactStagingDirectory)
-        set BLD_ARTIFACT_PREFIX=conda_artifacts
+        set BLD_ARTIFACT_PREFIX=conda_pkgs
         set CI=azure
         set CI_RUN_ID=$(build.BuildNumber).$(system.JobAttempt)
         set CONDA_BLD_PATH=$(build_workspace_dir)
         set FEEDSTOCK_NAME=$(build.Repository.Name)
+        rem strip '{org}/' from `{org}/{repo}` to get feedstock name
+        set FEEDSTOCK_NAME=%FEEDSTOCK_NAME:*/=%
         set MINIFORGE_HOME=$(tools_install_dir)
         if "%AGENT_JOBSTATUS%" == "Failed" (
+            set BLD_ARTIFACT_PREFIX=conda_pkgs_failed
             set ENV_ARTIFACT_PREFIX=conda_envs
+            set WRK_ARTIFACT_PREFIX=conda_work
         )
         call ".scripts\create_conda_build_artifacts.bat"
       displayName: Prepare conda build artifacts
@@ -108,6 +101,13 @@ jobs:
       inputs:
         targetPath: $(BLD_ARTIFACT_PATH)
         artifactName: $(BLD_ARTIFACT_NAME)
+
+    - task: PublishPipelineArtifact@1
+      displayName: Store conda work directoryartifacts
+      condition: not(eq(variables.WRK_ARTIFACT_PATH, ''))
+      inputs:
+        targetPath: $(WRK_ARTIFACT_PATH)
+        artifactName: $(WRK_ARTIFACT_NAME)
 
     - task: PublishPipelineArtifact@1
       displayName: Store conda build environment artifacts
