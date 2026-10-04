@@ -1,19 +1,21 @@
+MACOSX_DEPLOYMENT_TARGET:
+- '11.0'
+MACOSX_SDK_VERSION:
+- '11.0'
 c_stdlib:
-- sysroot
+- macosx_deployment_target
 c_stdlib_version:
-- '2.17'
+- '11.0'
 cairo:
 - '1'
 channel_sources:
-- conda-forge
+- conda-forge,conda-forge/label/python_rc
 channel_targets:
 - conda-forge main
 cxx_compiler:
-- gxx
+- clangxx
 cxx_compiler_version:
-- '15'
-docker_image:
-- quay.io/condaforge/linux-anvil-x86_64:alma10
+- '21'
 eigen_abi_devel:
 - 5.0.1
 expat:
@@ -26,6 +28,8 @@ libboost_python_devel:
 - '1.90'
 librdkit:
 - 2026.03.2
+macos_machine:
+- x86_64-apple-darwin13.4.0
 numpy:
 - '2'
 pin_run_as_build:
@@ -35,6 +39,9 @@ pin_run_as_build:
 postgresql:
 - '18'
 python:
-- 3.10.* *_cpython
+- 3.15.* *_cp315
 target_platform:
-- linux-aarch64
+- osx-64
+zip_keys:
+- - python
+  - channel_sources
