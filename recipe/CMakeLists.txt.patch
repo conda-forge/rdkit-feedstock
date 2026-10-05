@@ -6,7 +6,7 @@ index 9e28815c4..25ee857fe 100644
  
    #-------
    # pull in python:
--  find_package(Python COMPONENTS Interpreter Development.Module NumPy)
+-  find_package(Python COMPONENTS Interpreter Development.Module Development.Embed NumPy)
 +  find_package(Python COMPONENTS Interpreter Development NumPy)
    target_include_directories(rdkit_py_base INTERFACE ${Python_INCLUDE_DIRS})
    target_include_directories(rdkit_py_base INTERFACE ${Python_NumPy_INCLUDE_DIRS})
