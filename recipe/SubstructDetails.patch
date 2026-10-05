@@ -4,7 +4,7 @@ index 32d110771..58ecace97 100644
 +++ b/Code/GraphMol/Substruct/SubstructDetails.h
 @@ -23,7 +23,7 @@ class RecursiveStructureQuery;
  struct SubstructMatchParameters;
-
+ 
  namespace detail {
 -struct RecursiveLocker {
 +struct RDKIT_SUBSTRUCTMATCH_EXPORT RecursiveLocker {
