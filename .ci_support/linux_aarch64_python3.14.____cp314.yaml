@@ -38,3 +38,6 @@ python:
 - 3.14.* *_cp314
 target_platform:
 - linux-aarch64
+zip_keys:
+- - python
+  - channel_sources
