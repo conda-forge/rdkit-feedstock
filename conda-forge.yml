@@ -11,6 +11,7 @@ provider:
   linux_ppc64le: default
   osx_arm64: default
   win: azure
+  osx_arm64: default
 test: native_and_emulated
 workflow_settings:
   store_build_artifacts: true
