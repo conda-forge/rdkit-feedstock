@@ -20,7 +20,12 @@ elif [ "${PKG_NAME}" == "rdkit" ]; then
     for COMPONENT in extras python; do
       cmake -D CMAKE_INSTALL_COMPONENT="${COMPONENT}" -P cmake_install.cmake
     done
-    cmake --build . --config Release --target stubs
+    # Upstream generates stubs only for Boost.Python. The flavor comes from the build
+    # tree rather than the variant variable: conda-build hashes every variable this
+    # script names into librdkit too, which must stay one package for all flavors.
+    if grep -q '^RDK_BUILD_BOOST_PYTHON_WRAPPERS:BOOL=ON$' CMakeCache.txt; then
+      cmake --build . --config Release --target stubs
+    fi
 
     # NOTE(hadim): Below we run `pip install ...` in order to correctly add the `.dist-info` directory in the package
     # so python can correctly detect whether rdkit is installed when it's coming from a conda package.

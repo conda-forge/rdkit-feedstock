@@ -37,6 +37,16 @@ if [[ "${target_platform}" == "osx-64"  ]]; then
   CXXFLAGS="${CXXFLAGS} -D_LIBCPP_DISABLE_AVAILABILITY"
 fi
 
+# Upstream defaults boost to ON and rejects both ON with a FATAL_ERROR, so set both.
+case "${wrapper_flavor}" in
+  boost)
+    WRAPPER_FLAGS="-D RDK_BUILD_BOOST_PYTHON_WRAPPERS=ON -D RDK_BUILD_NANOBIND_WRAPPERS=OFF" ;;
+  nanobind)
+    WRAPPER_FLAGS="-D RDK_BUILD_BOOST_PYTHON_WRAPPERS=OFF -D RDK_BUILD_NANOBIND_WRAPPERS=ON" ;;
+  *)
+    echo "ERROR: unknown wrapper_flavor '${wrapper_flavor}'" >&2
+    exit 1 ;;
+esac
 
 time cmake ${CMAKE_ARGS} \
     -D Boost_NO_SYSTEM_PATHS=ON \
@@ -47,7 +57,7 @@ time cmake ${CMAKE_ARGS} \
     -D Python_EXECUTABLE="${PYTHON}" \
     -D Python3_EXECUTABLE="${PYTHON}" \
     -D RDK_BUILD_AVALON_SUPPORT=ON \
-    -D RDK_BUILD_BOOST_PYTHON_WRAPPERS=ON \
+    ${WRAPPER_FLAGS} \
     -D RDK_BUILD_CAIRO_SUPPORT=ON \
     -D RDK_BUILD_CONTRIB=ON \
     -D RDK_BUILD_CPP_TESTS=OFF \

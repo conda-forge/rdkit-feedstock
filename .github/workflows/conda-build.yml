@@ -22,8 +22,8 @@ jobs:
       max-parallel: 50
       matrix:
         include:
-          - CONFIG: linux_64_python3.11.____cpython
-            CONFIG_SHORT: linux_64_python3.11.____cpython
+          - CONFIG: linux_64_python3.11.____cpythonwrapper_flavorboost
+            CONFIG_SHORT: linux_64_python3.11.____cpythonwrapper_f_he210c4f6
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
             STORE_BUILD_ARTIFACTS: True
             UPLOAD_PACKAGES: True
@@ -35,8 +35,8 @@ jobs:
             resize_partitions: False
             runs_on: ['ubuntu-latest']
             tools_install_dir: ~/miniforge3
-          - CONFIG: linux_64_python3.12.____cpython
-            CONFIG_SHORT: linux_64_python3.12.____cpython
+          - CONFIG: linux_64_python3.11.____cpythonwrapper_flavornanobind
+            CONFIG_SHORT: linux_64_python3.11.____cpythonwrapper_f_h843721d9
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
             STORE_BUILD_ARTIFACTS: True
             UPLOAD_PACKAGES: True
@@ -48,8 +48,8 @@ jobs:
             resize_partitions: False
             runs_on: ['ubuntu-latest']
             tools_install_dir: ~/miniforge3
-          - CONFIG: linux_64_python3.13.____cp313
-            CONFIG_SHORT: linux_64_python3.13.____cp313
+          - CONFIG: linux_64_python3.12.____cpythonwrapper_flavorboost
+            CONFIG_SHORT: linux_64_python3.12.____cpythonwrapper_f_h6c2988b8
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
             STORE_BUILD_ARTIFACTS: True
             UPLOAD_PACKAGES: True
@@ -61,8 +61,8 @@ jobs:
             resize_partitions: False
             runs_on: ['ubuntu-latest']
             tools_install_dir: ~/miniforge3
-          - CONFIG: linux_64_python3.14.____cp314
-            CONFIG_SHORT: linux_64_python3.14.____cp314
+          - CONFIG: linux_64_python3.12.____cpythonwrapper_flavornanobind
+            CONFIG_SHORT: linux_64_python3.12.____cpythonwrapper_f_hb822e2bb
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
             STORE_BUILD_ARTIFACTS: True
             UPLOAD_PACKAGES: True
@@ -74,8 +74,60 @@ jobs:
             resize_partitions: False
             runs_on: ['ubuntu-latest']
             tools_install_dir: ~/miniforge3
-          - CONFIG: linux_aarch64_python3.11.____cpython
-            CONFIG_SHORT: linux_aarch64_python3.11.____cpython
+          - CONFIG: linux_64_python3.13.____cp313wrapper_flavorboost
+            CONFIG_SHORT: linux_64_python3.13.____cp313wrapper_flavorboost
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
+            STORE_BUILD_ARTIFACTS: True
+            UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: skip
+            os: ubuntu
+            pagefile_size: 0
+            resize_partitions: False
+            runs_on: ['ubuntu-latest']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_64_python3.13.____cp313wrapper_flavornanobind
+            CONFIG_SHORT: linux_64_python3.13.____cp313wrapper_fla_h11b500f2
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
+            STORE_BUILD_ARTIFACTS: True
+            UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: skip
+            os: ubuntu
+            pagefile_size: 0
+            resize_partitions: False
+            runs_on: ['ubuntu-latest']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_64_python3.14.____cp314wrapper_flavorboost
+            CONFIG_SHORT: linux_64_python3.14.____cp314wrapper_flavorboost
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
+            STORE_BUILD_ARTIFACTS: True
+            UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: skip
+            os: ubuntu
+            pagefile_size: 0
+            resize_partitions: False
+            runs_on: ['ubuntu-latest']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_64_python3.14.____cp314wrapper_flavornanobind
+            CONFIG_SHORT: linux_64_python3.14.____cp314wrapper_fla_h496e6789
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
+            STORE_BUILD_ARTIFACTS: True
+            UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: skip
+            os: ubuntu
+            pagefile_size: 0
+            resize_partitions: False
+            runs_on: ['ubuntu-latest']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_aarch64_python3.11.____cpythonwrapper_flavorboost
+            CONFIG_SHORT: linux_aarch64_python3.11.____cpythonwrap_h6624e482
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-aarch64:alma10
             STORE_BUILD_ARTIFACTS: True
             UPLOAD_PACKAGES: True
@@ -87,8 +139,8 @@ jobs:
             resize_partitions: False
             runs_on: ['ubuntu-24.04-arm']
             tools_install_dir: ~/miniforge3
-          - CONFIG: linux_aarch64_python3.12.____cpython
-            CONFIG_SHORT: linux_aarch64_python3.12.____cpython
+          - CONFIG: linux_aarch64_python3.11.____cpythonwrapper_flavornanobind
+            CONFIG_SHORT: linux_aarch64_python3.11.____cpythonwrap_hdec05756
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-aarch64:alma10
             STORE_BUILD_ARTIFACTS: True
             UPLOAD_PACKAGES: True
@@ -100,8 +152,8 @@ jobs:
             resize_partitions: False
             runs_on: ['ubuntu-24.04-arm']
             tools_install_dir: ~/miniforge3
-          - CONFIG: linux_aarch64_python3.13.____cp313
-            CONFIG_SHORT: linux_aarch64_python3.13.____cp313
+          - CONFIG: linux_aarch64_python3.12.____cpythonwrapper_flavorboost
+            CONFIG_SHORT: linux_aarch64_python3.12.____cpythonwrap_h20f299ec
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-aarch64:alma10
             STORE_BUILD_ARTIFACTS: True
             UPLOAD_PACKAGES: True
@@ -113,8 +165,8 @@ jobs:
             resize_partitions: False
             runs_on: ['ubuntu-24.04-arm']
             tools_install_dir: ~/miniforge3
-          - CONFIG: linux_aarch64_python3.14.____cp314
-            CONFIG_SHORT: linux_aarch64_python3.14.____cp314
+          - CONFIG: linux_aarch64_python3.12.____cpythonwrapper_flavornanobind
+            CONFIG_SHORT: linux_aarch64_python3.12.____cpythonwrap_h0c3d55cf
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-aarch64:alma10
             STORE_BUILD_ARTIFACTS: True
             UPLOAD_PACKAGES: True
@@ -126,8 +178,60 @@ jobs:
             resize_partitions: False
             runs_on: ['ubuntu-24.04-arm']
             tools_install_dir: ~/miniforge3
-          - CONFIG: linux_ppc64le_python3.11.____cpython
-            CONFIG_SHORT: linux_ppc64le_python3.11.____cpython
+          - CONFIG: linux_aarch64_python3.13.____cp313wrapper_flavorboost
+            CONFIG_SHORT: linux_aarch64_python3.13.____cp313wrappe_h5858d7f2
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-aarch64:alma10
+            STORE_BUILD_ARTIFACTS: True
+            UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: skip
+            os: ubuntu
+            pagefile_size: 0
+            resize_partitions: False
+            runs_on: ['ubuntu-24.04-arm']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_aarch64_python3.13.____cp313wrapper_flavornanobind
+            CONFIG_SHORT: linux_aarch64_python3.13.____cp313wrappe_hd4395b23
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-aarch64:alma10
+            STORE_BUILD_ARTIFACTS: True
+            UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: skip
+            os: ubuntu
+            pagefile_size: 0
+            resize_partitions: False
+            runs_on: ['ubuntu-24.04-arm']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_aarch64_python3.14.____cp314wrapper_flavorboost
+            CONFIG_SHORT: linux_aarch64_python3.14.____cp314wrappe_h63ced478
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-aarch64:alma10
+            STORE_BUILD_ARTIFACTS: True
+            UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: skip
+            os: ubuntu
+            pagefile_size: 0
+            resize_partitions: False
+            runs_on: ['ubuntu-24.04-arm']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_aarch64_python3.14.____cp314wrapper_flavornanobind
+            CONFIG_SHORT: linux_aarch64_python3.14.____cp314wrappe_h250f4a1d
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-aarch64:alma10
+            STORE_BUILD_ARTIFACTS: True
+            UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: skip
+            os: ubuntu
+            pagefile_size: 0
+            resize_partitions: False
+            runs_on: ['ubuntu-24.04-arm']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_ppc64le_python3.11.____cpythonwrapper_flavorboost
+            CONFIG_SHORT: linux_ppc64le_python3.11.____cpythonwrap_h588d6590
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
             STORE_BUILD_ARTIFACTS: True
             UPLOAD_PACKAGES: True
@@ -139,8 +243,8 @@ jobs:
             resize_partitions: False
             runs_on: ['ubuntu-latest']
             tools_install_dir: ~/miniforge3
-          - CONFIG: linux_ppc64le_python3.12.____cpython
-            CONFIG_SHORT: linux_ppc64le_python3.12.____cpython
+          - CONFIG: linux_ppc64le_python3.11.____cpythonwrapper_flavornanobind
+            CONFIG_SHORT: linux_ppc64le_python3.11.____cpythonwrap_h31917bdc
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
             STORE_BUILD_ARTIFACTS: True
             UPLOAD_PACKAGES: True
@@ -152,8 +256,8 @@ jobs:
             resize_partitions: False
             runs_on: ['ubuntu-latest']
             tools_install_dir: ~/miniforge3
-          - CONFIG: linux_ppc64le_python3.13.____cp313
-            CONFIG_SHORT: linux_ppc64le_python3.13.____cp313
+          - CONFIG: linux_ppc64le_python3.12.____cpythonwrapper_flavorboost
+            CONFIG_SHORT: linux_ppc64le_python3.12.____cpythonwrap_h3dd0bdcc
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
             STORE_BUILD_ARTIFACTS: True
             UPLOAD_PACKAGES: True
@@ -165,8 +269,60 @@ jobs:
             resize_partitions: False
             runs_on: ['ubuntu-latest']
             tools_install_dir: ~/miniforge3
-          - CONFIG: linux_ppc64le_python3.14.____cp314
-            CONFIG_SHORT: linux_ppc64le_python3.14.____cp314
+          - CONFIG: linux_ppc64le_python3.12.____cpythonwrapper_flavornanobind
+            CONFIG_SHORT: linux_ppc64le_python3.12.____cpythonwrap_h105b5f57
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
+            STORE_BUILD_ARTIFACTS: True
+            UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: skip
+            os: ubuntu
+            pagefile_size: 0
+            resize_partitions: False
+            runs_on: ['ubuntu-latest']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_ppc64le_python3.13.____cp313wrapper_flavorboost
+            CONFIG_SHORT: linux_ppc64le_python3.13.____cp313wrappe_h2ad8f1e2
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
+            STORE_BUILD_ARTIFACTS: True
+            UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: skip
+            os: ubuntu
+            pagefile_size: 0
+            resize_partitions: False
+            runs_on: ['ubuntu-latest']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_ppc64le_python3.13.____cp313wrapper_flavornanobind
+            CONFIG_SHORT: linux_ppc64le_python3.13.____cp313wrappe_h18fd2a42
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
+            STORE_BUILD_ARTIFACTS: True
+            UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: skip
+            os: ubuntu
+            pagefile_size: 0
+            resize_partitions: False
+            runs_on: ['ubuntu-latest']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_ppc64le_python3.14.____cp314wrapper_flavorboost
+            CONFIG_SHORT: linux_ppc64le_python3.14.____cp314wrappe_h322aaaf1
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
+            STORE_BUILD_ARTIFACTS: True
+            UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: skip
+            os: ubuntu
+            pagefile_size: 0
+            resize_partitions: False
+            runs_on: ['ubuntu-latest']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_ppc64le_python3.14.____cp314wrapper_flavornanobind
+            CONFIG_SHORT: linux_ppc64le_python3.14.____cp314wrappe_h7af3ae1d
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma10
             STORE_BUILD_ARTIFACTS: True
             UPLOAD_PACKAGES: True
