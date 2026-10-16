@@ -51,6 +51,8 @@ if %PKG_NAME%==rdkit (
         cmake -D CMAKE_INSTALL_COMPONENT=%%x -P cmake_install.cmake
         if errorlevel 1 exit 1
     )
+    %PYTHON% %RECIPE_DIR%\source_tree_files.py prune %LIBRARY_PREFIX%\share\RDKit %SRC_DIR%\source-tree-files.txt Contrib Projects
+    if errorlevel 1 exit 1
 
     REM The nanobind runtime installs to lib, which is not on the DLL search path
     REM that extension modules load from; bin is.
@@ -64,6 +66,8 @@ if %PKG_NAME%==rdkit (
     if not errorlevel 1 (
         cmake --build . --config Release --target stubs
         if errorlevel 1 exit 1
+        REM Upstream reports a failed generation only as a message.
+        if not exist %SP_DIR%\rdkit-stubs\Chem\rdchem.pyi exit 1
     )
 
     REM NOTE(hadim): Below we run `pip install ...` in order to correctly add the `.dist-info` directory in the package

@@ -8,6 +8,12 @@ if "%wrapper_flavor%"=="boost" (
     exit 1
 )
 
+REM The build stays in-source because the stub generator imports the extension modules
+REM from the source tree. Record Contrib\ and Projects\ before CMake writes into them,
+REM since upstream installs both whole; install.bat drops what the build added.
+%PYTHON% %RECIPE_DIR%\source_tree_files.py record %SRC_DIR% %SRC_DIR%\source-tree-files.txt Contrib Projects
+if errorlevel 1 exit 1
+
 cmake ^
     -G "NMake Makefiles JOM" ^
     -D CMAKE_BUILD_TYPE=Release ^

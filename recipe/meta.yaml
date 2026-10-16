@@ -28,10 +28,12 @@ source:
     # drop both once rdkit/rdkit#9621 ships in a release.
     # Installs Python-coupled files into the python component.
     - python-component.patch
-    # Sets RDKit_HAS_PYTHON_WRAPPERS from whether rdkitpython is installed instead of
-    # from the build option, which would leave librdkit-dev's value to whichever
-    # flavor uploads first.
-    - rdkit-config.patch
+    # Makes the installed CMake packages usable: RDKit_HAS_PYTHON_WRAPPERS follows
+    # whether rdkitpython is installed instead of the build option, which would leave
+    # librdkit-dev's value to whichever flavor uploads first; the targets require
+    # C++20; rdkit-config.cmake finds Freetype, Cairo, and EXPAT; and
+    # rdkitpython-config.cmake asks for the Python version it was built against.
+    - cmake-config.patch
 
 build:
   number: 1
@@ -122,11 +124,30 @@ outputs:
         - cmake
       host:
         - eigen-abi-devel
+        - libboost-devel
       run:
         - {{ pin_subpackage('librdkit', exact=True) }}
         - eigen-abi-devel
+        # rdkit-config.cmake finds these for the exported targets.
+        - {{ pin_compatible('libboost-devel', max_pin='x.x') }}
+        - cairo
+        - expat
+        - freetype
     test:
+      requires:
+        - {{ compiler('cxx') }}
+        - {{ stdlib('c') }}
+        - cmake
+        - ninja
+      files:
+        - cmake_consumer/
       commands:
+        # A project linking every exported target, with no rdkit installed.
+        - cmake ${CMAKE_ARGS} -G Ninja -S cmake_consumer -B consumer_build -D CMAKE_PREFIX_PATH=$PREFIX -D CMAKE_BUILD_TYPE=Release  # [unix]
+        - cmake -G Ninja -S cmake_consumer -B consumer_build -D CMAKE_PREFIX_PATH=%LIBRARY_PREFIX% -D CMAKE_BUILD_TYPE=Release  # [win]
+        - cmake --build consumer_build
+        - ./consumer_build/consumer  # [unix]
+        - consumer_build\consumer.exe  # [win]
         - test -f $PREFIX/include/rdkit/GraphMol/GraphMol.h               # [unix]
         - if not exist %LIBRARY_INC%\\rdkit\\GraphMol\\GraphMol.h exit 1  # [win]
         # Cmake config and hash headers must live here, not in librdkit.
@@ -223,6 +244,16 @@ outputs:
         - test ! -e $PREFIX/lib/libRDKitRDBoost.so  # [linux and wrapper_flavor == "nanobind"]
         - test ! -e $PREFIX/lib/libRDKitRDBoost.dylib  # [osx and wrapper_flavor == "nanobind"]
         - if exist %LIBRARY_BIN%\\RDKitRDBoost.dll exit 1  # [win and wrapper_flavor == "nanobind"]
+        # Stubs come from running the new modules, which a cross-compiled build cannot.
+        - test -f $SP_DIR/rdkit-stubs/Chem/rdchem.pyi  # [unix and wrapper_flavor == "boost" and build_platform == target_platform]
+        - if not exist %SP_DIR%\\rdkit-stubs\\Chem\\rdchem.pyi exit 1  # [win and wrapper_flavor == "boost"]
+        # Contrib/ ships its sources but none of the in-source build's files.
+        - test -f $PREFIX/share/RDKit/Contrib/PBF/Makefile  # [unix]
+        - test ! -e $PREFIX/share/RDKit/Contrib/Makefile  # [unix]
+        - test ! -e $PREFIX/share/RDKit/Contrib/ConformerParser/CMakeFiles  # [unix]
+        - if not exist %LIBRARY_PREFIX%\\share\\RDKit\\Contrib\\PBF\\Makefile exit 1  # [win]
+        - if exist %LIBRARY_PREFIX%\\share\\RDKit\\Contrib\\Makefile exit 1  # [win]
+        - if exist %LIBRARY_PREFIX%\\share\\RDKit\\Contrib\\ConformerParser\\CMakeFiles exit 1  # [win]
       imports:
         - rdkit
         - rdkit.Avalon
@@ -283,14 +314,31 @@ outputs:
       # keep one package per combination.
       string: {{ wrapper_flavor }}_py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}
     requirements:
+      host:
+        - libboost-python-devel  # [wrapper_flavor == "boost"]
       run:
         - {{ pin_subpackage('librdkit-dev', exact=True) }}
         - {{ pin_subpackage('rdkit', exact=True) }}
+        # rdkitpython-config.cmake finds Boost.Python's CMake package.
+        - {{ pin_compatible('libboost-python-devel', max_pin='x.x') }}  # [wrapper_flavor == "boost"]
     test:
+      requires:
+        - {{ compiler('cxx') }}
+        - {{ stdlib('c') }}
+        - cmake
+        - ninja
+      files:
+        - cmake_consumer/
       commands:
         - test -f $PREFIX/include/rdkit/GraphMol/GraphMol.h               # [unix]
         - if not exist %LIBRARY_INC%\\rdkit\\GraphMol\\GraphMol.h exit 1  # [win]
         - python -c "import rdkit; assert rdkit.__version__ == '{{ version }}'"
+        # rdkitpython exists only for Boost.Python; the consumer checks both ways.
+        - cmake ${CMAKE_ARGS} -G Ninja -S cmake_consumer -B consumer_build -D CMAKE_PREFIX_PATH=$PREFIX -D CMAKE_BUILD_TYPE=Release -D EXPECT_RDKITPYTHON={{ "ON" if wrapper_flavor == "boost" else "OFF" }}  # [unix]
+        - cmake -G Ninja -S cmake_consumer -B consumer_build -D CMAKE_PREFIX_PATH=%LIBRARY_PREFIX% -D CMAKE_BUILD_TYPE=Release -D EXPECT_RDKITPYTHON={{ "ON" if wrapper_flavor == "boost" else "OFF" }}  # [win]
+        - cmake --build consumer_build
+        - ./consumer_build/consumer  # [unix]
+        - consumer_build\consumer.exe  # [win]
       imports:
         - rdkit
         - rdkit.Avalon

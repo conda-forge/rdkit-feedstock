@@ -48,6 +48,11 @@ case "${wrapper_flavor}" in
     exit 1 ;;
 esac
 
+# The build stays in-source because the stub generator imports the extension modules
+# from the source tree. Record Contrib/ and Projects/ before CMake writes into them,
+# since upstream installs both whole; install.sh drops what the build added.
+"${PYTHON}" "${RECIPE_DIR}/source_tree_files.py" record "${SRC_DIR}" "${SRC_DIR}/source-tree-files.txt" Contrib Projects
+
 time cmake ${CMAKE_ARGS} \
     -D Boost_NO_SYSTEM_PATHS=ON \
     -D BOOST_ROOT="${PREFIX}" \
