@@ -19,7 +19,11 @@ source:
     - pg_regress.patch
     - CMakeLists.txt.patch
     - pyproject.patch
+    # These two backport rdkit/rdkit#9669, which Windows DLL builds of the wrappers
+    # need; drop both once a release includes it.
     - SubstructDetails.patch
+    # Keeps NOGIL out of the RDBoost DLL interface, which nanobind builds lack.
+    - nanobind-windows.patch
     # Together these keep librdkit and librdkit-dev identical across wrapper flavors;
     # drop both once rdkit/rdkit#9621 ships in a release.
     # Installs Python-coupled files into the python component.

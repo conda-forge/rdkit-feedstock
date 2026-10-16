@@ -1,0 +1,49 @@
+diff --git a/Code/GraphMol/MolProcessing/nbWrap/rdMolProcessing.cpp b/Code/GraphMol/MolProcessing/nbWrap/rdMolProcessing.cpp
+index bd06d2f94..70c3b053c 100644
+--- a/Code/GraphMol/MolProcessing/nbWrap/rdMolProcessing.cpp
++++ b/Code/GraphMol/MolProcessing/nbWrap/rdMolProcessing.cpp
+@@ -13,7 +13,7 @@
+ 
+ #include <GraphMol/MolProcessing/MolProcessing.h>
+ #include <GraphMol/FileParsers/GeneralFileReader.h>
+-#include <RDBoost/Wrap.h>
++#include <RDBoost/Wrap_nb.h>
+ 
+ namespace nb = nanobind;
+ using namespace nb::literals;
+@@ -77,12 +77,14 @@ NB_MODULE(rdMolProcessing, m) {
+       .def_rw("confId3D", &GeneralMolSupplier::SupplierOptions::confId3D,
+               "used for TDT files");
+ 
+-  m.def("GetFingerprintsForMolsInFile", getFingerprintsHelper<std::uint32_t>,
+-        "filename"_a, "generator"_a = nb::none(),
+-        "options"_a = GeneralMolSupplier::SupplierOptions(),
+-        "returns the fingerprints for the molecules in a file (32 bit version)");
+-  m.def("GetFingerprintsForMolsInFile", getFingerprintsHelper<std::uint64_t>,
+-        "filename"_a, "generator"_a = nb::none(),
+-        "options"_a = GeneralMolSupplier::SupplierOptions(),
+-        "returns the fingerprints for the molecules in a file (64 bit version)");
++  m.def(
++      "GetFingerprintsForMolsInFile", getFingerprintsHelper<std::uint32_t>,
++      "filename"_a, "generator"_a = nb::none(),
++      "options"_a = GeneralMolSupplier::SupplierOptions(),
++      "returns the fingerprints for the molecules in a file (32 bit version)");
++  m.def(
++      "GetFingerprintsForMolsInFile", getFingerprintsHelper<std::uint64_t>,
++      "filename"_a, "generator"_a = nb::none(),
++      "options"_a = GeneralMolSupplier::SupplierOptions(),
++      "returns the fingerprints for the molecules in a file (64 bit version)");
+ }
+diff --git a/Code/RDBoost/Wrap_nb.h b/Code/RDBoost/Wrap_nb.h
+index 1cd736d1c..3542a447c 100644
+--- a/Code/RDBoost/Wrap_nb.h
++++ b/Code/RDBoost/Wrap_nb.h
+@@ -283,7 +283,7 @@ class PyGILStateHolder {
+ //  on destruction - grab the lock
+ //  no entry into the python interpreter can be performed
+ //   between releasing and grabbing the lock
+-class RDKIT_RDBOOST_EXPORT RDUNUSED NOGIL {
++class RDUNUSED NOGIL {
+  public:
+   inline NOGIL() { m_thread_state = PyEval_SaveThread(); }
+ 
