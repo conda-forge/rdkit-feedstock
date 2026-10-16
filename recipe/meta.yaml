@@ -20,9 +20,9 @@ source:
     - CMakeLists.txt.patch
     - pyproject.patch
     - SubstructDetails.patch
-    # Installs Python-coupled files into the python component so librdkit and
-    # librdkit-dev are identical across wrapper flavors; drop once rdkit/rdkit#9621
-    # ships in a release.
+    # Together these keep librdkit and librdkit-dev identical across wrapper flavors;
+    # drop both once rdkit/rdkit#9621 ships in a release.
+    # Installs Python-coupled files into the python component.
     - python-component.patch
     # Sets RDKit_HAS_PYTHON_WRAPPERS from whether rdkitpython is installed instead of
     # from the build option, which would leave librdkit-dev's value to whichever
