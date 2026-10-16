@@ -24,6 +24,10 @@ source:
     # librdkit-dev are identical across wrapper flavors; drop once rdkit/rdkit#9621
     # ships in a release.
     - python-component.patch
+    # Sets RDKit_HAS_PYTHON_WRAPPERS from whether rdkitpython is installed instead of
+    # from the build option, which would leave librdkit-dev's value to whichever
+    # flavor uploads first.
+    - rdkit-config.patch
 
 build:
   number: 1
@@ -132,6 +136,8 @@ outputs:
         # The wrapper headers differ by flavor, so they belong to the rdkit output.
         # Windows copies every source header and so ships the same set for each flavor.
         - test ! -e $PREFIX/include/rdkit/RDBoost  # [unix]
+        # A build option baked into the cmake config would differ by flavor.
+        - test "$(grep -cE '^set\(RDKit_HAS_PYTHON_WRAPPERS (ON|OFF)\)' $PREFIX/lib/cmake/rdkit/rdkit-config.cmake)" = 0  # [unix]
     about:
       summary: RDKit headers and library used in librdkit
       license: BSD-3-Clause
