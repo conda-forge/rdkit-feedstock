@@ -1,0 +1,83 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 81fb33173..44c473908 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -702,13 +702,13 @@ if(NOT RDK_INSTALL_INTREE)
+     if(RDK_INSTALL_PYTHON_TESTS)
+       install(DIRECTORY Scripts DESTINATION
+         ${RDKit_ShareDir}
+-        COMPONENT data
++        COMPONENT python
+         PATTERN ".svn" EXCLUDE
+         )
+     else(RDK_INSTALL_PYTHON_TESTS)
+       install(DIRECTORY Scripts DESTINATION
+         ${RDKit_ShareDir}
+-        COMPONENT data
++        COMPONENT python
+         PATTERN ".svn" EXCLUDE
+         PATTERN "run_python_tests.py" EXCLUDE
+         )
+diff --git a/Code/RDBoost/CMakeLists.txt b/Code/RDBoost/CMakeLists.txt
+index 03b699d47..0988c9da1 100644
+--- a/Code/RDBoost/CMakeLists.txt
++++ b/Code/RDBoost/CMakeLists.txt
+@@ -16,7 +16,8 @@ rdkit_headers(Wrap.h PySequenceHolder.h
+               boost_numpy.h
+               python_streambuf.h
+               pyint_api.h
+-              DEST RDBoost)
++              DEST RDBoost
++              COMPONENT python)
+ 
+ if(${CMAKE_VERSION} VERSION_GREATER_EQUAL "3.13.0")
+    cmake_policy(SET CMP0079 NEW)
+@@ -28,7 +29,8 @@ if(RDK_BUILD_NANOBIND_WRAPPERS)
+ 
+ rdkit_headers(Wrap.h PySequenceHolder.h
+               python_streambuf.h
+-              DEST RDBoost)
++              DEST RDBoost
++              COMPONENT python)
+ 
+ 
+ if(${CMAKE_VERSION} VERSION_GREATER_EQUAL "3.13.0")
+diff --git a/Code/cmake/Modules/RDKitUtils.cmake b/Code/cmake/Modules/RDKitUtils.cmake
+index de544643a..b38072944 100644
+--- a/Code/cmake/Modules/RDKitUtils.cmake
++++ b/Code/cmake/Modules/RDKitUtils.cmake
+@@ -172,14 +172,17 @@ endmacro(rdkit_library)
+ macro(rdkit_headers)
+   if (NOT RDK_INSTALL_INTREE)
+     PARSE_ARGUMENTS(RDKHDR
+-      "DEST"
++      "DEST;COMPONENT"
+       ""
+       ${ARGN})
+     # RDKHDR_DEFAULT_ARGS -> RDKHDR_DEST
++    if(NOT RDKHDR_COMPONENT)
++      set(RDKHDR_COMPONENT dev)
++    endif()
+     if(RDK_INSTALL_DEV_COMPONENT)
+       install(FILES ${RDKHDR_DEFAULT_ARGS}
+               DESTINATION ${RDKit_HdrDir}/${RDKHDR_DEST}
+-              COMPONENT dev )
++              COMPONENT ${RDKHDR_COMPONENT})
+     endif(RDK_INSTALL_DEV_COMPONENT)
+   endif(NOT RDK_INSTALL_INTREE)
+ endmacro(rdkit_headers)
+@@ -250,9 +253,11 @@ macro(rdkit_nanobind_extension)
+     set_target_properties(nanobind
+       PROPERTIES
+       LIBRARY_OUTPUT_DIRECTORY  ${RDK_LIBRARY_OUTPUT_DIRECTORY} )
+-    INSTALL(TARGETS nanobind 
+-            DESTINATION ${RDKit_LibDir}/${RDKLIB_DEST}
+-            COMPONENT ${sharedLibComponent})
++    # The shared nanobind runtime is tied to the Python ABI, so it ships with the
++    # wrappers.
++    INSTALL(TARGETS nanobind
++            DESTINATION ${RDKit_LibDir}
++            COMPONENT python)
+   endif(RDK_BUILD_NANOBIND_WRAPPERS)
+ endmacro(rdkit_nanobind_extension)
+ 

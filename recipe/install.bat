@@ -13,7 +13,8 @@ if %PKG_NAME%==librdkit (
 
     copy bin\*.dll %LIBRARY_BIN%
     REM Remove python-only libraries.
-    del %LIBRARY_BIN%\RDKitRDBoost.dll
+    if exist %LIBRARY_BIN%\RDKitRDBoost.dll del %LIBRARY_BIN%\RDKitRDBoost.dll
+    if exist %LIBRARY_BIN%\nanobind.dll del %LIBRARY_BIN%\nanobind.dll
 )
 
 if %PKG_NAME%==librdkit-dev (
@@ -42,7 +43,7 @@ if %PKG_NAME%==rdkit (
     echo Installing rdkit
 
     REM Copy python-only libraries.
-    copy bin\RDKitRDBoost.dll %LIBRARY_BIN%
+    if exist bin\RDKitRDBoost.dll copy bin\RDKitRDBoost.dll %LIBRARY_BIN%
 
     REM NOTE(skearnes): The "extras" component covers the Contrib and Projects directories.
     for %%x in (extras python) do (
@@ -50,8 +51,24 @@ if %PKG_NAME%==rdkit (
         cmake -D CMAKE_INSTALL_COMPONENT=%%x -P cmake_install.cmake
         if errorlevel 1 exit 1
     )
-    cmake --build . --config Release --target stubs
+    %PYTHON% %RECIPE_DIR%\source_tree_files.py prune %LIBRARY_PREFIX%\share\RDKit %SRC_DIR%\source-tree-files.txt Contrib Projects
     if errorlevel 1 exit 1
+
+    REM The nanobind runtime installs to lib, which is not on the DLL search path
+    REM that extension modules load from; bin is.
+    if exist %LIBRARY_LIB%\nanobind.dll move /y %LIBRARY_LIB%\nanobind.dll %LIBRARY_BIN%
+
+    REM Upstream generates stubs only for Boost.Python. The flavor comes from the
+    REM build tree rather than the variant variable: conda-build hashes every
+    REM variable this script names into librdkit too, which must stay one package
+    REM for all flavors.
+    findstr /b /c:"RDK_BUILD_BOOST_PYTHON_WRAPPERS:BOOL=ON" CMakeCache.txt >nul
+    if not errorlevel 1 (
+        cmake --build . --config Release --target stubs
+        if errorlevel 1 exit 1
+        REM Upstream reports a failed generation only as a message.
+        if not exist %SP_DIR%\rdkit-stubs\Chem\rdchem.pyi exit 1
+    )
 
     REM NOTE(hadim): Below we run `pip install ...` in order to correctly add the `.dist-info` directory in the package
     REM so python can correctly detect whether rdkit is installed when it's coming from a conda package.

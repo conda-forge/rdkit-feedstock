@@ -8,8 +8,8 @@ jobs:
     vmImage: $(VMIMAGE)
   strategy:
     matrix:
-      osx_64_python3.11.____cpython:
-        CONFIG: osx_64_python3.11.____cpython
+      osx_64_python3.11.____cpythonwrapper_flavorboost:
+        CONFIG: osx_64_python3.11.____cpythonwrapper_flavorboost
         UPLOAD_PACKAGES: 'True'
         VMIMAGE: macOS-15
         build_workspace_dir: ~/miniforge3/conda-bld
@@ -18,9 +18,9 @@ jobs:
         resize_partitions: false
         store_build_artifacts: true
         tools_install_dir: ~/miniforge3
-        CONFIG_SHORT: osx_64_python3.11.____cpython
-      osx_64_python3.12.____cpython:
-        CONFIG: osx_64_python3.12.____cpython
+        CONFIG_SHORT: osx_64_python3.11.____cpythonwrapper_flavorboost
+      osx_64_python3.11.____cpythonwrapper_flavornanobind:
+        CONFIG: osx_64_python3.11.____cpythonwrapper_flavornanobind
         UPLOAD_PACKAGES: 'True'
         VMIMAGE: macOS-15
         build_workspace_dir: ~/miniforge3/conda-bld
@@ -29,9 +29,9 @@ jobs:
         resize_partitions: false
         store_build_artifacts: true
         tools_install_dir: ~/miniforge3
-        CONFIG_SHORT: osx_64_python3.12.____cpython
-      osx_64_python3.13.____cp313:
-        CONFIG: osx_64_python3.13.____cp313
+        CONFIG_SHORT: osx_64_python3.11.____cpythonwrapper_fla_hc1e9c936
+      osx_64_python3.12.____cpythonwrapper_flavorboost:
+        CONFIG: osx_64_python3.12.____cpythonwrapper_flavorboost
         UPLOAD_PACKAGES: 'True'
         VMIMAGE: macOS-15
         build_workspace_dir: ~/miniforge3/conda-bld
@@ -40,9 +40,9 @@ jobs:
         resize_partitions: false
         store_build_artifacts: true
         tools_install_dir: ~/miniforge3
-        CONFIG_SHORT: osx_64_python3.13.____cp313
-      osx_64_python3.14.____cp314:
-        CONFIG: osx_64_python3.14.____cp314
+        CONFIG_SHORT: osx_64_python3.12.____cpythonwrapper_flavorboost
+      osx_64_python3.12.____cpythonwrapper_flavornanobind:
+        CONFIG: osx_64_python3.12.____cpythonwrapper_flavornanobind
         UPLOAD_PACKAGES: 'True'
         VMIMAGE: macOS-15
         build_workspace_dir: ~/miniforge3/conda-bld
@@ -51,9 +51,53 @@ jobs:
         resize_partitions: false
         store_build_artifacts: true
         tools_install_dir: ~/miniforge3
-        CONFIG_SHORT: osx_64_python3.14.____cp314
-      osx_arm64_python3.11.____cpython:
-        CONFIG: osx_arm64_python3.11.____cpython
+        CONFIG_SHORT: osx_64_python3.12.____cpythonwrapper_fla_h9901fe05
+      osx_64_python3.13.____cp313wrapper_flavorboost:
+        CONFIG: osx_64_python3.13.____cp313wrapper_flavorboost
+        UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15
+        build_workspace_dir: ~/miniforge3/conda-bld
+        free_disk_space: skip
+        pagefile_size: 0
+        resize_partitions: false
+        store_build_artifacts: true
+        tools_install_dir: ~/miniforge3
+        CONFIG_SHORT: osx_64_python3.13.____cp313wrapper_flavorboost
+      osx_64_python3.13.____cp313wrapper_flavornanobind:
+        CONFIG: osx_64_python3.13.____cp313wrapper_flavornanobind
+        UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15
+        build_workspace_dir: ~/miniforge3/conda-bld
+        free_disk_space: skip
+        pagefile_size: 0
+        resize_partitions: false
+        store_build_artifacts: true
+        tools_install_dir: ~/miniforge3
+        CONFIG_SHORT: osx_64_python3.13.____cp313wrapper_flavo_h266bc73e
+      osx_64_python3.14.____cp314wrapper_flavorboost:
+        CONFIG: osx_64_python3.14.____cp314wrapper_flavorboost
+        UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15
+        build_workspace_dir: ~/miniforge3/conda-bld
+        free_disk_space: skip
+        pagefile_size: 0
+        resize_partitions: false
+        store_build_artifacts: true
+        tools_install_dir: ~/miniforge3
+        CONFIG_SHORT: osx_64_python3.14.____cp314wrapper_flavorboost
+      osx_64_python3.14.____cp314wrapper_flavornanobind:
+        CONFIG: osx_64_python3.14.____cp314wrapper_flavornanobind
+        UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15
+        build_workspace_dir: ~/miniforge3/conda-bld
+        free_disk_space: skip
+        pagefile_size: 0
+        resize_partitions: false
+        store_build_artifacts: true
+        tools_install_dir: ~/miniforge3
+        CONFIG_SHORT: osx_64_python3.14.____cp314wrapper_flavo_hbff866d0
+      osx_arm64_python3.11.____cpythonwrapper_flavorboost:
+        CONFIG: osx_arm64_python3.11.____cpythonwrapper_flavorboost
         UPLOAD_PACKAGES: 'True'
         VMIMAGE: macOS-15-arm64
         build_workspace_dir: ~/miniforge3/conda-bld
@@ -62,9 +106,9 @@ jobs:
         resize_partitions: false
         store_build_artifacts: true
         tools_install_dir: ~/miniforge3
-        CONFIG_SHORT: osx_arm64_python3.11.____cpython
-      osx_arm64_python3.12.____cpython:
-        CONFIG: osx_arm64_python3.12.____cpython
+        CONFIG_SHORT: osx_arm64_python3.11.____cpythonwrapper__h5545bfbd
+      osx_arm64_python3.11.____cpythonwrapper_flavornanobind:
+        CONFIG: osx_arm64_python3.11.____cpythonwrapper_flavornanobind
         UPLOAD_PACKAGES: 'True'
         VMIMAGE: macOS-15-arm64
         build_workspace_dir: ~/miniforge3/conda-bld
@@ -73,9 +117,9 @@ jobs:
         resize_partitions: false
         store_build_artifacts: true
         tools_install_dir: ~/miniforge3
-        CONFIG_SHORT: osx_arm64_python3.12.____cpython
-      osx_arm64_python3.13.____cp313:
-        CONFIG: osx_arm64_python3.13.____cp313
+        CONFIG_SHORT: osx_arm64_python3.11.____cpythonwrapper__h3dc67e8f
+      osx_arm64_python3.12.____cpythonwrapper_flavorboost:
+        CONFIG: osx_arm64_python3.12.____cpythonwrapper_flavorboost
         UPLOAD_PACKAGES: 'True'
         VMIMAGE: macOS-15-arm64
         build_workspace_dir: ~/miniforge3/conda-bld
@@ -84,9 +128,9 @@ jobs:
         resize_partitions: false
         store_build_artifacts: true
         tools_install_dir: ~/miniforge3
-        CONFIG_SHORT: osx_arm64_python3.13.____cp313
-      osx_arm64_python3.14.____cp314:
-        CONFIG: osx_arm64_python3.14.____cp314
+        CONFIG_SHORT: osx_arm64_python3.12.____cpythonwrapper__he13beb6d
+      osx_arm64_python3.12.____cpythonwrapper_flavornanobind:
+        CONFIG: osx_arm64_python3.12.____cpythonwrapper_flavornanobind
         UPLOAD_PACKAGES: 'True'
         VMIMAGE: macOS-15-arm64
         build_workspace_dir: ~/miniforge3/conda-bld
@@ -95,7 +139,51 @@ jobs:
         resize_partitions: false
         store_build_artifacts: true
         tools_install_dir: ~/miniforge3
-        CONFIG_SHORT: osx_arm64_python3.14.____cp314
+        CONFIG_SHORT: osx_arm64_python3.12.____cpythonwrapper__h84e9e029
+      osx_arm64_python3.13.____cp313wrapper_flavorboost:
+        CONFIG: osx_arm64_python3.13.____cp313wrapper_flavorboost
+        UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15-arm64
+        build_workspace_dir: ~/miniforge3/conda-bld
+        free_disk_space: skip
+        pagefile_size: 0
+        resize_partitions: false
+        store_build_artifacts: true
+        tools_install_dir: ~/miniforge3
+        CONFIG_SHORT: osx_arm64_python3.13.____cp313wrapper_fl_h82004266
+      osx_arm64_python3.13.____cp313wrapper_flavornanobind:
+        CONFIG: osx_arm64_python3.13.____cp313wrapper_flavornanobind
+        UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15-arm64
+        build_workspace_dir: ~/miniforge3/conda-bld
+        free_disk_space: skip
+        pagefile_size: 0
+        resize_partitions: false
+        store_build_artifacts: true
+        tools_install_dir: ~/miniforge3
+        CONFIG_SHORT: osx_arm64_python3.13.____cp313wrapper_fl_ha71536ee
+      osx_arm64_python3.14.____cp314wrapper_flavorboost:
+        CONFIG: osx_arm64_python3.14.____cp314wrapper_flavorboost
+        UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15-arm64
+        build_workspace_dir: ~/miniforge3/conda-bld
+        free_disk_space: skip
+        pagefile_size: 0
+        resize_partitions: false
+        store_build_artifacts: true
+        tools_install_dir: ~/miniforge3
+        CONFIG_SHORT: osx_arm64_python3.14.____cp314wrapper_fl_hbe5142c6
+      osx_arm64_python3.14.____cp314wrapper_flavornanobind:
+        CONFIG: osx_arm64_python3.14.____cp314wrapper_flavornanobind
+        UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15-arm64
+        build_workspace_dir: ~/miniforge3/conda-bld
+        free_disk_space: skip
+        pagefile_size: 0
+        resize_partitions: false
+        store_build_artifacts: true
+        tools_install_dir: ~/miniforge3
+        CONFIG_SHORT: osx_arm64_python3.14.____cp314wrapper_fl_h648aa5b1
   timeoutInMinutes: 360
   variables: {}
 

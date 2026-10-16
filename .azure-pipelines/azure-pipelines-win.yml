@@ -8,8 +8,8 @@ jobs:
     vmImage: windows-2022
   strategy:
     matrix:
-      win_64_python3.11.____cpython:
-        CONFIG: win_64_python3.11.____cpython
+      win_64_python3.11.____cpythonwrapper_flavorboost:
+        CONFIG: win_64_python3.11.____cpythonwrapper_flavorboost
         UPLOAD_PACKAGES: 'True'
         build_platform: win-64
         build_workspace_dir: D:\\bld\\
@@ -18,9 +18,9 @@ jobs:
         resize_partitions: false
         store_build_artifacts: true
         tools_install_dir: D:\Miniforge
-        CONFIG_SHORT: win_64_python3.11.____cpython
-      win_64_python3.12.____cpython:
-        CONFIG: win_64_python3.12.____cpython
+        CONFIG_SHORT: win_64_python3.11.____cpythonwrapper_flavorboost
+      win_64_python3.11.____cpythonwrapper_flavornanobind:
+        CONFIG: win_64_python3.11.____cpythonwrapper_flavornanobind
         UPLOAD_PACKAGES: 'True'
         build_platform: win-64
         build_workspace_dir: D:\\bld\\
@@ -29,9 +29,9 @@ jobs:
         resize_partitions: false
         store_build_artifacts: true
         tools_install_dir: D:\Miniforge
-        CONFIG_SHORT: win_64_python3.12.____cpython
-      win_64_python3.13.____cp313:
-        CONFIG: win_64_python3.13.____cp313
+        CONFIG_SHORT: win_64_python3.11.____cpythonwrapper_fla_h14593b31
+      win_64_python3.12.____cpythonwrapper_flavorboost:
+        CONFIG: win_64_python3.12.____cpythonwrapper_flavorboost
         UPLOAD_PACKAGES: 'True'
         build_platform: win-64
         build_workspace_dir: D:\\bld\\
@@ -40,9 +40,9 @@ jobs:
         resize_partitions: false
         store_build_artifacts: true
         tools_install_dir: D:\Miniforge
-        CONFIG_SHORT: win_64_python3.13.____cp313
-      win_64_python3.14.____cp314:
-        CONFIG: win_64_python3.14.____cp314
+        CONFIG_SHORT: win_64_python3.12.____cpythonwrapper_flavorboost
+      win_64_python3.12.____cpythonwrapper_flavornanobind:
+        CONFIG: win_64_python3.12.____cpythonwrapper_flavornanobind
         UPLOAD_PACKAGES: 'True'
         build_platform: win-64
         build_workspace_dir: D:\\bld\\
@@ -51,7 +51,51 @@ jobs:
         resize_partitions: false
         store_build_artifacts: true
         tools_install_dir: D:\Miniforge
-        CONFIG_SHORT: win_64_python3.14.____cp314
+        CONFIG_SHORT: win_64_python3.12.____cpythonwrapper_fla_h151e215e
+      win_64_python3.13.____cp313wrapper_flavorboost:
+        CONFIG: win_64_python3.13.____cp313wrapper_flavorboost
+        UPLOAD_PACKAGES: 'True'
+        build_platform: win-64
+        build_workspace_dir: D:\\bld\\
+        free_disk_space: skip
+        pagefile_size: 0
+        resize_partitions: false
+        store_build_artifacts: true
+        tools_install_dir: D:\Miniforge
+        CONFIG_SHORT: win_64_python3.13.____cp313wrapper_flavorboost
+      win_64_python3.13.____cp313wrapper_flavornanobind:
+        CONFIG: win_64_python3.13.____cp313wrapper_flavornanobind
+        UPLOAD_PACKAGES: 'True'
+        build_platform: win-64
+        build_workspace_dir: D:\\bld\\
+        free_disk_space: skip
+        pagefile_size: 0
+        resize_partitions: false
+        store_build_artifacts: true
+        tools_install_dir: D:\Miniforge
+        CONFIG_SHORT: win_64_python3.13.____cp313wrapper_flavo_h57b1b3b4
+      win_64_python3.14.____cp314wrapper_flavorboost:
+        CONFIG: win_64_python3.14.____cp314wrapper_flavorboost
+        UPLOAD_PACKAGES: 'True'
+        build_platform: win-64
+        build_workspace_dir: D:\\bld\\
+        free_disk_space: skip
+        pagefile_size: 0
+        resize_partitions: false
+        store_build_artifacts: true
+        tools_install_dir: D:\Miniforge
+        CONFIG_SHORT: win_64_python3.14.____cp314wrapper_flavorboost
+      win_64_python3.14.____cp314wrapper_flavornanobind:
+        CONFIG: win_64_python3.14.____cp314wrapper_flavornanobind
+        UPLOAD_PACKAGES: 'True'
+        build_platform: win-64
+        build_workspace_dir: D:\\bld\\
+        free_disk_space: skip
+        pagefile_size: 0
+        resize_partitions: false
+        store_build_artifacts: true
+        tools_install_dir: D:\Miniforge
+        CONFIG_SHORT: win_64_python3.14.____cp314wrapper_flavo_h8bea384d
   timeoutInMinutes: 360
   variables:
     UPLOAD_TEMP: D:\\tmp

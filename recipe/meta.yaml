@@ -19,10 +19,24 @@ source:
     - pg_regress.patch
     - CMakeLists.txt.patch
     - pyproject.patch
+    # These two backport rdkit/rdkit#9669, which Windows DLL builds of the wrappers
+    # need; drop both once a release includes it.
     - SubstructDetails.patch
+    # Keeps NOGIL out of the RDBoost DLL interface, which nanobind builds lack.
+    - nanobind-windows.patch
+    # Together these keep librdkit and librdkit-dev identical across wrapper flavors;
+    # drop both once rdkit/rdkit#9621 ships in a release.
+    # Installs Python-coupled files into the python component.
+    - python-component.patch
+    # Makes the installed CMake packages usable: RDKit_HAS_PYTHON_WRAPPERS follows
+    # whether rdkitpython is installed instead of the build option, which would leave
+    # librdkit-dev's value to whichever flavor uploads first; the targets require
+    # C++20; rdkit-config.cmake finds Freetype, Cairo, and EXPAT; and
+    # rdkitpython-config.cmake asks for the Python version it was built against.
+    - cmake-config.patch
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   # See https://conda-forge.org/docs/maintainer/knowledge_base/#placing-requirements-in-build-or-host and
@@ -34,6 +48,7 @@ requirements:
     - numpy                               # [build_platform != target_platform]
     - postgresql                          # [build_platform != target_platform]
     - python                              # [build_platform != target_platform]
+    - nanobind 2.*                        # [build_platform != target_platform and wrapper_flavor == "nanobind"]
     - cmake
     - jom   # [win]
     - make  # [unix]
@@ -44,7 +59,10 @@ requirements:
     - freetype
     - expat
     - libboost-devel
-    - libboost-python-devel
+    - libboost-python-devel  # [wrapper_flavor == "boost"]
+    # RDKit asks for `find_package(nanobind 2 CONFIG)`, and nanobind's config accepts
+    # only its own major version.
+    - nanobind 2.*           # [wrapper_flavor == "nanobind"]
     - numpy
     - pandas
     - pillow
@@ -82,6 +100,13 @@ outputs:
         - test ! -e $PREFIX/include/rdkit/RDGeneral/hash/hash.hpp  # [unix]
         - if exist %LIBRARY_LIB%\cmake\rdkit\rdkit-config.cmake exit 1  # [win]
         - if exist %LIBRARY_INC%\rdkit\RDGeneral\hash\hash.hpp exit 1  # [win]
+        # Every wrapper flavor builds librdkit under one build string, so nothing
+        # flavor-specific may land here.
+        - test ! -e $PREFIX/share/RDKit/Scripts  # [unix]
+        - test ! -e $PREFIX/lib/libnanobind.so  # [linux]
+        - test ! -e $PREFIX/lib/libnanobind.dylib  # [osx]
+        - if exist %LIBRARY_PREFIX%\share\RDKit\Scripts exit 1  # [win]
+        - if exist %LIBRARY_BIN%\nanobind.dll exit 1  # [win]
     about:
       summary: RDKit C++ library
       license: BSD-3-Clause
@@ -99,11 +124,30 @@ outputs:
         - cmake
       host:
         - eigen-abi-devel
+        - libboost-devel
       run:
         - {{ pin_subpackage('librdkit', exact=True) }}
         - eigen-abi-devel
+        # rdkit-config.cmake finds these for the exported targets.
+        - {{ pin_compatible('libboost-devel', max_pin='x.x') }}
+        - cairo
+        - expat
+        - freetype
     test:
+      requires:
+        - {{ compiler('cxx') }}
+        - {{ stdlib('c') }}
+        - cmake
+        - ninja
+      files:
+        - cmake_consumer/
       commands:
+        # A project linking every exported target, with no rdkit installed.
+        - cmake ${CMAKE_ARGS} -G Ninja -S cmake_consumer -B consumer_build -D CMAKE_PREFIX_PATH=$PREFIX -D CMAKE_BUILD_TYPE=Release  # [unix]
+        - cmake -G Ninja -S cmake_consumer -B consumer_build -D CMAKE_PREFIX_PATH=%LIBRARY_PREFIX% -D CMAKE_BUILD_TYPE=Release  # [win]
+        - cmake --build consumer_build
+        - ./consumer_build/consumer  # [unix]
+        - consumer_build\consumer.exe  # [win]
         - test -f $PREFIX/include/rdkit/GraphMol/GraphMol.h               # [unix]
         - if not exist %LIBRARY_INC%\\rdkit\\GraphMol\\GraphMol.h exit 1  # [win]
         # Cmake config and hash headers must live here, not in librdkit.
@@ -114,6 +158,11 @@ outputs:
         # Python-coupled cmake config must live in the rdkit (python) output, not here.
         - test ! -e $PREFIX/lib/cmake/rdkitpython/rdkitpython-config.cmake  # [unix]
         - if exist %LIBRARY_LIB%\\cmake\\rdkitpython\\rdkitpython-config.cmake exit 1  # [win]
+        # The wrapper headers differ by flavor, so they belong to the rdkit output.
+        # Windows copies every source header and so ships the same set for each flavor.
+        - test ! -e $PREFIX/include/rdkit/RDBoost  # [unix]
+        # A build option baked into the cmake config would differ by flavor.
+        - test "$(grep -cE '^set\(RDKit_HAS_PYTHON_WRAPPERS (ON|OFF)\)' $PREFIX/lib/cmake/rdkit/rdkit-config.cmake)" = 0  # [unix]
     about:
       summary: RDKit headers and library used in librdkit
       license: BSD-3-Clause
@@ -122,6 +171,13 @@ outputs:
   - name: rdkit
     script: install.sh  # [unix]
     script: install.bat  # [win]
+    build:
+      # Downstreams pin a flavor with `rdkit {{ version }} boost_*`; see
+      # conda_build_config.yaml.
+      string: {{ wrapper_flavor }}_py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}
+      # Keeps boost the default when nothing selects a flavor.
+      track_features:  # [wrapper_flavor == "nanobind"]
+        - rdkit_nanobind  # [wrapper_flavor == "nanobind"]
     requirements:
       build:
         - {{ compiler('cxx') }}
@@ -140,14 +196,15 @@ outputs:
         - freetype
         - expat
         - libboost-devel
-        - libboost-python-devel
+        - libboost-python-devel  # [wrapper_flavor == "boost"]
+        - nanobind 2.*           # [wrapper_flavor == "nanobind"]
         - matplotlib-base
         - numpy
         - pandas
         - pillow
         - pip
         - postgresql
-        - pybind11-stubgen
+        - pybind11-stubgen  # [wrapper_flavor == "boost"]
         - pycairo
         - python
         - reportlab
@@ -170,9 +227,33 @@ outputs:
         # Test the availability of Contrib.
         - python -c "import os; import sys; sys.path.append(os.path.join(os.environ['CONDA_PREFIX'], 'share', 'RDKit', 'Contrib')); from SA_Score import sascorer"  # [unix]
         - python -c "import os; import sys; sys.path.append(os.path.join(os.environ['CONDA_PREFIX'], 'Library', 'share', 'RDKit', 'Contrib')); from SA_Score import sascorer"  # [win]
-        # Python-coupled cmake config must live here, not in librdkit-dev.
-        - test -f $PREFIX/lib/cmake/rdkitpython/rdkitpython-config.cmake  # [unix]
-        - if not exist %LIBRARY_LIB%\\cmake\\rdkitpython\\rdkitpython-config.cmake exit 1  # [win]
+        # Python-coupled cmake config must live here, not in librdkit-dev. Upstream
+        # exports it only for Boost.Python.
+        - test -f $PREFIX/lib/cmake/rdkitpython/rdkitpython-config.cmake  # [unix and wrapper_flavor == "boost"]
+        - if not exist %LIBRARY_LIB%\\cmake\\rdkitpython\\rdkitpython-config.cmake exit 1  # [win and wrapper_flavor == "boost"]
+        # The wrappers must match the flavor in the build string.
+        - test -f $PREFIX/lib/libRDKitRDBoost.so  # [linux and wrapper_flavor == "boost"]
+        - test -f $PREFIX/lib/libRDKitRDBoost.dylib  # [osx and wrapper_flavor == "boost"]
+        - if not exist %LIBRARY_BIN%\\RDKitRDBoost.dll exit 1  # [win and wrapper_flavor == "boost"]
+        - test ! -e $PREFIX/lib/libnanobind.so  # [linux and wrapper_flavor == "boost"]
+        - test ! -e $PREFIX/lib/libnanobind.dylib  # [osx and wrapper_flavor == "boost"]
+        - if exist %LIBRARY_BIN%\\nanobind.dll exit 1  # [win and wrapper_flavor == "boost"]
+        - test -f $PREFIX/lib/libnanobind.so  # [linux and wrapper_flavor == "nanobind"]
+        - test -f $PREFIX/lib/libnanobind.dylib  # [osx and wrapper_flavor == "nanobind"]
+        - if not exist %LIBRARY_BIN%\\nanobind.dll exit 1  # [win and wrapper_flavor == "nanobind"]
+        - test ! -e $PREFIX/lib/libRDKitRDBoost.so  # [linux and wrapper_flavor == "nanobind"]
+        - test ! -e $PREFIX/lib/libRDKitRDBoost.dylib  # [osx and wrapper_flavor == "nanobind"]
+        - if exist %LIBRARY_BIN%\\RDKitRDBoost.dll exit 1  # [win and wrapper_flavor == "nanobind"]
+        # Stubs come from running the new modules, which a cross-compiled build cannot.
+        - test -f $SP_DIR/rdkit-stubs/Chem/rdchem.pyi  # [unix and wrapper_flavor == "boost" and build_platform == target_platform]
+        - if not exist %SP_DIR%\\rdkit-stubs\\Chem\\rdchem.pyi exit 1  # [win and wrapper_flavor == "boost"]
+        # Contrib/ ships its sources but none of the in-source build's files.
+        - test -f $PREFIX/share/RDKit/Contrib/PBF/Makefile  # [unix]
+        - test ! -e $PREFIX/share/RDKit/Contrib/Makefile  # [unix]
+        - test ! -e $PREFIX/share/RDKit/Contrib/ConformerParser/CMakeFiles  # [unix]
+        - if not exist %LIBRARY_PREFIX%\\share\\RDKit\\Contrib\\PBF\\Makefile exit 1  # [win]
+        - if exist %LIBRARY_PREFIX%\\share\\RDKit\\Contrib\\Makefile exit 1  # [win]
+        - if exist %LIBRARY_PREFIX%\\share\\RDKit\\Contrib\\ConformerParser\\CMakeFiles exit 1  # [win]
       imports:
         - rdkit
         - rdkit.Avalon
@@ -195,16 +276,69 @@ outputs:
       license: BSD-3-Clause
       license_file: license.txt
 
-  - name: rdkit-dev
+  - name: rdkit-boost
+    build:
+      string: {{ wrapper_flavor }}_py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}
+      # Only the boost variant may claim this name; another flavor's build would
+      # otherwise publish an rdkit-boost that resolves to the wrong wrappers.
+      skip: true  # [wrapper_flavor != "boost"]
     requirements:
+      run:
+        - {{ pin_subpackage('rdkit', exact=True) }}
+    test:
+      imports:
+        - rdkit.Chem
+    about:
+      summary: Selects the Boost.Python build of the RDKit Python bindings
+      license: BSD-3-Clause
+      license_file: license.txt
+
+  - name: rdkit-nanobind
+    build:
+      string: {{ wrapper_flavor }}_py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}
+      skip: true  # [wrapper_flavor != "nanobind"]
+    requirements:
+      run:
+        - {{ pin_subpackage('rdkit', exact=True) }}
+    test:
+      imports:
+        - rdkit.Chem
+    about:
+      summary: Selects the nanobind build of the RDKit Python bindings
+      license: BSD-3-Clause
+      license_file: license.txt
+
+  - name: rdkit-dev
+    build:
+      # Pins one flavor and Python of rdkit exactly, so both go in the build string to
+      # keep one package per combination.
+      string: {{ wrapper_flavor }}_py{{ CONDA_PY }}h{{ PKG_HASH }}_{{ PKG_BUILDNUM }}
+    requirements:
+      host:
+        - libboost-python-devel  # [wrapper_flavor == "boost"]
       run:
         - {{ pin_subpackage('librdkit-dev', exact=True) }}
         - {{ pin_subpackage('rdkit', exact=True) }}
+        # rdkitpython-config.cmake finds Boost.Python's CMake package.
+        - {{ pin_compatible('libboost-python-devel', max_pin='x.x') }}  # [wrapper_flavor == "boost"]
     test:
+      requires:
+        - {{ compiler('cxx') }}
+        - {{ stdlib('c') }}
+        - cmake
+        - ninja
+      files:
+        - cmake_consumer/
       commands:
         - test -f $PREFIX/include/rdkit/GraphMol/GraphMol.h               # [unix]
         - if not exist %LIBRARY_INC%\\rdkit\\GraphMol\\GraphMol.h exit 1  # [win]
         - python -c "import rdkit; assert rdkit.__version__ == '{{ version }}'"
+        # rdkitpython exists only for Boost.Python; the consumer checks both ways.
+        - cmake ${CMAKE_ARGS} -G Ninja -S cmake_consumer -B consumer_build -D CMAKE_PREFIX_PATH=$PREFIX -D CMAKE_BUILD_TYPE=Release -D EXPECT_RDKITPYTHON={{ "ON" if wrapper_flavor == "boost" else "OFF" }}  # [unix]
+        - cmake -G Ninja -S cmake_consumer -B consumer_build -D CMAKE_PREFIX_PATH=%LIBRARY_PREFIX% -D CMAKE_BUILD_TYPE=Release -D EXPECT_RDKITPYTHON={{ "ON" if wrapper_flavor == "boost" else "OFF" }}  # [win]
+        - cmake --build consumer_build
+        - ./consumer_build/consumer  # [unix]
+        - consumer_build\consumer.exe  # [win]
       imports:
         - rdkit
         - rdkit.Avalon
