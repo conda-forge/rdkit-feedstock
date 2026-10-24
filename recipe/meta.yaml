@@ -141,6 +141,7 @@ outputs:
         - freetype
         - expat
         - libboost-devel
+        - libboost-python-devel
         - libpython  # [unix and py >= 315]
         - matplotlib-base
         - numpy
