@@ -1,0 +1,15 @@
+diff --git a/rdkitpython-config.cmake.in b/rdkitpython-config.cmake.in
+index b3db8cf83..38460db9d 100644
+--- a/rdkitpython-config.cmake.in
++++ b/rdkitpython-config.cmake.in
+@@ -1,8 +1,8 @@
+ # Find the RDKitPython dependencies
+ include(CMakeFindDependencyMacro)
+ 
+-find_dependency(Python3 @Python3_VERSION_MAJOR@.@Python3_VERSION_MINOR@ COMPONENTS Interpreter Development.Module NumPy)
+-find_dependency(Boost @Boost_VERSION_STRING@ COMPONENTS python@Python3_VERSION_MAJOR@@Python3_VERSION_MINOR@ numpy@Python3_VERSION_MAJOR@@Python3_VERSION_MINOR@)
++find_dependency(Python @Python_VERSION_MAJOR@.@Python_VERSION_MINOR@ COMPONENTS Interpreter Development.Module NumPy)
++find_dependency(Boost @Boost_VERSION_STRING@ COMPONENTS python@Python_VERSION_MAJOR@@Python_VERSION_MINOR@ numpy@Python_VERSION_MAJOR@@Python_VERSION_MINOR@)
+ find_dependency(RDKit @RDKit_RELEASENAME@ REQUIRED)
+ 
+ # Import the targets
