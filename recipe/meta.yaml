@@ -46,6 +46,7 @@ requirements:
     - expat
     - libboost-devel
     - libboost-python-devel
+    - libpython  # [unix and py >= 315]
     - numpy
     - pandas
     - pillow
@@ -142,6 +143,7 @@ outputs:
         - expat
         - libboost-devel
         - libboost-python-devel
+        - libpython  # [unix and py >= 315]
         - matplotlib-base
         - numpy
         - pandas
