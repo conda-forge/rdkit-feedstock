@@ -17,12 +17,13 @@ source:
 
   patches:
     - pg_regress.patch
+    # Backports https://github.com/rdkit/rdkit/pull/9745; remove after 2026.9.2 release
     - CMakeLists.txt.patch
     - pyproject.patch
     - SubstructDetails.patch
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   # See https://conda-forge.org/docs/maintainer/knowledge_base/#placing-requirements-in-build-or-host and
