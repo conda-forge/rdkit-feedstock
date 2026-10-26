@@ -17,6 +17,7 @@ source:
 
   patches:
     - pg_regress.patch
+    # Backports https://github.com/rdkit/rdkit/pull/9745; remove after 2026.9.2 release
     - CMakeLists.txt.patch
     - pyproject.patch
     - SubstructDetails.patch
