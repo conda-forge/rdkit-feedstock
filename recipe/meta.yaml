@@ -266,7 +266,7 @@ outputs:
       license_file: license.txt
 
 about:
-  home: http://rdkit.org
+  home: https://rdkit.org
   license: BSD-3-Clause
   license_file: license.txt
   summary: RDKit is a collection of cheminformatics and machine-learning software written in C++ and Python.
