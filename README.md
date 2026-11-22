@@ -7,7 +7,7 @@ Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/rdkit-feedstock
 About rdkit
 -----------
 
-Home: http://rdkit.org
+Home: https://rdkit.org
 
 Package license: BSD-3-Clause
 
