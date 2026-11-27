@@ -1,4 +1,4 @@
-{% set version = "2026_09_2" %}
+{% set version = "2026_09_3" %}
 {% set filename = "Release_%s.tar.gz" % version.replace(".", "_") %}
 {% set version = version.replace("_",".") %} # workaround bad conda-forge/rdkit release name interaction
 
@@ -13,7 +13,7 @@ package:
 source:
   fn: {{ filename }}
   url: https://github.com/rdkit/rdkit/archive/{{ filename }}
-  sha256: 42650cd497f4cb8273c935d75f4b48db6da7b9ddad16a0cb2a46271f509c9760
+  sha256: 3c7c113ccd3e9196f7914d895839e23a3c937da1228b9e0c1c4b50558fe17d75
 
   patches:
     - pg_regress.patch
