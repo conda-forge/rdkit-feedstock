@@ -9,8 +9,8 @@ github:
 provider:
   linux_aarch64: default
   linux_ppc64le: default
-  win: azure
   osx_arm64: default
+  win: azure
 test: native_and_emulated
 workflow_settings:
   store_build_artifacts: true
